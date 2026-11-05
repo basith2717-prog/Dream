@@ -496,6 +496,81 @@ class SakuraBranchInteractive {
 }
 
 // ==========================================================================
+// 4. HERO AWWWARDS INTERACTIVE NAME SLOT & TYPEWRITER CONTROLLER
+// ==========================================================================
+class HeroSlotStranger {
+  constructor() {
+    this.slotBtn = document.getElementById('heroSlotBtn');
+    this.slotName = document.getElementById('heroSlotName');
+    this.bylineL1 = document.getElementById('heroBylineL1');
+    this.bylineL2 = document.getElementById('heroBylineL2');
+    if (!this.slotBtn || !this.slotName) return;
+    this.init();
+  }
+
+  init() {
+    const askName = () => {
+      sound.playClick();
+      const current = this.slotName.textContent.trim();
+      const entered = window.prompt("What's your first name?", current === 'first name' || current === 'stranger' ? '' : current);
+      if (entered && entered.trim()) {
+        const clean = entered.trim().toLowerCase().slice(0, 16);
+        this.slotName.textContent = clean;
+        sound.playZenChime();
+        try { localStorage.setItem('visitor_name', clean); } catch (e) {}
+      }
+    };
+
+    this.slotBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      askName();
+    });
+
+    try {
+      const saved = localStorage.getItem('visitor_name');
+      if (saved) this.slotName.textContent = saved;
+    } catch (e) {}
+
+    this.initTypewriter();
+  }
+
+  initTypewriter() {
+    if (!this.bylineL1 || !this.bylineL2) return;
+    const txt1 = "a full-stack developer/ai engineer";
+    const txt2 = "with chutzpah.";
+
+    const tEl1 = this.bylineL1.querySelector('.hero-byline__text');
+    const tEl2 = this.bylineL2.querySelector('.hero-byline__text');
+    if (!tEl1 || !tEl2) return;
+
+    tEl1.textContent = "";
+    tEl2.textContent = "";
+
+    setTimeout(() => {
+      let i = 0;
+      const typeL1 = () => {
+        if (i < txt1.length) {
+          tEl1.textContent += txt1.charAt(i);
+          i++;
+          setTimeout(typeL1, 26 + Math.random() * 18);
+        } else {
+          let j = 0;
+          const typeL2 = () => {
+            if (j < txt2.length) {
+              tEl2.textContent += txt2.charAt(j);
+              j++;
+              setTimeout(typeL2, 26 + Math.random() * 18);
+            }
+          };
+          setTimeout(typeL2, 110);
+        }
+      };
+      typeL1();
+    }, 450);
+  }
+}
+
+// ==========================================================================
 // 4. KINETIC ROTATING HEADLINE
 // ==========================================================================
 class KineticHeadline {
@@ -1307,6 +1382,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
   const sakuraSim = new SakuraSimulation();
   new SakuraBranchInteractive(sakuraSim);
+  new HeroSlotStranger();
   const headline = new KineticHeadline();
   IntroVideo.init();
   new CaseStudyDrawer();

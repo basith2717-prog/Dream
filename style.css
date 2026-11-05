@@ -2958,3 +2958,382 @@ body {
     font-size: 1.1rem;
   }
 }
+
+
+/* ============================================================
+   AWWWARDS SRUTHI CREATIVE HERO SECTION — EXACT WORKS-RUTHI SPEC
+   Colors: --spring (#f3f3e9), --cinnabar (#e33529), --ink (#1c1b1a)
+   Fonts: Impact / Bayon (Display), Geist Mono / Courier Prime (Mono)
+   ============================================================ */
+
+:root {
+  --spring: #f3f3e9;
+  --ink: #1c1b1a;
+  --cinnabar: #e33529;
+  --font-display: "Impact", "Bayon", "Arial Narrow", sans-serif;
+  --font-mono: "Geist Mono", "Courier Prime", "SF Mono", Menlo, monospace;
+}
+
+/* Full Hero Canvas */
+.hero--sruthi {
+  background: var(--spring);
+  height: 100svh;
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: clip;
+  padding-top: var(--header-height, 65px);
+  padding-bottom: 0;
+  isolation: isolate;
+  --clip-pad: .14em;
+  --clip-rise: 130%;
+  --clip-stagger: 60ms;
+  --dur-pop: .6s;
+  --ease-pop: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Main Container-Queries Stage */
+.hero-stage {
+  display: contents;
+}
+
+/* Monumental Display Words */
+.hero-word {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: normal;
+  color: var(--cinnabar);
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-top: 0;
+  line-height: .78;
+  padding-block: var(--clip-pad);
+  margin-block: calc(var(--clip-pad) * -1);
+  overflow: visible clip;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.hero-word__txt {
+  transform: translateY(var(--clip-rise));
+  transition: transform var(--dur-pop) var(--ease-pop);
+  transition-delay: calc(var(--i, 0) * var(--clip-stagger));
+  will-change: transform;
+  display: block;
+}
+
+.hero--sruthi.is-live.in .hero-word__txt {
+  transform: none;
+}
+
+.hero-word--hello {
+  --i: 0;
+  --rail: left;
+  margin-left: -.041em;
+}
+
+.hero-word--stranger {
+  --i: 1;
+  --rail: right;
+  text-align: right;
+  align-self: flex-end;
+  margin-left: 0;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  text-transform: lowercase;
+  color: var(--cinnabar);
+  letter-spacing: 0;
+}
+
+.hero-word--meet {
+  --i: 2;
+  --rail: left;
+  margin-left: -.041em;
+}
+
+.hero-word--basith {
+  --i: 3;
+  --rail: right;
+  text-align: right;
+  align-self: flex-end;
+  margin-right: -.0284em;
+  font-size: min(var(--h1, 190px), max(8.53svh, 44px));
+}
+
+/* Interactive Name Slot Button {{ first name }} */
+.hero-slot-btn {
+  all: unset;
+  cursor: text;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+}
+
+.hero-slot-btn:hover {
+  opacity: .85;
+}
+
+.hero-slot-btn:focus-visible {
+  outline: 2px solid var(--cinnabar);
+  outline-offset: .1em;
+}
+
+.hero-placeholder {
+  font-family: var(--font-mono);
+  text-transform: none;
+}
+
+.hero-slot-bracket {
+  color: var(--cinnabar);
+}
+
+.hero-slot-name {
+  color: var(--cinnabar);
+  border-bottom: 2px solid transparent;
+  transition: border-color .2s;
+}
+
+.hero-slot-btn:hover .hero-slot-name {
+  border-bottom-color: var(--cinnabar);
+}
+
+.hero-slot-caret {
+  --w: max(2px, .08em);
+  width: var(--w);
+  margin-left: .06em;
+  margin-right: calc(-1 * (var(--w) + .06em));
+  vertical-align: -.2em;
+  background: var(--ink);
+  height: 1.05em;
+  animation: 1.06s step-end infinite hero-slot-blink;
+  display: inline-block;
+}
+
+@keyframes hero-slot-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Central Cutout Portrait — Mohammed Basith Selfie */
+.hero-photo-wrap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.hero-photo {
+  object-fit: contain;
+  object-position: bottom center;
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: block;
+  filter: drop-shadow(0 25px 50px rgba(28, 27, 26, 0.28));
+  animation: heroPhotoFadeIn 1s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+@keyframes heroPhotoFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Byline Subtitle (Typewriter & Layout) */
+.hero-byline {
+  font-family: var(--font-mono);
+  font-size: calc(clamp(12px, calc(10.51px + .38vw), 16px));
+  text-transform: uppercase;
+  color: var(--ink);
+  margin-top: 0;
+  line-height: 1.25;
+  display: flex;
+  flex-direction: column;
+  letter-spacing: .02em;
+}
+
+.hero-byline__l {
+  white-space: nowrap;
+  display: block;
+  position: relative;
+}
+
+.hero-byline__caret {
+  display: inline-block;
+  width: max(2px, .092em);
+  height: 1.1em;
+  background: var(--cinnabar);
+  margin-left: 2px;
+  vertical-align: -.18em;
+  animation: hero-slot-blink 1s step-end infinite;
+}
+
+/* ============================================================
+   DESKTOP CONTAINER QUERIES LAYOUT (Exact worksruthi proportions)
+   ============================================================ */
+@media (min-width: 810px) and (min-aspect-ratio: 4/3), (min-width: 1025px) {
+  .hero--sruthi {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-block: 0;
+    display: flex;
+  }
+
+  .hero-stage {
+    --stage-h: min(calc(100svh - 40px), calc((100vw - 40px) / 1.3333), calc((50vw - 20px) * 1.12));
+    height: var(--stage-h);
+    width: calc(var(--stage-h) * 1.3333);
+    display: block;
+    position: relative;
+    container-type: size;
+    margin: 0 auto;
+  }
+
+  .hero-word {
+    z-index: 1;
+    width: max-content;
+    font-size: 16.6872cqw;
+    line-height: .78;
+    position: absolute;
+  }
+
+  .hero-word--hello {
+    right: calc(100cqw - 30.85cqw);
+    top: 18cqh;
+    text-align: right;
+    margin-right: -.0157em;
+  }
+
+  .hero-word--stranger {
+    left: 70.65cqw;
+    top: 29cqh;
+    font-size: 5.2696cqw;
+    text-align: left;
+    margin-left: -.0137em;
+    margin-right: 0;
+    z-index: 4;
+  }
+
+  .hero-photo-wrap {
+    height: 93cqh;
+    width: auto;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-photo {
+    height: 100%;
+    width: auto;
+  }
+
+  .hero-word--meet {
+    right: calc(100cqw - 31.6cqw);
+    top: 68cqh;
+    text-align: right;
+    margin-right: .0112em;
+  }
+
+  .hero-byline {
+    z-index: 1;
+    left: 76.5cqw;
+    bottom: calc(100cqh - 77cqh);
+    position: absolute;
+    width: max-content;
+    max-width: 34ch;
+    text-align: left;
+  }
+
+  .hero-word--basith {
+    left: 76.29cqw;
+    top: 78.7cqh;
+    text-align: left;
+    font-size: 16.6872cqw;
+    margin-left: -.0137em;
+    margin-right: 0;
+  }
+}
+
+/* ============================================================
+   MOBILE & TABLET RESPONSIVE LAYOUT
+   ============================================================ */
+@media (max-width: 809px) {
+  .hero--sruthi {
+    background: var(--spring);
+    height: calc(100svh - var(--header-height, 60px));
+    min-height: 520px;
+    padding: 1rem 1.25rem;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero-stage {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+
+  .hero-word {
+    position: static;
+    font-size: min(14.5svh, 18vw);
+  }
+
+  .hero-word--hello {
+    text-align: left;
+  }
+
+  .hero-word--stranger {
+    text-align: right;
+    align-self: flex-end;
+    font-size: min(5.2svh, 6.5vw);
+    margin-top: -.4rem;
+    z-index: 4;
+  }
+
+  .hero-photo-wrap {
+    height: 60svh;
+    max-height: 480px;
+    bottom: 0;
+  }
+
+  .hero-word--meet {
+    text-align: left;
+    margin-top: auto;
+    z-index: 3;
+  }
+
+  .hero-byline {
+    position: static;
+    text-align: right;
+    align-self: flex-end;
+    margin-top: .35rem;
+    font-size: 11px;
+    z-index: 3;
+  }
+
+  .hero-word--basith {
+    text-align: right;
+    align-self: flex-end;
+    z-index: 3;
+    font-size: min(16.5svh, 21vw);
+    margin-top: .1rem;
+  }
+}
