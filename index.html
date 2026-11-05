@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mohammed Basith | Full-Stack Developer &amp; AI Engineer</title>
-  <meta name="description" content="Full-Stack Developer, AI Integrator &amp; MCA Candidate. Building structured, high-performance web applications and intelligent systems.">
-  <meta property="og:title" content="Mohammed Basith | Full-Stack Developer">
-  <meta property="og:description" content="Full-Stack Developer, AI Integrator &amp; MCA Candidate based in Ernakulam, Kerala.">
+  <title>Mohammed Basith | Full-Stack Developer &amp; AI Systems Engineer</title>
+  <meta name="description" content="Portfolio of Mohammed Basith — MCA Candidate, Full-Stack Developer &amp; AI Integrator based in Ernakulam, Kerala. Building structured Python, React, Django &amp; SQL solutions.">
+  <meta property="og:title" content="Mohammed Basith | Full-Stack Developer &amp; AI Engineer">
+  <meta property="og:description" content="Detail-oriented MCA Candidate &amp; Software Developer in Ernakulam, Kerala. React, Python, Django, SQL &amp; AI systems.">
   <meta property="og:image" content="/images/og-en.jpeg">
-  <meta property="og:url" content="https://mohammedbasith.dev">
+  <meta property="og:url" content="https://basith-design.vercel.app">
 
-  <!-- Favicon -->
+  <!-- Favicon with Japanese Hanko Seal '基' (Foundation / Basith) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%23d62828'/><text x='50' y='64' font-size='42' font-family='serif' font-weight='bold' text-anchor='middle' fill='%23ffffff'>基</text></svg>">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Serif+JP:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Kanit:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Noto+Serif+JP:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,600;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="./style.css">
 </head>
@@ -51,19 +51,19 @@
         <div class="services-mobile__panel">
           <div class="services-mobile__grid">
             <a href="#serviceItem1" class="services-mobile__item services-mobile__item--websites">
-              <span class="services-mobile__title" style="--chars:8">Web Dev</span>
+              <span class="services-mobile__title" style="--chars:8">AI &amp; Web</span>
               <img src="/images/services/poster-websites.webp" alt="Web Development" width="640" height="960" loading="lazy">
             </a>
-            <a href="#serviceItem3" class="services-mobile__item services-mobile__item--apps">
-              <span class="services-mobile__title" style="--chars:12">AI &amp; Python</span>
-              <img src="/images/services/poster-apps.webp" alt="AI Development" width="640" height="960" loading="lazy">
-            </a>
             <a href="#serviceItem2" class="services-mobile__item services-mobile__item--ecommerce">
-              <span class="services-mobile__title" style="--chars:9">Full-Stack</span>
-              <img src="/images/services/poster-ecommerce.webp" alt="Full-Stack" width="640" height="960" loading="lazy">
+              <span class="services-mobile__title" style="--chars:9">Python &amp; Django</span>
+              <img src="/images/services/poster-ecommerce.webp" alt="Backend &amp; SQL" width="640" height="960" loading="lazy">
+            </a>
+            <a href="#serviceItem3" class="services-mobile__item services-mobile__item--apps">
+              <span class="services-mobile__title" style="--chars:12">Mobile Apps</span>
+              <img src="/images/services/poster-apps.webp" alt="React Native" width="640" height="960" loading="lazy">
             </a>
             <a href="#serviceItem4" class="services-mobile__item services-mobile__item--automations">
-              <span class="services-mobile__title" style="--chars:10">Automation</span>
+              <span class="services-mobile__title" style="--chars:10">Systems &amp; Tests</span>
               <img src="/images/services/poster-automations.webp" alt="Automation" width="640" height="960" loading="lazy">
             </a>
           </div>
@@ -71,12 +71,15 @@
       </div>
     </li>
     <li class="nav-dropdown-mobile__item" style="--i:2">
-      <div class="nav-dropdown-mobile__mask"><a href="#projects" class="mobile-link">Projects</a></div>
+      <div class="nav-dropdown-mobile__mask"><a href="#clients" class="mobile-link">Skills &amp; Tech</a></div>
     </li>
     <li class="nav-dropdown-mobile__item" style="--i:3">
-      <div class="nav-dropdown-mobile__mask"><a href="#experience" class="mobile-link">About</a></div>
+      <div class="nav-dropdown-mobile__mask"><a href="#projects" class="mobile-link">Projects</a></div>
     </li>
-    <li class="nav-dropdown-mobile__item nav-dropdown-mobile__item--cta" style="--i:4">
+    <li class="nav-dropdown-mobile__item" style="--i:4">
+      <div class="nav-dropdown-mobile__mask"><a href="#experience" class="mobile-link">Experience &amp; Certs</a></div>
+    </li>
+    <li class="nav-dropdown-mobile__item nav-dropdown-mobile__item--cta" style="--i:5">
       <a href="#contact" class="contact-postcard-cta mobile-cta">
         <span class="contact-postcard-cta__label">Get in Touch</span>
         <span class="contact-postcard-cta__kanji">連絡</span>
@@ -88,32 +91,32 @@
   <div class="nav-dropdown" id="servicesMenu" role="region" aria-hidden="true">
     <div class="nav-dropdown__divider"></div>
     <div class="nav-dropdown__container">
-      <a href="#serviceItem1" class="nav-dropdown__item service-preview service-preview--websites" data-cursor="WEB DEV">
-        <span class="service-preview__title">Web<br>Development</span>
+      <a href="#serviceItem1" class="nav-dropdown__item service-preview service-preview--websites" data-cursor="AI WEB">
+        <span class="service-preview__title">AI &amp;<br>Web Apps</span>
         <div class="service-preview__art">
           <img class="service-preview__background" src="/images/services/posters/websites-background-v2-768.webp" alt="" width="640" height="640" loading="lazy">
-          <img class="service-preview__subject service-menu-image" src="/images/services/posters/websites-subject-v3-640.webp" alt="Web Development" width="640" height="960" loading="lazy">
+          <img class="service-preview__subject service-menu-image" src="/images/services/posters/websites-subject-v3-640.webp" alt="AI &amp; Web Apps" width="640" height="960" loading="lazy">
         </div>
       </a>
-      <a href="#serviceItem3" class="nav-dropdown__item service-preview service-preview--apps" data-cursor="AI &amp; PYTHON">
-        <span class="service-preview__title">AI &amp;<br>Python</span>
-        <div class="service-preview__art">
-          <img class="service-preview__background" src="/images/services/posters/apps-background-v2-768.webp" alt="" width="640" height="640" loading="lazy">
-          <img class="service-preview__subject service-menu-image" src="/images/services/posters/apps-subject-v4-640.webp" alt="AI Development" width="640" height="960" loading="lazy">
-        </div>
-      </a>
-      <a href="#serviceItem2" class="nav-dropdown__item service-preview service-preview--ecommerce" data-cursor="FULL-STACK">
-        <span class="service-preview__title">Full-<br>Stack</span>
+      <a href="#serviceItem2" class="nav-dropdown__item service-preview service-preview--ecommerce" data-cursor="PYTHON">
+        <span class="service-preview__title">Python &amp;<br>Django SQL</span>
         <div class="service-preview__art">
           <img class="service-preview__background" src="/images/services/posters/ecommerce-background-v2-768.webp" alt="" width="640" height="640" loading="lazy">
-          <img class="service-preview__subject service-menu-image" src="/images/services/posters/ecommerce-subject-v5-640.webp" alt="Full-Stack" width="640" height="960" loading="lazy">
+          <img class="service-preview__subject service-menu-image" src="/images/services/posters/ecommerce-subject-v5-640.webp" alt="Backend &amp; SQL" width="640" height="960" loading="lazy">
+        </div>
+      </a>
+      <a href="#serviceItem3" class="nav-dropdown__item service-preview service-preview--apps" data-cursor="MOBILE">
+        <span class="service-preview__title">Mobile &amp;<br>React Native</span>
+        <div class="service-preview__art">
+          <img class="service-preview__background" src="/images/services/posters/apps-background-v2-768.webp" alt="" width="640" height="640" loading="lazy">
+          <img class="service-preview__subject service-menu-image" src="/images/services/posters/apps-subject-v4-640.webp" alt="Mobile Development" width="640" height="960" loading="lazy">
         </div>
       </a>
       <a href="#serviceItem4" class="nav-dropdown__item service-preview service-preview--automations" data-cursor="AUTOMATION">
-        <span class="service-preview__title">Workflow<br>Automation</span>
+        <span class="service-preview__title">Systems &amp;<br>Automation</span>
         <div class="service-preview__art">
           <img class="service-preview__background" src="/images/services/posters/automations-background-v2-768.webp" alt="" width="640" height="640" loading="lazy">
-          <img class="service-preview__subject service-menu-image" src="/images/services/posters/automations-subject-v2-640.webp" alt="Automation" width="640" height="960" loading="lazy">
+          <img class="service-preview__subject service-menu-image" src="/images/services/posters/automations-subject-v2-640.webp" alt="Automation &amp; Testing" width="640" height="960" loading="lazy">
         </div>
       </a>
     </div>
@@ -128,10 +131,7 @@
         <nav>
           <!-- Logo -->
           <a href="#hero" class="header__logo-container" aria-label="Mohammed Basith Portfolio">
-            <svg class="header__logo" viewBox="0 0 125 32" fill="none" aria-label="Mohammed Basith">
-              <text x="0" y="24" font-family="'Kanit', sans-serif" font-weight="700" font-size="22" fill="currentColor" letter-spacing="-1">BASITH</text>
-              <circle cx="115" cy="16" r="6" fill="#d62828"/>
-            </svg>
+            <img src="/images/basith-logo.png" alt="BASITH" class="header__logo" width="346" height="100" loading="eager" decoding="async">
           </a>
 
           <!-- Desktop Nav Links -->
@@ -157,6 +157,14 @@
             </div>
             <div class="nav-item">
               <div class="nav-item__mask">
+                <a href="#clients" class="nav-link">
+                  <span class="nav-item__dot"></span>
+                  Skills
+                </a>
+              </div>
+            </div>
+            <div class="nav-item">
+              <div class="nav-item__mask">
                 <a href="#projects" class="nav-link">
                   <span class="nav-item__dot"></span>
                   Projects
@@ -167,14 +175,29 @@
               <div class="nav-item__mask">
                 <a href="#experience" class="nav-link">
                   <span class="nav-item__dot"></span>
-                  About
+                  Experience
                 </a>
               </div>
             </div>
           </div>
 
-          <!-- Right: CTA + Language + Mobile Toggle -->
+          <!-- Right: Audio Toggle + Language + CTA + Mobile Toggle -->
           <div class="header__actions">
+            <!-- Zen Ambient Music & Sound Toggle -->
+            <button id="soundToggle" class="sound-toggle-btn" aria-label="Toggle Background Music and Sound" title="Toggle Background Music (Click to Play/Pause)">
+              <span class="sound-icon sound-icon--on">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+              </span>
+              <span class="sound-bars" aria-hidden="true">
+                <span class="sound-bar sound-bar--1"></span>
+                <span class="sound-bar sound-bar--2"></span>
+                <span class="sound-bar sound-bar--3"></span>
+              </span>
+              <span class="sound-icon sound-icon--off" style="display:none;">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+              </span>
+            </button>
+
             <!-- Language Switcher -->
             <div class="language">
               <svg class="language__icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
@@ -185,6 +208,7 @@
               <a href="#" class="language__locale" data-lang="jp" aria-label="Japanese">日</a>
             </div>
 
+            <!-- Get in touch CTA -->
             <a href="#contact" class="contact-postcard-cta header__button" id="contactCta">
               <span class="contact-postcard-cta__label">Get in Touch</span>
               <span class="contact-postcard-cta__kanji">連絡</span>
@@ -217,17 +241,27 @@
           </div>
 
           <!-- Background sakura canvas petals -->
-          <div class="home-petals hero__back-petals" aria-hidden="true" id="heroPetals">
-            <!-- Animated petal divs injected by JS -->
+          <div class="home-petals hero__back-petals" aria-hidden="true" id="heroPetals"></div>
+
+          <!-- Cherry Blossom Branch hanging from top right (Animated & Interactive) -->
+          <div class="hero__branch" id="heroBranch" data-cursor="BREEZE" aria-label="Cherry blossom branch, click for spring breeze" role="button" tabindex="0">
+            <div class="hero__branch-aura" aria-hidden="true"></div>
+            <div class="hero__branch-bough" id="heroBranchBough">
+              <img src="/images/sakura-hero-branch.png" alt="Japanese cherry blossom branch in spring bloom" width="736" height="1023" loading="eager" decoding="async">
+              <!-- Drifting individual petals directly fluttering from the blossoms -->
+              <div class="hero__branch-petals" aria-hidden="true">
+                <span class="branch-petal branch-petal--1"></span>
+                <span class="branch-petal branch-petal--2"></span>
+                <span class="branch-petal branch-petal--3"></span>
+                <span class="branch-petal branch-petal--4"></span>
+                <span class="branch-petal branch-petal--5"></span>
+                <span class="branch-petal branch-petal--6"></span>
+                <span class="branch-petal branch-petal--7"></span>
+              </div>
+            </div>
           </div>
 
-          
-        <!-- Cherry Blossom Branch hanging from top right -->
-        <div class="hero__branch" aria-hidden="true">
-          <img src="/images/sakura-hero-branch.png" alt="" width="736" height="1023" loading="eager" decoding="async">
-        </div>
-
-        <!-- Hero Title & Content -->
+          <!-- Hero Title & Content -->
           <div class="hero__content">
             <div class="hero-title" id="heroTitle">
               <div class="hero-title__above">
@@ -265,22 +299,24 @@
                 </svg>
               </div>
 
+              <!-- Kinetic Rotating Headline -->
               <h1 class="hero-title__heading">
-                <span class="visually-hidden">Make your code efficient. Make your apps intelligent. Make your systems automatic.</span>
+                <span class="visually-hidden">Mohammed Basith — Full-Stack Developer &amp; AI Systems Engineer</span>
                 <span class="hero-title__line" aria-hidden="true">
-                  <span class="hero-title__prefix">Make your</span>
+                  <span class="hero-title__prefix">I engineer</span>
                 </span>
                 <span class="hero-title__line hero-title__line--rotating" aria-hidden="true">
                   <span class="hero-title__word-mask">
-                    <span class="hero-title__word" id="rotatingWord">code</span>
+                    <span class="hero-title__word" id="rotatingWord">FULL-STACK</span>
                   </span>
                   <em class="hero-title__accent">
-                    <span class="hero-title__accent-text" id="rotatingAccent">efficient</span>
+                    <span class="hero-title__accent-text" id="rotatingAccent">scalable</span>
                   </em>
                   <span class="hero-title__sizer" aria-hidden="true">
-                    <span>code <em class="hero-title__accent">efficient</em></span>
-                    <span>apps <em class="hero-title__accent">intelligent</em></span>
-                    <span>systems <em class="hero-title__accent">automatic</em></span>
+                    <span>FULL-STACK <em class="hero-title__accent">scalable</em></span>
+                    <span>AI SYSTEMS <em class="hero-title__accent">intelligent</em></span>
+                    <span>PYTHON &amp; SQL <em class="hero-title__accent">robust</em></span>
+                    <span>MOBILE APPS <em class="hero-title__accent">immersive</em></span>
                   </span>
                 </span>
               </h1>
@@ -288,14 +324,36 @@
               <canvas class="hero-title__petals" id="petalCanvas" aria-hidden="true"></canvas>
             </div>
 
+            <!-- Profile Summary from Resume -->
             <p class="hero__description">
-              Full-stack systems that solve real problems. AI integrations that amplify your product. 
-              Python automation that gives you your day back.
+              <strong>Detail-oriented Computer Applications postgraduate candidate (MCA '27)</strong> with a strong foundation in software development, AI integration, and full-stack systems. Hands-on experience building structured web applications and robust architectures using Python, React, Django, and SQL.
             </p>
+
+            <!-- Quick Candidate Highlights / Pills -->
+            <div class="hero-badges">
+              <span class="hero-badge">📍 Ernakulam, Kerala</span>
+              <span class="hero-badge hero-badge--accent">🎓 MCA Expected 2027 (MES AIMAT)</span>
+              <span class="hero-badge">💼 Python Intern Alumni (LCC)</span>
+              <span class="hero-badge hero-badge--success">⚡ Available for Full-Stack &amp; AI Roles</span>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="hero-actions">
+              <a href="#projects" class="btn-zen btn-zen--primary" data-cursor="EXPLORE">
+                <span>Explore Projects</span>
+                <span class="btn-zen__kanji">作</span>
+              </a>
+              <a href="https://linkedin.com/in/mohammedbasith1" target="_blank" rel="noopener" class="btn-zen btn-zen--outline" data-cursor="LINKEDIN">
+                <span>LinkedIn Profile ↗</span>
+              </a>
+              <a href="#contact" class="btn-zen btn-zen--ghost" data-cursor="CONTACT">
+                <span>Dispatch Postcard [押]</span>
+              </a>
+            </div>
           </div>
         </section>
 
-        <!-- ===== CLIENTS / TECH STACK SECTION ===== -->
+        <!-- ===== CLIENTS / TECH STACK & ECOSYSTEM SECTION ===== -->
         <section class="home-clients" id="clients" aria-labelledby="clients-heading">
 
           <div class="home-clients__head">
@@ -303,30 +361,58 @@
               希望なら、<br>何でも出来る
             </p>
 
-            <div class="home-reel home-clients__reel" id="studioReel">
-              <div class="home-reel__stage" id="reelStage">
-                <button type="button" class="home-reel__close" id="reelClose" aria-label="Close reel">
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="m6 6 12 12M6 18 18 6"/>
-                  </svg>
-                </button>
+            <!-- ================================================ -->
+            <!-- INTRO VIDEO SECTION                              -->
+            <!-- Replace data-youtube-id value with your YouTube -->
+            <!-- video ID when you record your intro video.       -->
+            <!-- ================================================ -->
+            <div class="intro-video-section" id="introVideoSection">
+
+              <div class="intro-video-label">
+                <span class="intro-video-tag">&#9654; INTRO</span>
+                <span class="intro-video-subtitle">Mohammed Basith &mdash; Full-Stack Developer &amp; AI Engineer</span>
               </div>
-              <button type="button" class="home-reel__poster" id="reelPoster" aria-label="Play the portfolio reel">
-                <span class="home-reel__title" aria-hidden="true">
-                  <span class="home-reel__name">Basith</span>
-                  <span class="home-reel__year">Dev</span>
-                  <span class="home-reel__dot"></span>
-                </span>
-                <span class="home-reel__play" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" focusable="false"><path d="M7 4.5v15l12.5-7.5z"/></svg>
-                </span>
-              </button>
+
+              <div class="intro-video-wrapper" id="introVideoWrapper">
+
+                <!-- Poster shown before video plays -->
+                <div class="intro-video-poster" id="introVideoPoster">
+                  <div class="intro-video-poster__bg"></div>
+                  <div class="intro-video-poster__content">
+                    <div class="intro-video-poster__avatar">MB</div>
+                    <div class="intro-video-poster__text">
+                      <h3>Hi, I&#39;m Basith</h3>
+                      <p>Full-Stack Developer &middot; AI Engineer &middot; MCA Candidate</p>
+                      <p class="intro-video-coming">&#128249;&nbsp; Intro video coming soon</p>
+                    </div>
+                  </div>
+                  <button class="intro-video-play-btn" id="introPlayBtn" aria-label="Watch introduction video">
+                    <span class="intro-video-play-icon">
+                      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </span>
+                    <span class="intro-video-play-label">Watch Intro</span>
+                  </button>
+                </div>
+
+                <!-- YouTube player (injected by JS on play click) -->
+                <div class="intro-video-player" id="introVideoPlayer" hidden
+                     data-youtube-id="YOUR_YOUTUBE_VIDEO_ID_HERE">
+                </div>
+
+              </div>
+
+              <div class="intro-video-meta">
+                <span class="intro-video-meta__chip">&#128205;&nbsp;Ernakulam, Kerala</span>
+                <span class="intro-video-meta__chip">&#127891;&nbsp;MCA &#39;27 &middot; MES AIMAT</span>
+                <span class="intro-video-meta__chip">&#128204;&nbsp;Open to Work</span>
+              </div>
+
             </div>
 
-            <h2 id="clients-heading" class="home-clients__title" aria-label="Technologies I work with">
+            <h2 id="clients-heading" class="home-clients__title" aria-label="Technologies &amp; Skills I master">
               <span class="home-clients__title-text">
-                <span class="home-clients__title-line"><span>Technologies</span></span>
-                <span class="home-clients__title-line"><span>I work with</span></span>
+                <span class="home-clients__title-line"><span>Technical</span></span>
+                <span class="home-clients__title-line"><span>Proficiency</span></span>
               </span>
             </h2>
           </div>
@@ -338,80 +424,124 @@
 
             <div class="home-clients__logos">
               <img src="/images/illustrations/clients-floral-background-v1.webp" alt="" width="768" height="512" loading="lazy" class="home-clients__logo-flowers" aria-hidden="true">
+              
+              <!-- 10 Technical Artifacts directly from resume -->
               <ul class="home-clients__grid">
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/gobierno-de-mexico.webp" alt="Python" width="290" height="104" loading="lazy">
+                
+                <!-- 1. Python -->
+                <li class="tech-card" data-cursor="PYTHON">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">蛇</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Python</span>
+                      <span class="tech-badge__category">Core / Backend</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/fifa.webp" alt="React" width="290" height="94" loading="lazy">
+
+                <!-- 2. React.js -->
+                <li class="tech-card" data-cursor="REACT">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">結</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">React.js</span>
+                      <span class="tech-badge__category">Frontend / SPA</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/televisa.svg" alt="Django" width="188" height="32" loading="lazy">
+
+                <!-- 3. Django -->
+                <li class="tech-card" data-cursor="DJANGO">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">網</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Django</span>
+                      <span class="tech-badge__category">Python Web FW</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/hollywood-wordmark.svg" alt="Next.js" width="193" height="42" loading="lazy">
+
+                <!-- 4. TypeScript & JS -->
+                <li class="tech-card" data-cursor="TYPESCRIPT">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">型</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">TypeScript</span>
+                      <span class="tech-badge__category">Typed JavaScript</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/tequila-campo-azul.webp" alt="PostgreSQL" width="290" height="143" loading="lazy">
+
+                <!-- 5. SQL & MySQL -->
+                <li class="tech-card" data-cursor="SQL">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">蓄</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">SQL / MySQL</span>
+                      <span class="tech-badge__category">Relational DBMS</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/wera-workout.webp" alt="TypeScript" width="290" height="85" loading="lazy">
+
+                <!-- 6. React Native -->
+                <li class="tech-card" data-cursor="REACT NATIVE">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">機</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">React Native</span>
+                      <span class="tech-badge__category">Cross-Platform Mobile</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell">
-                  <div class="home-clients__identity">
-                    <div class="home-clients__mark">
-                      <img src="/images/clients/tu-potencial.webp" alt="Docker" width="145" height="42" loading="lazy">
+
+                <!-- 7. Tailwind CSS -->
+                <li class="tech-card" data-cursor="TAILWIND">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">装</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Tailwind CSS</span>
+                      <span class="tech-badge__category">Modern Styling &amp; UI</span>
                     </div>
                   </div>
                 </li>
-                <li class="home-clients__cell home-clients__cell--more">
-                  <div class="home-clients__identity">
-                    <svg class="more-calligraphy home-clients__kanji" viewBox="0 0 109 112" aria-hidden="true" focusable="false">
-                      <defs>
-                        <mask id="more-stroke-0" x="0" y="0" width="109" height="112" maskUnits="userSpaceOnUse">
-                          <path class="more-calligraphy__trace" d="M31.75,11.25c0.08,1.09-0.02,1.81-0.46,2.82C29.36,18.45,24.34,26.08,18.25,31" pathLength="1" fill="none" stroke="white" stroke-width="24" stroke-linecap="round" style="--delay:0s;--duration:0.162s;"/>
-                        </mask>
-                        <mask id="more-stroke-1" x="0" y="0" width="109" height="112" maskUnits="userSpaceOnUse">
-                          <path class="more-calligraphy__trace" d="M29.23,22.04c2.94,0,11.09-1.69,16.52-2.28c1.42-0.16,2.62-0.13,3.75,0" pathLength="1" fill="none" stroke="white" stroke-width="24" stroke-linecap="round" style="--delay:0.17s;--duration:0.126s;"/>
-                        </mask>
-                        <mask id="more-stroke-2" x="0" y="0" width="109" height="112" maskUnits="userSpaceOnUse">
-                          <path class="more-calligraphy__trace" d="M37.14,23.96c1.74,1.45,4.48,7.5,4.92,9.76" pathLength="1" fill="none" stroke="white" stroke-width="24" stroke-linecap="round" style="--delay:0.304s;--duration:0.094s;"/>
-                        </mask>
-                      </defs>
-                      <g mask="url(#more-stroke-0)"><path d="M28 7 C31 7 36 10 35 13 C33 20 24 29 15 34 C21 26 29 15 28 7 Z" fill="currentColor"/></g>
-                      <g mask="url(#more-stroke-1)"><path d="M28 18 C31 19 34 19 38 18 L46 16 C49 15 52 17 53 21 C50 23 47 22 44 22 L32 25 C28 26 26 23 28 18 Z" fill="currentColor"/></g>
-                      <g mask="url(#more-stroke-2)"><path d="M34 23 C38 23 44 28 46 32 C47 36 43 38 40 35 C39 31 37 27 34 23 Z" fill="currentColor"/></g>
-                    </svg>
-                    <span class="home-clients__more">and more</span>
+
+                <!-- 8. Supabase & XAMPP -->
+                <li class="tech-card" data-cursor="SUPABASE">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">雲</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Supabase</span>
+                      <span class="tech-badge__category">BaaS &amp; Auth</span>
+                    </div>
                   </div>
                 </li>
+
+                <!-- 9. Java, C, C++ & PHP -->
+                <li class="tech-card" data-cursor="OOP LANGUAGES">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">論</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Java / C / PHP</span>
+                      <span class="tech-badge__category">OOP &amp; CS Core</span>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- 10. Linux, Git & Testing -->
+                <li class="tech-card" data-cursor="LINUX GIT QA">
+                  <div class="tech-badge">
+                    <div class="tech-badge__seal">核</div>
+                    <div class="tech-badge__content">
+                      <span class="tech-badge__name">Git &amp; Linux</span>
+                      <span class="tech-badge__category">Testing &amp; DevOps</span>
+                    </div>
+                  </div>
+                </li>
+
               </ul>
             </div>
 
+            <!-- Dancer mascot alternating poses -->
             <figure class="home-clients__figure" aria-hidden="true">
               <div class="client-dancer" aria-hidden="true">
                 <img class="client-dancer__pose" src="/images/illustrations/clients-dance-pose-1-v6.webp" alt="" width="1024" height="1536" loading="lazy" style="opacity:1;">
@@ -422,7 +552,182 @@
 
         </section>
 
-        <section class="home__services services" lang="en" aria-labelledby="services-heading"><h2 id="services-heading" class="visually-hidden">Services</h2><div id="servicesList" class="services__list"><article id="serviceItem1" class="services__item" aria-labelledby="poster-title-websites" style="z-index: 1;"><a href="#contact" class="service-poster service-poster--websites" aria-label="Build your website"><div class="service-poster__paper"><h3 id="poster-title-websites" class="service-poster__title"><span>Websites</span></h3><div class="service-poster__art" aria-hidden="true"><img class="service-poster__background" src="/images/services/posters/websites-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy"><img class="service-poster__subject" src="/images/services/posters/websites-subject-v3-640.webp" alt="Websites" width="1024" height="1536" loading="lazy"></div><div class="service-poster__copy"><ul class="service-poster__features"><li class="service-poster__feature"><p class="service-poster__metric"><span>+20<small>%</small></span><span class="service-poster__metric-label">faster</span></p><div class="service-poster__benefit"><h4>Speed sells</h4><p>Make your pages feel instant so people stay longer and reach out more.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+23<small>%</small></span><span class="service-poster__metric-label">leads</span></p><div class="service-poster__benefit"><h4>Customers find you</h4><p>We structure and code your site so buyers find you on Google and even when they ask an AI.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+12<small>%</small></span><span class="service-poster__metric-label">sales</span></p><div class="service-poster__benefit"><h4>Design that builds trust</h4><p>Look established with a custom design and clear message so people feel safe to contact or buy.</p></div></li></ul><span class="service-poster__cta"><span class="service-poster__cta-label">Build your website</span><span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span></span></div></div></a></article><article id="serviceItem2" class="services__item" aria-labelledby="poster-title-ecommerce" style="z-index: 2;"><a href="#contact" class="service-poster service-poster--ecommerce" aria-label="Build your ecommerce"><div class="service-poster__paper"><h3 id="poster-title-ecommerce" class="service-poster__title"><span>Ecommerce</span></h3><div class="service-poster__art" aria-hidden="true"><img class="service-poster__background" src="/images/services/posters/ecommerce-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy"><img class="service-poster__subject" src="/images/services/posters/ecommerce-subject-v5-640.webp" alt="Ecommerce" width="1024" height="1536" loading="lazy"></div><div class="service-poster__copy"><ul class="service-poster__features"><li class="service-poster__feature"><p class="service-poster__metric"><span>+13<small>%</small></span><span class="service-poster__metric-label">orders</span></p><div class="service-poster__benefit"><h4>More orders</h4><p>Give shoppers clear product pages and a smooth mobile checkout so more visits end in a purchase.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+16<small>%</small></span><span class="service-poster__metric-label">in order</span></p><div class="service-poster__benefit"><h4>Bigger carts</h4><p>Lift order size with bundles, subscriptions, and smart follow-ups that bring customers back.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>-26<small>%</small></span><span class="service-poster__metric-label">costs</span></p><div class="service-poster__benefit"><h4>Less busywork</h4><p>Connect inventory, shipping, taxes, and returns so orders flow and operating costs drop.</p></div></li></ul><span class="service-poster__cta"><span class="service-poster__cta-label">Build your ecommerce</span><span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span></span></div></div></a></article><article id="serviceItem3" class="services__item" aria-labelledby="poster-title-apps" style="z-index: 3;"><a href="#contact" class="service-poster service-poster--apps" aria-label="Build your app"><div class="service-poster__paper"><h3 id="poster-title-apps" class="service-poster__title"><span>Apps</span></h3><div class="service-poster__art" aria-hidden="true"><img class="service-poster__background" src="/images/services/posters/apps-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy"><img class="service-poster__subject" src="/images/services/posters/apps-subject-v4-640.webp" alt="Apps" width="1024" height="1536" loading="lazy"></div><div class="service-poster__copy"><ul class="service-poster__features"><li class="service-poster__feature"><p class="service-poster__metric"><span>+24<small>%</small></span><span class="service-poster__metric-label">reorders</span></p><div class="service-poster__benefit"><h4>Next-level growth</h4><p>Launch a branded app that turns customers into members with subscriptions, loyalty, and in-app offers. Own your channel, reduce churn, and lift repeat revenue.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+40<small>%</small></span><span class="service-poster__metric-label">new users</span></p><div class="service-poster__benefit"><h4>More customers</h4><p>Publish on iOS, Android, and web from one codebase. Get discovered in app stores, re-engage with push, and stay top of mind between purchases.</p></div></li></ul><span class="service-poster__cta"><span class="service-poster__cta-label">Build your app</span><span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span></span></div></div></a></article><article id="serviceItem4" class="services__item" aria-labelledby="poster-title-automations" style="z-index: 4;"><a href="#contact" class="service-poster service-poster--automations" aria-label="Automate your work"><div class="service-poster__paper"><h3 id="poster-title-automations" class="service-poster__title"><span>Automations</span></h3><div class="service-poster__art" aria-hidden="true"><img class="service-poster__background" src="/images/services/posters/automations-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy"><img class="service-poster__subject" src="/images/services/posters/automations-subject-v2-640.webp" alt="Automations" width="1024" height="1536" loading="lazy"></div><div class="service-poster__copy"><ul class="service-poster__features"><li class="service-poster__feature"><p class="service-poster__metric"><span>-35<small>%</small></span><span class="service-poster__metric-label">costs</span></p><div class="service-poster__benefit"><h4>Save time and money</h4><p>Automate invoice matching, lead routing, and weekly reports.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+10<small>%</small></span><span class="service-poster__metric-label">revenue</span></p><div class="service-poster__benefit"><h4>Answers from your data</h4><p>Spot issues early, forecast what’s next, and plan with confidence.</p></div></li><li class="service-poster__feature"><p class="service-poster__metric"><span>+15<small>%</small></span><span class="service-poster__metric-label">profit</span></p><div class="service-poster__benefit"><h4>Start small, prove value</h4><p>Launch one workflow, measure the result, then expand to the rest.</p></div></li></ul><span class="service-poster__cta"><span class="service-poster__cta-label">Automate your work</span><span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span></span></div></div></a></article></div></section>
+        <!-- ===== SERVICES / CORE DISCIPLINES SECTION ===== -->
+        <section class="home__services services" lang="en" aria-labelledby="services-heading">
+          <h2 id="services-heading" class="visually-hidden">Core Engineering Disciplines</h2>
+          <div id="servicesList" class="services__list">
+
+            <!-- Poster 1: AI Integration & Public Systems (CivicCare) -->
+            <article id="serviceItem1" class="services__item" aria-labelledby="poster-title-websites" style="z-index: 1;">
+              <a href="#projects" class="service-poster service-poster--websites" aria-label="Explore AI &amp; Web Applications">
+                <div class="service-poster__paper">
+                  <h3 id="poster-title-websites" class="service-poster__title"><span>AI &amp; Web</span></h3>
+                  <div class="service-poster__art" aria-hidden="true">
+                    <img class="service-poster__background" src="/images/services/posters/websites-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy">
+                    <img class="service-poster__subject" src="/images/services/posters/websites-subject-v3-640.webp" alt="AI &amp; Web" width="1024" height="1536" loading="lazy">
+                  </div>
+                  <div class="service-poster__copy">
+                    <ul class="service-poster__features">
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Civic<small>Care</small></span><span class="service-poster__metric-label">Flagship</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>AI-Powered Civic Platform</h4>
+                          <p>Real-time public complaint dispatch, automated categorization, and municipal grievance tracking built on React &amp; AI models.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>100<small>%</small></span><span class="service-poster__metric-label">Reactive</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Interactive User Interfaces</h4>
+                          <p>Modern React component architecture with intuitive submission flows, responsive dashboard states, and instant user feedback.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Zero<small>Lag</small></span><span class="service-poster__metric-label">Dispatch</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Real-Time Transparency</h4>
+                          <p>Empowers citizens to register and monitor complaints through automated lifecycle status tracking.</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <span class="service-poster__cta">
+                      <span class="service-poster__cta-label">Explore CivicCare</span>
+                      <span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <!-- Poster 2: Python Backend & Relational Databases (CITY-360) -->
+            <article id="serviceItem2" class="services__item" aria-labelledby="poster-title-ecommerce" style="z-index: 2;">
+              <a href="#projects" class="service-poster service-poster--ecommerce" aria-label="Explore Python &amp; Django Backend Architecture">
+                <div class="service-poster__paper">
+                  <h3 id="poster-title-ecommerce" class="service-poster__title"><span>Backend &amp; SQL</span></h3>
+                  <div class="service-poster__art" aria-hidden="true">
+                    <img class="service-poster__background" src="/images/services/posters/ecommerce-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy">
+                    <img class="service-poster__subject" src="/images/services/posters/ecommerce-subject-v5-640.webp" alt="Backend &amp; SQL" width="1024" height="1536" loading="lazy">
+                  </div>
+                  <div class="service-poster__copy">
+                    <ul class="service-poster__features">
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>CITY<small>360</small></span><span class="service-poster__metric-label">Platform</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Service Marketplace Engine</h4>
+                          <p>Web-based service provider platform featuring structured Python/Django backend solutions for service listings and user interactions.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Strict<small>SQL</small></span><span class="service-poster__metric-label">Integrity</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Database-Driven Security</h4>
+                          <p>Normalized relational schemas designed in MySQL to coordinate sensitive user credentials, role permissions, and bookings safely.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>REST<small>APIs</small></span><span class="service-poster__metric-label">Scalable</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Modular Architecture</h4>
+                          <p>Decoupled endpoints ensuring high scalability, structured MVC patterns, and seamless front-to-back data flow.</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <span class="service-poster__cta">
+                      <span class="service-poster__cta-label">Explore CITY-360</span>
+                      <span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <!-- Poster 3: Mobile Immersion & Cross-Platform UX (Growy) -->
+            <article id="serviceItem3" class="services__item" aria-labelledby="poster-title-apps" style="z-index: 3;">
+              <a href="#projects" class="service-poster service-poster--apps" aria-label="Explore Mobile Application Engineering">
+                <div class="service-poster__paper">
+                  <h3 id="poster-title-apps" class="service-poster__title"><span>Mobile Apps</span></h3>
+                  <div class="service-poster__art" aria-hidden="true">
+                    <img class="service-poster__background" src="/images/services/posters/apps-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy">
+                    <img class="service-poster__subject" src="/images/services/posters/apps-subject-v4-640.webp" alt="Mobile Apps" width="1024" height="1536" loading="lazy">
+                  </div>
+                  <div class="service-poster__copy">
+                    <ul class="service-poster__features">
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Growy<small>App</small></span><span class="service-poster__metric-label">AI Coach</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Language Immersion Coach</h4>
+                          <p>Architected a cross-platform mobile application focused on interactive language immersion powered by modern full-stack tools.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>React<small>Native</small></span><span class="service-poster__metric-label">TypeScript</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Type-Safe Mobile Codebase</h4>
+                          <p>Engineered with TypeScript to guarantee predictable state management, resilient offline storage, and silky smooth native gestures.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Smart<small>NLP</small></span><span class="service-poster__metric-label">Feedback</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Conversational Immersion</h4>
+                          <p>Interactive coaching feedback loops that inspire communication confidence in language learners.</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <span class="service-poster__cta">
+                      <span class="service-poster__cta-label">Explore Growy</span>
+                      <span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+            <!-- Poster 4: Systems Automation & Testing (LCC Internship) -->
+            <article id="serviceItem4" class="services__item" aria-labelledby="poster-title-automations" style="z-index: 4;">
+              <a href="#experience" class="service-poster service-poster--automations" aria-label="Explore Systems Engineering &amp; Optimization">
+                <div class="service-poster__paper">
+                  <h3 id="poster-title-automations" class="service-poster__title"><span>Automation</span></h3>
+                  <div class="service-poster__art" aria-hidden="true">
+                    <img class="service-poster__background" src="/images/services/posters/automations-background-v2-768.webp" alt="" width="1024" height="1024" loading="lazy">
+                    <img class="service-poster__subject" src="/images/services/posters/automations-subject-v2-640.webp" alt="Automation" width="1024" height="1536" loading="lazy">
+                  </div>
+                  <div class="service-poster__copy">
+                    <ul class="service-poster__features">
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>LCC<small>Intern</small></span><span class="service-poster__metric-label">2 Months</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Python Workflow Optimization</h4>
+                          <p>Engineered and optimized practical Python scripts and backend application workflows to enhance system efficiency.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Clean<small>Arch</small></span><span class="service-poster__metric-label">Modular</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Team Code Structure</h4>
+                          <p>Collaborated with peers to design modular code structures ensuring standard adherence, maintainability, and clean OOP practices.</p>
+                        </div>
+                      </li>
+                      <li class="service-poster__feature">
+                        <p class="service-poster__metric"><span>Rigorous<small>QA</small></span><span class="service-poster__metric-label">Testing</span></p>
+                        <div class="service-poster__benefit">
+                          <h4>Debugging &amp; Refinement</h4>
+                          <p>Assisted in comprehensive debugging and component testing to elevate overall software performance and operational reliability.</p>
+                        </div>
+                      </li>
+                    </ul>
+                    <span class="service-poster__cta">
+                      <span class="service-poster__cta-label">Review Workflows</span>
+                      <span class="service-poster__cta-kanji" lang="ja" aria-hidden="true">押</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </article>
+
+          </div>
+        </section>
+
       </div><!-- /.home__group -->
 
       <!-- ===== WORK / PROJECTS SECTION ===== -->
@@ -433,158 +738,163 @@
             <span class="home-work__eyebrow" aria-hidden="true" lang="ja">作品集</span>
             <h2 id="work-section-heading" class="p-title p-title--section">
               <span class="p-title__mask">
-                <span class="p-title__text">Selected <em>work</em></span>
+                <span class="p-title__text">Selected <em>Projects</em></span>
               </span>
             </h2>
-            <p class="home-work__description">Projects that solve real problems for real users.</p>
+            <p class="home-work__description">Production builds, academic systems, and creative experiments. Click any project to open the interactive case study drawer.</p>
           </div>
 
           <!-- Project Filters -->
           <div class="home-work__filters" role="tablist" aria-label="Filter projects">
             <button class="work-filter work-filter--active" role="tab" aria-selected="true" data-filter="all">All</button>
-            <button class="work-filter" role="tab" aria-selected="false" data-filter="web">Web Dev</button>
-            <button class="work-filter" role="tab" aria-selected="false" data-filter="ai">AI / Python</button>
-            <button class="work-filter" role="tab" aria-selected="false" data-filter="fullstack">Full-Stack</button>
+            <button class="work-filter" role="tab" aria-selected="false" data-filter="ai">AI Systems</button>
+            <button class="work-filter" role="tab" aria-selected="false" data-filter="python">Python &amp; Django</button>
+            <button class="work-filter" role="tab" aria-selected="false" data-filter="web">React &amp; Web</button>
+            <button class="work-filter" role="tab" aria-selected="false" data-filter="mobile">Mobile</button>
           </div>
 
-          <!-- Projects Grid -->
+          <!-- Projects Grid with real projects from resume -->
           <ul class="home-work__grid" role="list" id="projectsGrid">
 
-            <!-- Project 1: StudyMate AI -->
-            <li class="work-card" data-tags="ai,fullstack" data-reveal style="--i:0">
+            <!-- Project 1: CivicCare -->
+            <li class="work-card" data-category="ai web" data-tags="ai,web" data-project="civiccare" data-reveal style="--i:0">
               <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="StudyMate AI">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View CivicCare Case Study">
                   <div class="work-card__image">
-                    <img src="/images/projects/project-llul.webp" alt="StudyMate AI" width="480" height="720" loading="lazy">
+                    <img src="/images/projects/project-llul.webp" alt="CivicCare AI Public Complaint System" width="480" height="720" loading="lazy">
                   </div>
                 </a>
                 <div class="work-card__meta">
                   <div class="work-card__tags">
-                    <span class="work-tag">AI</span>
-                    <span class="work-tag">Python</span>
+                    <span class="work-tag">JavaScript</span>
                     <span class="work-tag">React</span>
+                    <span class="work-tag">AI Classification</span>
                   </div>
-                  <h3 class="work-card__title">StudyMate AI</h3>
-                  <p class="work-card__subtitle">AI-powered study assistant with adaptive quizzes, document analysis, and personalized learning paths.</p>
+                  <h3 class="work-card__title">CivicCare: AI Complaint System</h3>
+                  <p class="work-card__subtitle">AI-powered real-time public complaint dispatch, service tracking, and municipal issue resolution web platform with interactive UI.</p>
                   <div class="work-card__result">
-                    <span class="result-value">3K+</span>
-                    <span class="result-label">Active users</span>
+                    <span class="result-value">Real-Time</span>
+                    <span class="result-label">Civic Dispatch</span>
                   </div>
                 </div>
               </article>
             </li>
 
-            <!-- Project 2: AI Code Reviewer -->
-            <li class="work-card" data-tags="ai,fullstack" data-reveal style="--i:1">
+            <!-- Project 2: CITY-360 -->
+            <li class="work-card" data-category="python web" data-tags="python,web" data-project="city360" data-reveal style="--i:1">
               <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="AI Code Reviewer">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View CITY-360 Case Study">
                   <div class="work-card__image">
-                    <img src="/images/projects/project-usplus.webp" alt="AI Code Reviewer" width="480" height="720" loading="lazy">
+                    <img src="/images/projects/project-recken.webp" alt="CITY-360 Service Provider Platform" width="480" height="720" loading="lazy">
                   </div>
                 </a>
                 <div class="work-card__meta">
                   <div class="work-card__tags">
-                    <span class="work-tag">Gemini API</span>
-                    <span class="work-tag">FastAPI</span>
-                  </div>
-                  <h3 class="work-card__title">AI Code Reviewer</h3>
-                  <p class="work-card__subtitle">Real-time code review tool with Gemini-powered suggestions, security checks, and performance analysis.</p>
-                  <div class="work-card__result">
-                    <span class="result-value">95%</span>
-                    <span class="result-label">Accuracy</span>
-                  </div>
-                </div>
-              </article>
-            </li>
-
-            <!-- Project 3: Inventory System -->
-            <li class="work-card" data-tags="fullstack,web" data-reveal style="--i:2">
-              <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="Smart Inventory">
-                  <div class="work-card__image">
-                    <img src="/images/projects/project-recken.webp" alt="Smart Inventory" width="480" height="720" loading="lazy">
-                  </div>
-                </a>
-                <div class="work-card__meta">
-                  <div class="work-card__tags">
+                    <span class="work-tag">Python</span>
                     <span class="work-tag">Django</span>
-                    <span class="work-tag">PostgreSQL</span>
+                    <span class="work-tag">SQL / MySQL</span>
                   </div>
-                  <h3 class="work-card__title">Smart Inventory</h3>
-                  <p class="work-card__subtitle">B2B inventory management and ordering hub for hardware retailers with real-time sync.</p>
-                  <div class="work-card__result">
-                    <span class="result-value">40%</span>
-                    <span class="result-label">Faster ops</span>
-                  </div>
-                </div>
-              </article>
-            </li>
-
-            <!-- Project 4: Portfolio Website -->
-            <li class="work-card" data-tags="web" data-reveal style="--i:3">
-              <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="Portfolio Website">
-                  <div class="work-card__image">
-                    <img src="/images/projects/project-celtrev.webp" alt="Portfolio Website" width="320" height="480" loading="lazy">
-                  </div>
-                </a>
-                <div class="work-card__meta">
-                  <div class="work-card__tags">
-                    <span class="work-tag">Next.js</span>
-                    <span class="work-tag">GSAP</span>
-                  </div>
-                  <h3 class="work-card__title">Design Portfolio</h3>
-                  <p class="work-card__subtitle">Nuxt-powered site with custom animations and content management for a media production company.</p>
-                  <div class="work-card__result">
-                    <span class="result-value">+40%</span>
-                    <span class="result-label">Engagement</span>
-                  </div>
-                </div>
-              </article>
-            </li>
-
-            <!-- Project 5: Field Analytics -->
-            <li class="work-card" data-tags="ai,fullstack" data-reveal style="--i:4">
-              <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="Field Analytics">
-                  <div class="work-card__image">
-                    <img src="/images/projects/project-brio.webp" alt="Field Analytics" width="320" height="480" loading="lazy">
-                  </div>
-                </a>
-                <div class="work-card__meta">
-                  <div class="work-card__tags">
-                    <span class="work-tag">Python</span>
-                    <span class="work-tag">ML</span>
-                  </div>
-                  <h3 class="work-card__title">Field Analytics</h3>
-                  <p class="work-card__subtitle">Intelligent field promotion tracker with daily ML-powered reports and actionable insights.</p>
-                  <div class="work-card__result">
-                    <span class="result-value">90%</span>
-                    <span class="result-label">Report accuracy</span>
-                  </div>
-                </div>
-              </article>
-            </li>
-
-            <!-- Project 6: E-Commerce Platform -->
-            <li class="work-card" data-tags="fullstack,web" data-reveal style="--i:5">
-              <article class="work-card__inner">
-                <a href="#" class="work-card__image-link" data-cursor="VIEW PROJECT" aria-label="E-Commerce Platform">
-                  <div class="work-card__image">
-                    <img src="/images/projects/project-minu.webp" alt="E-Commerce Platform" width="480" height="720" loading="lazy">
-                  </div>
-                </a>
-                <div class="work-card__meta">
-                  <div class="work-card__tags">
-                    <span class="work-tag">React</span>
-                    <span class="work-tag">Node.js</span>
-                    <span class="work-tag">Stripe</span>
-                  </div>
-                  <h3 class="work-card__title">E-Commerce Platform</h3>
-                  <p class="work-card__subtitle">Full-stack ecommerce with curated collections, streamlined checkout, and admin dashboard.</p>
+                  <h3 class="work-card__title">CITY-360 Service Platform</h3>
+                  <p class="work-card__subtitle">Web-based service marketplace featuring structured Django backend solutions for managing service listings, user profiles, and secure bookings.</p>
                   <div class="work-card__result">
                     <span class="result-value">100%</span>
-                    <span class="result-label">Uptime</span>
+                    <span class="result-label">Data Integrity</span>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Project 3: Growy Mobile -->
+            <li class="work-card" data-category="mobile ai" data-tags="mobile,ai" data-project="growy" data-reveal style="--i:2">
+              <article class="work-card__inner">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View Growy Case Study">
+                  <div class="work-card__image">
+                    <img src="/images/projects/project-usplus.webp" alt="Growy AI Language Immersion App" width="480" height="720" loading="lazy">
+                  </div>
+                </a>
+                <div class="work-card__meta">
+                  <div class="work-card__tags">
+                    <span class="work-tag">React Native</span>
+                    <span class="work-tag">TypeScript</span>
+                    <span class="work-tag">AI Immersion</span>
+                  </div>
+                  <h3 class="work-card__title">Growy: AI Language Coach</h3>
+                  <p class="work-card__subtitle">Architected a cross-platform mobile application focused on interactive language immersion powered by modern full-stack tools and speech feedback.</p>
+                  <div class="work-card__result">
+                    <span class="result-value">Interactive</span>
+                    <span class="result-label">Conversational AI</span>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Project 4: Basith Interactive Studio -->
+            <li class="work-card" data-category="web" data-tags="web" data-project="basithlabs" data-reveal style="--i:3">
+              <article class="work-card__inner">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View Creative Portfolio Case Study">
+                  <div class="work-card__image">
+                    <img src="/images/projects/project-celtrev.webp" alt="Basith Interactive Studio" width="480" height="720" loading="lazy">
+                  </div>
+                </a>
+                <div class="work-card__meta">
+                  <div class="work-card__tags">
+                    <span class="work-tag">Vite</span>
+                    <span class="work-tag">Canvas 2D</span>
+                    <span class="work-tag">Web Audio API</span>
+                  </div>
+                  <h3 class="work-card__title">Basith Interactive Portfolio</h3>
+                  <p class="work-card__subtitle">High-aesthetic Japanese Zen editorial experience featuring procedural falling sakura physics, magnetic custom cursor, and synthesized audio oscillators.</p>
+                  <div class="work-card__result">
+                    <span class="result-value">60 FPS</span>
+                    <span class="result-label">Fluid Physics</span>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Project 5: LCC Python Workflows -->
+            <li class="work-card" data-category="python" data-tags="python" data-project="lccwork" data-reveal style="--i:4">
+              <article class="work-card__inner">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View LCC Python Workflows">
+                  <div class="work-card__image">
+                    <img src="/images/projects/project-brio.webp" alt="LCC Python Engineering Workflows" width="480" height="720" loading="lazy">
+                  </div>
+                </a>
+                <div class="work-card__meta">
+                  <div class="work-card__tags">
+                    <span class="work-tag">Python</span>
+                    <span class="work-tag">OOP</span>
+                    <span class="work-tag">Software Testing</span>
+                  </div>
+                  <h3 class="work-card__title">Python Systems &amp; Testing</h3>
+                  <p class="work-card__subtitle">Engineered and optimized Python backend application workflows, collaborated on modular architectures, and executed systematic component testing.</p>
+                  <div class="work-card__result">
+                    <span class="result-value">2 Months</span>
+                    <span class="result-label">LCC Production Intern</span>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Project 6: Analytics & GenAI Systems -->
+            <li class="work-card" data-category="ai" data-tags="ai" data-project="analyticslab" data-reveal style="--i:5">
+              <article class="work-card__inner">
+                <a href="#projects" class="work-card__image-link" data-cursor="CASE STUDY" aria-label="View Data Analytics &amp; GenAI Case Study">
+                  <div class="work-card__image">
+                    <img src="/images/projects/project-minu.webp" alt="Data Analytics and GenAI Lab" width="480" height="720" loading="lazy">
+                  </div>
+                </a>
+                <div class="work-card__meta">
+                  <div class="work-card__tags">
+                    <span class="work-tag">Google Certified</span>
+                    <span class="work-tag">SQL</span>
+                    <span class="work-tag">TATA GenAI</span>
+                  </div>
+                  <h3 class="work-card__title">Data Analytics &amp; GenAI Lab</h3>
+                  <p class="work-card__subtitle">Data cleaning pipelines, exploratory SQL analysis, and GenAI productivity workflows backed by official Google and TATA credentials.</p>
+                  <div class="work-card__result">
+                    <span class="result-value">Certified</span>
+                    <span class="result-label">Google / TATA</span>
                   </div>
                 </div>
               </article>
@@ -593,56 +903,162 @@
           </ul>
         </section>
 
-        <!-- ===== EXPERIENCE SECTION ===== -->
+        <!-- ===== EXPERIENCE & EDUCATION SECTION ===== -->
         <section class="home-team p-wrap" id="experience" aria-labelledby="team-heading">
           <div class="home-team__head" data-reveal="title">
-            <span class="home-team__eyebrow" aria-hidden="true" lang="ja">経験</span>
+            <span class="home-team__eyebrow" aria-hidden="true" lang="ja">経歴と学歴</span>
             <h2 id="team-heading" class="p-title p-title--section">
               <span class="p-title__mask">
                 <span class="p-title__text">Experience &amp; <em>Education</em></span>
               </span>
             </h2>
+            <p class="home-work__description">Solid academic computer science foundation complemented by practical industry internship experience.</p>
           </div>
 
           <div class="home-team__grid">
-            <article class="team-card" data-reveal style="--i:0">
-              <div class="team-card__role">Freelance Full-Stack Developer</div>
-              <div class="team-card__name">Self-Employed</div>
-              <div class="team-card__period">2023 – Present</div>
-              <p class="team-card__bio">Building custom web applications, AI integrations, and automation scripts for clients. Focused on Python/Django back-end systems and React front-end development.</p>
+
+            <!-- Card 1: Internship -->
+            <article class="team-card team-card--highlight" data-reveal style="--i:0">
+              <div class="team-card__badge">Industry Internship</div>
+              <div class="team-card__role">Python Programming &amp; Development Intern</div>
+              <div class="team-card__name">LCC Computer Education</div>
+              <div class="team-card__period">2 Months Duration</div>
+              <p class="team-card__bio">
+                • Engineered and optimized Python scripts and backend application workflows, enhancing practical software development capabilities.<br>
+                • Collaborated with peers to design modular code structures, ensuring clean architecture and adherence to standard programming practices.<br>
+                • Assisted in debugging, testing, and refining application components to improve overall system performance and reliability.
+              </p>
               <ul class="team-card__skills">
-                <li>Python / Django</li>
-                <li>React / Next.js</li>
-                <li>PostgreSQL</li>
-                <li>Docker</li>
+                <li>Python 3</li>
+                <li>Backend Workflows</li>
+                <li>Clean OOP Architecture</li>
+                <li>Software Testing &amp; Debugging</li>
               </ul>
             </article>
 
+            <!-- Card 2: Master of Computer Applications -->
             <article class="team-card" data-reveal style="--i:1">
-              <div class="team-card__role">MCA Student</div>
-              <div class="team-card__name">Rajagiri School of Engineering &amp; Technology</div>
-              <div class="team-card__period">2024 – 2026</div>
-              <p class="team-card__bio">Master of Computer Applications focusing on advanced algorithms, machine learning, distributed systems, and enterprise application development.</p>
+              <div class="team-card__badge">Postgraduate Degree</div>
+              <div class="team-card__role">Master of Computer Applications (MCA)</div>
+              <div class="team-card__name">MES AIMAT, Mahatma Gandhi University</div>
+              <div class="team-card__period">Expected 2027</div>
+              <p class="team-card__bio">
+                Pursuing advanced postgraduate studies in computer applications focusing on advanced data structures, software engineering methodologies, distributed systems, and modern AI/full-stack web development.
+              </p>
               <ul class="team-card__skills">
-                <li>Machine Learning</li>
-                <li>Distributed Systems</li>
-                <li>Enterprise Java</li>
-                <li>Data Science</li>
+                <li>Full-Stack Development</li>
+                <li>AI Integration</li>
+                <li>Software Architecture</li>
+                <li>Advanced Databases</li>
               </ul>
             </article>
 
+            <!-- Card 3: Bachelor of Science -->
             <article class="team-card" data-reveal style="--i:2">
-              <div class="team-card__role">BSc Computer Science</div>
-              <div class="team-card__name">MES College, Ernakulam</div>
-              <div class="team-card__period">2021 – 2024</div>
-              <p class="team-card__bio">Bachelor's degree with strong foundation in programming, data structures, databases, and software engineering principles.</p>
+              <div class="team-card__badge">Undergraduate Degree</div>
+              <div class="team-card__role">Bachelor of Science in Computer Science (BSc)</div>
+              <div class="team-card__name">KMM College of Arts and Science</div>
+              <div class="team-card__period">2023 – 2025</div>
+              <p class="team-card__bio">
+                Graduated with a comprehensive grounding in core computer science principles, object-oriented programming (OOP), relational DBMS, software engineering, and computer networking.
+              </p>
               <ul class="team-card__skills">
-                <li>C / C++ / Java</li>
-                <li>Database Design</li>
-                <li>Web Technologies</li>
-                <li>Algorithms</li>
+                <li>C, C++, Java</li>
+                <li>SQL &amp; MySQL</li>
+                <li>OOP &amp; DBMS</li>
+                <li>Networking &amp; Testing</li>
               </ul>
             </article>
+
+          </div>
+        </section>
+
+        <!-- ===== CERTIFICATIONS & TRAINING SECTION ===== -->
+        <section class="home-certs p-wrap" id="certifications" aria-labelledby="certs-heading">
+          <div class="home-team__head" data-reveal="title">
+            <span class="home-team__eyebrow" aria-hidden="true" lang="ja">資格認定</span>
+            <h2 id="certs-heading" class="p-title p-title--section">
+              <span class="p-title__mask">
+                <span class="p-title__text">Certifications &amp; <em>Training</em></span>
+              </span>
+            </h2>
+            <p class="home-work__description">Professional credentials and specialized technical programs completed across data analytics, cybersecurity, and artificial intelligence.</p>
+          </div>
+
+          <div class="certs-grid">
+
+            <!-- Cert 1 -->
+            <div class="cert-card" data-reveal style="--i:0">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">Coursera</div>
+              <h3 class="cert-card__title">Google Data Analytics Professional Certificate</h3>
+              <p class="cert-card__desc">Rigorous multi-course professional program in data cleaning, SQL queries, visualizations, and data-informed decision making.</p>
+              <span class="cert-card__tag">Google Certified</span>
+            </div>
+
+            <!-- Cert 2 -->
+            <div class="cert-card" data-reveal style="--i:1">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">NPTEL Skill India</div>
+              <h3 class="cert-card__title">Software Testing Course (1 Month)</h3>
+              <p class="cert-card__desc">Comprehensive foundation in black-box/white-box testing, unit testing methodologies, test cases, and quality assurance workflows.</p>
+              <span class="cert-card__tag">QA &amp; Verification</span>
+            </div>
+
+            <!-- Cert 3 -->
+            <div class="cert-card" data-reveal style="--i:2">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">ATAL Academy</div>
+              <h3 class="cert-card__title">Digital Forensics in AI-Driven Cybersecurity</h3>
+              <p class="cert-card__desc">1-Week faculty development and technical program exploring AI-driven vulnerability analysis, cyber forensics, and data security.</p>
+              <span class="cert-card__tag">Cybersecurity &amp; AI</span>
+            </div>
+
+            <!-- Cert 4 -->
+            <div class="cert-card" data-reveal style="--i:3">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">TATA</div>
+              <h3 class="cert-card__title">GenAI Powered Data Analytics Job Simulation</h3>
+              <p class="cert-card__desc">Practical corporate job simulation demonstrating generative AI application in business intelligence, automated insights, and executive summaries.</p>
+              <span class="cert-card__tag">GenAI Simulation</span>
+            </div>
+
+            <!-- Cert 5 -->
+            <div class="cert-card" data-reveal style="--i:4">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">Infocampus</div>
+              <h3 class="cert-card__title">Networking &amp; DevOps Foundation Workshop</h3>
+              <p class="cert-card__desc">Hands-on 3-day intensive workshop in network topologies, protocols, server deployment basics, and DevOps pipelines.</p>
+              <span class="cert-card__tag">Networking &amp; DevOps</span>
+            </div>
+
+            <!-- Cert 6 -->
+            <div class="cert-card" data-reveal style="--i:5">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">HCL GUVI</div>
+              <h3 class="cert-card__title">Claude AI in 90 Minutes Productivity Course</h3>
+              <p class="cert-card__desc">Prompt engineering, LLM workflow optimization, code generation techniques, and automated document analysis using Claude.</p>
+              <span class="cert-card__tag">LLM Productivity</span>
+            </div>
+
+            <!-- Cert 7 -->
+            <div class="cert-card" data-reveal style="--i:6">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">HCL GUVI</div>
+              <h3 class="cert-card__title">Complete Python Bootcamp</h3>
+              <p class="cert-card__desc">End-to-end Python programming, functional constructs, OOP paradigms, file I/O, error handling, and algorithmic problem-solving.</p>
+              <span class="cert-card__tag">Python Core</span>
+            </div>
+
+            <!-- Cert 8 -->
+            <div class="cert-card" data-reveal style="--i:7">
+              <div class="cert-card__stamp">印</div>
+              <div class="cert-card__org">HCL GUVI</div>
+              <h3 class="cert-card__title">Data Science vs Data Analytics vs AI</h3>
+              <p class="cert-card__desc">Comparative architectural analysis of modern machine learning pipelines, analytics lifecycles, and generative AI systems.</p>
+              <span class="cert-card__tag">Data Science &amp; AI</span>
+            </div>
+
           </div>
         </section>
 
@@ -670,6 +1086,7 @@
 
           <!-- FAQ List -->
           <ul class="faq faq--uniform service-faq__list" id="faqList">
+
             <li class="faq__item is-open" style="--i:0">
               <span class="service-faq__shoulder" aria-hidden="true">
                 <svg class="service-faq__corner service-faq__corner--top" viewBox="0 0 20 20"><path d="M20 .5L.5 20"/></svg>
@@ -687,13 +1104,13 @@
               <span class="service-faq__eyelet" aria-hidden="true"></span>
               <h3 class="faq__heading">
                 <button id="faq-q0" type="button" class="faq__question" aria-expanded="true" aria-controls="faq-a0">
-                  <span>What tech stack do you work with?</span>
+                  <span>What roles is Mohammed Basith actively seeking?</span>
                   <span class="faq__icon" aria-hidden="true"></span>
                 </button>
               </h3>
               <div id="faq-a0" class="faq__answer" role="region" aria-labelledby="faq-q0">
                 <div class="faq__answer-inner">
-                  <p>My primary stack is Python (Django/FastAPI), React/Next.js, TypeScript, and PostgreSQL. I also work with Docker, Redis, Celery, and various AI/ML libraries including LangChain, OpenAI API, and Gemini. For deployment, I use Vercel, Railway, and AWS.</p>
+                  <p>I am actively seeking Full-Stack Developer, Python Backend Engineer, and Frontend React developer roles, as well as technical internships. Based in Ernakulam, Kerala, I am open to opportunities in Kochi, Bangalore, or remote software engineering roles worldwide.</p>
                 </div>
               </div>
             </li>
@@ -726,13 +1143,13 @@
               </svg>
               <h3 class="faq__heading">
                 <button id="faq-q1" type="button" class="faq__question" aria-expanded="false" aria-controls="faq-a1">
-                  <span>Are you available for freelance projects?</span>
+                  <span>What is your primary technology stack and technical strength?</span>
                   <span class="faq__icon" aria-hidden="true"></span>
                 </button>
               </h3>
               <div id="faq-a1" class="faq__answer" role="region" aria-labelledby="faq-q1" inert>
                 <div class="faq__answer-inner">
-                  <p>Yes! I'm currently available for freelance and contract work alongside my MCA studies. I take on web development, AI integration, API building, and automation projects. The best way to start is to <a href="#contact">reach out via the contact form</a> with your project details.</p>
+                  <p>My core foundation consists of Python, Django, React, TypeScript, and SQL/MySQL databases. My standout strength is bridging backend robustness with fluid frontend design: designing clean, normalized database schemas, building secure RESTful APIs, and pairing them with high-performance, accessible interfaces.</p>
                 </div>
               </div>
             </li>
@@ -754,13 +1171,13 @@
               <span class="service-faq__eyelet" aria-hidden="true"></span>
               <h3 class="faq__heading">
                 <button id="faq-q2" type="button" class="faq__question" aria-expanded="false" aria-controls="faq-a2">
-                  <span>What kind of AI projects can you build?</span>
+                  <span>How did you develop CivicCare and CITY-360?</span>
                   <span class="faq__icon" aria-hidden="true"></span>
                 </button>
               </h3>
               <div id="faq-a2" class="faq__answer" role="region" aria-labelledby="faq-q2" inert>
                 <div class="faq__answer-inner">
-                  <p>I build RAG (Retrieval-Augmented Generation) systems, LLM-powered chatbots, document analysis tools, AI code reviewers, and custom ML pipelines. I use OpenAI, Gemini, LangChain, and open-source models depending on the requirement.</p>
+                  <p>In CivicCare, I tackled civic complaint backlogs by building a real-time dispatch and issue resolution web platform with React, implementing automated complaint classification algorithms and intuitive status tracking for citizens. In CITY-360, I engineered a structured Python/Django backend with normalized SQL schemas to safely handle service marketplace listings, user authentication, and provider coordination.</p>
                 </div>
               </div>
             </li>
@@ -782,16 +1199,17 @@
               <span class="service-faq__eyelet" aria-hidden="true"></span>
               <h3 class="faq__heading">
                 <button id="faq-q3" type="button" class="faq__question" aria-expanded="false" aria-controls="faq-a3">
-                  <span>How do you communicate during a project?</span>
+                  <span>What experience did you gain at LCC Computer Education?</span>
                   <span class="faq__icon" aria-hidden="true"></span>
                 </button>
               </h3>
               <div id="faq-a3" class="faq__answer" role="region" aria-labelledby="faq-q3" inert>
                 <div class="faq__answer-inner">
-                  <p>I communicate primarily via email, WhatsApp, or scheduled video calls. I provide weekly progress updates, maintain a shared project board, and am responsive during IST business hours. For urgent issues, I aim to respond within a few hours.</p>
+                  <p>During my 2-month Python internship at LCC, I engineered production scripts, refactored backend workflows for performance, collaborated with teammates on modular architecture adhering to strict clean-code standards, and performed hands-on component debugging and unit testing.</p>
                 </div>
               </div>
             </li>
+
           </ul>
 
         </section>
@@ -808,49 +1226,66 @@
                 <span class="p-title__text">Let's build <em>together</em></span>
               </span>
             </h2>
+            <p class="home-work__description">Looking for a full-stack engineer, AI integrator, or dedicated postgraduate hire? Dispatch a message below or contact me directly.</p>
           </div>
 
           <div class="home-contact__layout">
-          <!-- Postcard contact card -->
-          <div class="postcard" id="postcardWidget" data-cursor="SEND">
-            <div class="postcard__front">
-              <div class="postcard__header">
-                <span class="postcard__stamp">
-                  <span class="postcard__stamp-kanji">連</span>
-                </span>
-                <span class="postcard__from">FROM:<br>Mohammed Basith</span>
-              </div>
-              <div class="postcard__address">
-                <p class="postcard__to">TO: <em>You</em></p>
-                <p class="postcard__greeting">Hello! I'm excited to hear about your project. Let's create something great together.</p>
-                <div class="postcard__links">
-                  <a href="mailto:mohammedbasith1@gmail.com" class="postcard__link">mohammedbasith1@gmail.com</a>
-                  <a href="https://linkedin.com/in/mohammedbasith1" target="_blank" rel="noopener" class="postcard__link">LinkedIn</a>
-                  <a href="https://github.com/mohammedbasith" target="_blank" rel="noopener" class="postcard__link">GitHub</a>
+            <!-- Postcard contact card with Mohammed Basith's actual details -->
+            <div class="postcard" id="postcardWidget" data-cursor="DIRECT CONTACT">
+              <div class="postcard__front">
+                <div class="postcard__header">
+                  <span class="postcard__stamp">
+                    <span class="postcard__stamp-kanji">基</span>
+                  </span>
+                  <span class="postcard__from">
+                    <strong>FROM:</strong><br>
+                    Mohammed Basith<br>
+                    <span style="font-size:0.85em; color:#777;">Ernakulam, Kerala</span>
+                  </span>
+                </div>
+                <div class="postcard__address">
+                  <p class="postcard__to">TO: <em>Future Collaborator / Hiring Manager</em></p>
+                  <p class="postcard__greeting">"Passionate about writing clean code, architecting scalable data systems, and creating responsive digital products that make an impact."</p>
+                  <div class="postcard__links">
+                    <a href="mailto:basith2717@gmail.com" class="postcard__link">📧 basith2717@gmail.com</a>
+                    <a href="tel:+919526747375" class="postcard__link">📞 +91-9526747375</a>
+                    <a href="https://linkedin.com/in/mohammedbasith1" target="_blank" rel="noopener" class="postcard__link">💼 linkedin.com/in/mohammedbasith1</a>
+                    <a href="https://basith-design.vercel.app" target="_blank" rel="noopener" class="postcard__link">🌐 basith-design.vercel.app</a>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Contact Form -->
-          <form class="contact-form" id="contactForm" novalidate>
-            <div class="contact-form__group">
-              <label class="contact-form__label" for="contactName">Your name</label>
-              <input id="contactName" class="contact-form__input" type="text" name="name" placeholder="Jane Smith" autocomplete="name" required>
-            </div>
-            <div class="contact-form__group">
-              <label class="contact-form__label" for="contactEmail">Email address</label>
-              <input id="contactEmail" class="contact-form__input" type="email" name="email" placeholder="jane@example.com" autocomplete="email" required>
-            </div>
-            <div class="contact-form__group">
-              <label class="contact-form__label" for="contactMessage">Tell me about your project</label>
-              <textarea id="contactMessage" class="contact-form__textarea" name="message" rows="4" placeholder="I'm looking for help with..." required></textarea>
-            </div>
-            <button type="submit" class="contact-form__submit contact-postcard-cta">
-              <span class="contact-postcard-cta__label">Send message</span>
-              <span class="contact-postcard-cta__kanji">送信</span>
-            </button>
-          </form>
+            <!-- Contact Form with Interactive Feedback -->
+            <form class="contact-form" id="contactForm" novalidate>
+              <!-- Role / Inquiry Selector Chips -->
+              <div class="contact-form__group">
+                <label class="contact-form__label">Inquiry Focus</label>
+                <div class="contact-chips" id="contactChips">
+                  <button type="button" class="chip active" data-value="Full-time Role">Full-time Role</button>
+                  <button type="button" class="chip" data-value="Internship">Internship</button>
+                  <button type="button" class="chip" data-value="Freelance Project">Freelance Build</button>
+                  <button type="button" class="chip" data-value="Technical Chat">Technical Chat</button>
+                </div>
+              </div>
+
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="contactName">Your Name</label>
+                <input id="contactName" class="contact-form__input" type="text" name="name" placeholder="E.g., Sarah Jenkins" autocomplete="name" required>
+              </div>
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="contactEmail">Email Address</label>
+                <input id="contactEmail" class="contact-form__input" type="email" name="email" placeholder="sarah@company.com" autocomplete="email" required>
+              </div>
+              <div class="contact-form__group">
+                <label class="contact-form__label" for="contactMessage">Project / Opportunity Details</label>
+                <textarea id="contactMessage" class="contact-form__textarea" name="message" rows="4" placeholder="Hello Mohammed, we have an opening for a Full-Stack / Python role..." required></textarea>
+              </div>
+              <button type="submit" class="contact-form__submit contact-postcard-cta" data-cursor="STAMP &amp; SEND">
+                <span class="contact-postcard-cta__label">Stamp &amp; Dispatch Postcard</span>
+                <span class="contact-postcard-cta__kanji">送信</span>
+              </button>
+            </form>
           </div><!-- /.home-contact__layout -->
         </div>
       </section>
@@ -862,55 +1297,85 @@
       <div class="site-footer__inner">
         <div class="site-footer__brand">
           <a href="#hero" class="site-footer__logo" aria-label="Back to top">
-            <svg viewBox="0 0 125 32" fill="none" width="100" aria-hidden="true">
-              <text x="0" y="24" font-family="'Kanit', sans-serif" font-weight="700" font-size="22" fill="currentColor" letter-spacing="-1">BASITH</text>
-              <circle cx="115" cy="16" r="6" fill="#d62828"/>
-            </svg>
+            <img src="/images/basith-logo-white.png" alt="BASITH" class="site-footer__logo-img" width="346" height="100" loading="lazy" decoding="async">
           </a>
-          <p class="site-footer__tagline">Full-Stack Developer &amp; AI Engineer</p>
-          <p class="site-footer__location">📍 Ernakulam, Kerala, India</p>
+          <p class="site-footer__tagline">Full-Stack Developer &amp; AI Systems Engineer</p>
+          <p class="site-footer__location">📍 Ernakulam, Kerala, India • MCA '27 Candidate</p>
+          <div style="margin-top: 1rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+            <a href="mailto:basith2717@gmail.com" class="footer-chip">basith2717@gmail.com</a>
+            <a href="tel:+919526747375" class="footer-chip">+91-9526747375</a>
+          </div>
         </div>
 
         <nav class="site-footer__nav" aria-label="Footer Navigation">
           <div class="site-footer__nav-group">
-            <span class="site-footer__nav-label">Navigate</span>
+            <span class="site-footer__nav-label">Navigation</span>
             <a href="#hero" class="site-footer__link">Home</a>
-            <a href="#projects" class="site-footer__link">Projects</a>
-            <a href="#experience" class="site-footer__link">Experience</a>
-            <a href="#faq" class="site-footer__link">FAQ</a>
-            <a href="#contact" class="site-footer__link">Contact</a>
+            <a href="#clients" class="site-footer__link">Technical Skills</a>
+            <a href="#projects" class="site-footer__link">Selected Projects</a>
+            <a href="#experience" class="site-footer__link">Experience &amp; Education</a>
+            <a href="#certifications" class="site-footer__link">Certifications</a>
+            <a href="#contact" class="site-footer__link">Contact Postcard</a>
           </div>
           <div class="site-footer__nav-group">
-            <span class="site-footer__nav-label">Capabilities</span>
-            <a href="#projects" class="site-footer__link">Web Development</a>
-            <a href="#projects" class="site-footer__link">AI &amp; Python</a>
-            <a href="#projects" class="site-footer__link">Full-Stack Apps</a>
-            <a href="#projects" class="site-footer__link">Automation</a>
+            <span class="site-footer__nav-label">Core Works</span>
+            <a href="#projects" class="site-footer__link">CivicCare AI Platform</a>
+            <a href="#projects" class="site-footer__link">CITY-360 Marketplace</a>
+            <a href="#projects" class="site-footer__link">Growy Language Coach</a>
+            <a href="#projects" class="site-footer__link">Python Engineering (LCC)</a>
+            <a href="#certifications" class="site-footer__link">Google Data Analytics</a>
           </div>
           <div class="site-footer__nav-group">
-            <span class="site-footer__nav-label">Connect</span>
-            <a href="https://linkedin.com/in/mohammedbasith1" target="_blank" rel="noopener" class="site-footer__link">LinkedIn</a>
-            <a href="https://github.com/mohammedbasith" target="_blank" rel="noopener" class="site-footer__link">GitHub</a>
-            <a href="mailto:mohammedbasith1@gmail.com" class="site-footer__link">Email</a>
+            <span class="site-footer__nav-label">Direct Connect</span>
+            <a href="https://linkedin.com/in/mohammedbasith1" target="_blank" rel="noopener" class="site-footer__link">LinkedIn Profile ↗</a>
+            <a href="https://basith-design.vercel.app" target="_blank" rel="noopener" class="site-footer__link">Portfolio Site ↗</a>
+            <a href="mailto:basith2717@gmail.com" class="site-footer__link">Send Email</a>
+            <a href="https://wa.me/919526747375" target="_blank" rel="noopener" class="site-footer__link">WhatsApp Chat ↗</a>
           </div>
         </nav>
       </div>
 
       <div class="site-footer__bottom">
-        <p class="site-footer__copy">© 2024 Mohammed Basith. Crafted with ❤️ and lots of ☕</p>
-        <p class="site-footer__kanji" lang="ja" aria-hidden="true">ものづくり</p>
+        <p class="site-footer__copy">© 2026 Mohammed Basith. Built with precision, React, Python &amp; Zen Japanese aesthetics.</p>
+        <p class="site-footer__kanji" lang="ja" aria-hidden="true">ものづくり • 探求</p>
       </div>
     </footer>
 
   </div><!-- /#__nuxt -->
 
-  <!-- WhatsApp floating button -->
-  <a href="https://wa.me/919876543210" class="whatsapp-icon" target="_blank" rel="noopener" aria-label="Contact on WhatsApp" id="whatsappBtn">
+  <!-- WhatsApp Floating Button (Direct to Basith's real number) -->
+  <a href="https://wa.me/919526747375?text=Hi%20Mohammed,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20connect!" class="whatsapp-icon" target="_blank" rel="noopener" aria-label="Contact Mohammed Basith on WhatsApp" id="whatsappBtn" data-cursor="WHATSAPP">
     <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="48" height="48" rx="12" fill="#25D366"/>
       <path d="M24 10C16.268 10 10 16.268 10 24c0 2.526.68 4.89 1.864 6.928L10 38l7.286-1.83A13.94 13.94 0 0 0 24 38c7.732 0 14-6.268 14-14S31.732 10 24 10Zm0 2c6.617 0 12 5.383 12 12s-5.383 12-12 12a11.95 11.95 0 0 1-6.13-1.688l-.44-.27-4.567 1.146 1.172-4.448-.294-.46A11.95 11.95 0 0 1 12 24c0-6.617 5.383-12 12-12Zm-3.5 6c-.333 0-.857.125-1.313.625C18.73 19.125 17.5 20.5 17.5 23.25c0 2.75 1.969 5.406 2.219 5.781.25.375 3.875 6.25 9.469 8.531C31 38.25 31 37.375 31.563 37.063c.562-.313 3.437-1.75 3.937-3.438.5-1.688.5-3.125.25-3.438-.25-.312-.688-.5-1.438-.875-.75-.375-3.437-1.75-3.937-2.063-.5-.312-.875-.5-1.25.063-.375.563-1.438 1.875-1.813 2.25-.375.375-.688.438-1.25.125C24.5 29.375 22.75 28.5 21.25 26.875c-1.25-1.438-2.125-3.25-2.375-3.688-.25-.437-.063-.688.188-.937.188-.188.563-.625.688-.813.125-.188.25-.438.375-.688.125-.25.063-.5-.062-.688C20 20.5 19.188 18.563 18.813 17.75 18.563 17.188 18.25 17 18 17c-.219 0-.5-.063-.75 0C17 17 16.875 17 16.5 17Z" fill="white"/>
     </svg>
   </a>
+
+  <!-- ==========================================================================
+       CASE STUDY SLIDING DRAWER MODAL (Opens upon clicking project cards)
+       ========================================================================== -->
+  <div class="case-drawer" id="caseStudyDrawer" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="case-drawer__backdrop"></div>
+    <div class="case-drawer__panel">
+      <button type="button" class="case-drawer__close" id="closeCaseDrawer" aria-label="Close Case Study">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="case-drawer__body" id="caseDrawerBody">
+        <!-- Rendered dynamically by main.js with project details -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       DISPATCH SUCCESS / FEEDBACK NOTIFICATION
+       ========================================================================== -->
+  <div class="dispatch-toast" id="dispatchToast" role="alert" aria-live="assertive" aria-hidden="true">
+    <div class="dispatch-toast__stamp">基</div>
+    <div class="dispatch-toast__copy">
+      <strong>Postcard Dispatched!</strong>
+      <span>Thank you! Your note has been delivered to Mohammed Basith.</span>
+    </div>
+  </div>
 
   <script src="./main.js" type="module"></script>
 </body>

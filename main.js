@@ -16,8 +16,13 @@
 // ==========================================================================
 class SoundEngine {
   constructor() {
-    this.enabled = true;
+    this.enabled = localStorage.getItem('zen_sound_enabled') !== 'false';
     this.ctx = null;
+    this.bgMusic = null;
+    this.isMusicPlaying = false;
+    this.fadeTimer = null;
+    this.hasUserInteracted = false;
+    this.initMusic();
   }
 
   init() {
@@ -29,9 +34,111 @@ class SoundEngine {
     }
   }
 
+  initMusic() {
+    if (typeof window === 'undefined') return;
+
+    // Background acoustic song provided by Mohammed Basith
+    this.bgMusic = new Audio('/audio/bg-music.mp3');
+    this.bgMusic.loop = true;
+    this.bgMusic.volume = 0;
+    this.bgMusic.preload = 'auto';
+
+    // Auto-start on first user interaction if audio is enabled
+    const startOnInteraction = () => {
+      if (this.hasUserInteracted) return;
+      this.hasUserInteracted = true;
+      ['click', 'touchstart', 'keydown'].forEach(evt => {
+        window.removeEventListener(evt, startOnInteraction);
+      });
+      if (this.enabled) {
+        this.playMusic();
+      }
+    };
+
+    ['click', 'touchstart', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, startOnInteraction, { passive: true });
+    });
+  }
+
+  playMusic() {
+    if (!this.bgMusic) return;
+    clearInterval(this.fadeTimer);
+
+    const playPromise = this.bgMusic.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        this.isMusicPlaying = true;
+        this.notifyUI(true);
+        // Fade in volume smoothly to a pleasant ambient level
+        const targetVol = 0.38;
+        this.fadeTimer = setInterval(() => {
+          if (this.bgMusic.volume < targetVol - 0.04) {
+            this.bgMusic.volume = Math.min(targetVol, this.bgMusic.volume + 0.04);
+          } else {
+            this.bgMusic.volume = targetVol;
+            clearInterval(this.fadeTimer);
+          }
+        }, 50);
+      }).catch(err => {
+        // Handled silently if browser awaits click
+        console.log('Background music waiting for user interaction:', err);
+      });
+    }
+  }
+
+  pauseMusic() {
+    if (!this.bgMusic) return;
+    clearInterval(this.fadeTimer);
+
+    // Fade out volume then pause
+    this.fadeTimer = setInterval(() => {
+      if (this.bgMusic.volume > 0.04) {
+        this.bgMusic.volume = Math.max(0, this.bgMusic.volume - 0.04);
+      } else {
+        this.bgMusic.volume = 0;
+        this.bgMusic.pause();
+        this.isMusicPlaying = false;
+        this.notifyUI(false);
+        clearInterval(this.fadeTimer);
+      }
+    }, 40);
+  }
+
   toggle() {
     this.enabled = !this.enabled;
+    localStorage.setItem('zen_sound_enabled', this.enabled ? 'true' : 'false');
+
+    if (this.enabled) {
+      this.playMusic();
+      this.playClick();
+    } else {
+      this.pauseMusic();
+    }
     return this.enabled;
+  }
+
+  notifyUI(isPlaying) {
+    const btn = document.getElementById('soundToggle');
+    if (!btn) return;
+    const iconOn = btn.querySelector('.sound-icon--on');
+    const iconOff = btn.querySelector('.sound-icon--off');
+    const soundBars = btn.querySelector('.sound-bars');
+
+    if (isPlaying) {
+      btn.classList.add('is-playing');
+      btn.setAttribute('aria-label', 'Pause Background Music');
+      btn.setAttribute('title', 'Pause Background Music');
+      if (iconOn) iconOn.style.display = 'block';
+      if (iconOff) iconOff.style.display = 'none';
+      if (soundBars) soundBars.style.display = 'flex';
+    } else {
+      btn.classList.remove('is-playing');
+      btn.setAttribute('aria-label', 'Play Background Music');
+      btn.setAttribute('title', 'Play Background Music');
+      if (iconOn) iconOn.style.display = 'none';
+      if (iconOff) iconOff.style.display = 'block';
+      if (soundBars) soundBars.style.display = 'none';
+    }
   }
 
   playClick() {
@@ -212,43 +319,53 @@ class SakuraSimulation {
   }
 
   createPetal(randomY = false) {
+    // 70% of falling petals originate from the branch bough at top right
+    const fromBranch = !randomY && Math.random() < 0.7;
+    const x = fromBranch
+      ? this.width * (0.65 + Math.random() * 0.35)
+      : Math.random() * this.width;
+    const y = randomY
+      ? Math.random() * this.height
+      : (fromBranch ? Math.random() * (this.height * 0.35) : -20 - Math.random() * 40);
+
     return {
-      x: Math.random() * this.width,
-      y: randomY ? Math.random() * this.height : -20 - Math.random() * 40,
-      size: 6 + Math.random() * 8,
-      speedY: 1.2 + Math.random() * 1.8,
-      speedX: -0.6 + Math.random() * 1.2,
+      x,
+      y,
+      size: 7 + Math.random() * 9,
+      speedY: 1.1 + Math.random() * 1.6,
+      // Petals from branch carry natural leftward drift velocity
+      speedX: fromBranch ? -1.2 - Math.random() * 1.5 : -0.5 + Math.random() * 1.0,
       rotation: Math.random() * 360,
-      rotationSpeed: (Math.random() - 0.5) * 2.2,
+      rotationSpeed: (Math.random() - 0.5) * 2.4,
       sway: Math.random() * 100,
-      swaySpeed: 0.02 + Math.random() * 0.02,
-      opacity: 0.35 + Math.random() * 0.3,
-      tint: Math.random() > 0.4 ? '#db5b7f' : '#f8adbc'
+      swaySpeed: 0.02 + Math.random() * 0.025,
+      opacity: 0.38 + Math.random() * 0.38,
+      tint: Math.random() > 0.45 ? '#db5b7f' : (Math.random() > 0.3 ? '#f8adbc' : '#e53e3e')
     };
   }
 
-  burst(originX, originY) {
-    const burstCount = 14;
+  burst(originX, originY, burstCount = 18) {
     for (let i = 0; i < burstCount; i++) {
-      const angle = (Math.PI * 2 / burstCount) * i + (Math.random() - 0.5);
-      const force = 4 + Math.random() * 6;
+      // Wind blowing predominantly downward and to the left
+      const angle = Math.PI * 0.55 + (Math.random() - 0.5) * Math.PI * 0.85;
+      const force = 3.5 + Math.random() * 5.5;
       this.petals.push({
-        x: originX,
-        y: originY,
-        size: 12 + Math.random() * 12,
-        speedY: Math.sin(angle) * force + 0.8,
-        speedX: Math.cos(angle) * force,
+        x: originX + (Math.random() - 0.5) * 40,
+        y: originY + (Math.random() - 0.5) * 40,
+        size: 11 + Math.random() * 12,
+        speedY: Math.sin(angle) * force + 1.2,
+        speedX: Math.cos(angle) * force - 1.6,
         rotation: Math.random() * 360,
-        rotationSpeed: (Math.random() - 0.5) * 4,
-        sway: 0,
+        rotationSpeed: (Math.random() - 0.5) * 4.5,
+        sway: Math.random() * 50,
         swaySpeed: 0.03,
         opacity: 0.95,
-        tint: '#d62828'
+        tint: Math.random() > 0.35 ? '#db5b7f' : '#f8adbc'
       });
     }
 
-    if (this.petals.length > this.maxPetals + 25) {
-      this.petals.splice(0, 14);
+    if (this.petals.length > this.maxPetals + 35) {
+      this.petals.splice(0, burstCount);
     }
   }
 
@@ -292,6 +409,93 @@ class SakuraSimulation {
 }
 
 // ==========================================================================
+// 3b. SAKURA BRANCH INTERACTIVE BREEZE & GUST CONTROLLER
+// ==========================================================================
+class SakuraBranchInteractive {
+  constructor(sakuraSim) {
+    this.branch = document.getElementById('heroBranch');
+    this.bough = document.getElementById('heroBranchBough');
+    this.sakuraSim = sakuraSim;
+    if (!this.branch || !this.bough) return;
+    this.init();
+  }
+
+  init() {
+    let isGusting = false;
+
+    // Trigger gust animation and petal burst on click / touch
+    const triggerGust = () => {
+      if (isGusting) return;
+      isGusting = true;
+      sound.playZenChime();
+
+      this.bough.classList.remove('is-gust');
+      void this.bough.offsetWidth; // force reflow
+      this.bough.classList.add('is-gust');
+
+      // Burst petals directly from the blossoms on the branch
+      if (this.sakuraSim) {
+        const rect = this.branch.getBoundingClientRect();
+        const originX = rect.left + rect.width * 0.45;
+        const originY = rect.top + rect.height * 0.42;
+        this.sakuraSim.burst(originX, originY, 20);
+      }
+
+      setTimeout(() => {
+        this.bough.classList.remove('is-gust');
+        isGusting = false;
+      }, 1500);
+    };
+
+    this.branch.addEventListener('click', (e) => {
+      e.stopPropagation();
+      triggerGust();
+    });
+
+    this.branch.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        triggerGust();
+      }
+    });
+
+    // Subtle parallax tilt when moving cursor near the branch
+    let targetTilt = 0;
+    let currentTilt = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      if (isGusting) return;
+      const rect = this.branch.getBoundingClientRect();
+      const originX = rect.right;
+      const originY = rect.top;
+      const dx = e.clientX - originX;
+      const dy = e.clientY - originY;
+      const dist = Math.hypot(dx, dy);
+
+      if (dist < 650) {
+        const factor = (1 - dist / 650);
+        targetTilt = (dx / 650) * 3.2 * factor;
+      } else {
+        targetTilt = 0;
+      }
+    }, { passive: true });
+
+    const updateTilt = () => {
+      if (!isGusting) {
+        currentTilt += (targetTilt - currentTilt) * 0.08;
+        if (Math.abs(currentTilt) > 0.02) {
+          this.bough.style.transform = `rotate(${currentTilt.toFixed(2)}deg)`;
+        } else if (this.bough.style.transform) {
+          this.bough.style.transform = '';
+        }
+      }
+      requestAnimationFrame(updateTilt);
+    };
+    requestAnimationFrame(updateTilt);
+  }
+}
+
+// ==========================================================================
 // 4. KINETIC ROTATING HEADLINE
 // ==========================================================================
 class KineticHeadline {
@@ -303,8 +507,8 @@ class KineticHeadline {
     this.words = [
       { subject: 'FULL-STACK', accent: 'scalable', jpSubject: 'フルスタック', jpAccent: 'スケーラブル' },
       { subject: 'AI SYSTEMS', accent: 'intelligent', jpSubject: 'AI システム', jpAccent: 'インテリジェント' },
-      { subject: 'WEB APPS', accent: 'seamless', jpSubject: 'Webアプリ', jpAccent: 'シームレス' },
-      { subject: 'PYTHON', accent: 'robust', jpSubject: 'Python', jpAccent: '堅牢' }
+      { subject: 'PYTHON & SQL', accent: 'robust', jpSubject: 'Python & SQL', jpAccent: '堅牢' },
+      { subject: 'MOBILE APPS', accent: 'immersive', jpSubject: 'モバイルアプリ', jpAccent: '没入型' }
     ];
 
     this.currentIndex = 0;
@@ -364,184 +568,61 @@ class KineticHeadline {
 // ==========================================================================
 // 5. CINEMA SHOWREEL VIDEO PLAYER STAGE
 // ==========================================================================
-class CinemaShowreel {
-  constructor() {
-    this.modal = document.getElementById('reelModal');
-    this.openBtn = document.getElementById('reelPlayButton');
-    this.closeBtn = document.getElementById('closeReelModal');
-    this.playPauseBtn = document.getElementById('cinemaPlayPauseBtn');
-    this.playIcon = document.getElementById('cinemaPlayIcon');
-    this.pauseIcon = document.getElementById('cinemaPauseIcon');
-    this.timecode = document.getElementById('cinemaTimecode');
-    this.progressFill = document.getElementById('cinemaProgress');
-    this.visualizer = document.getElementById('cinemaVisualizer');
-    this.canvas = document.getElementById('cinemaCanvas');
-
-    this.isPlaying = true;
-    this.currentTime = 14;
-    this.duration = 74;
-
-    this.init();
-  }
-
+// ==========================================================================
+// 5. INTRO VIDEO SECTION — simple YouTube embed on play click
+// ==========================================================================
+const IntroVideo = {
   init() {
-    // In-page reel player (kigo-style home-reel)
-    const inPagePoster = document.getElementById('reelPoster');
-    const inPageStage = document.getElementById('reelStage');
-    const inPageClose = document.getElementById('reelClose');
+    const playBtn   = document.getElementById('introPlayBtn');
+    const poster    = document.getElementById('introVideoPoster');
+    const player    = document.getElementById('introVideoPlayer');
+    const wrapper   = document.getElementById('introVideoWrapper');
 
-    if (inPagePoster && inPageStage) {
-      inPagePoster.addEventListener('click', () => {
+    if (!playBtn || !poster || !player) return;
+
+    function showVideo() {
+      const youtubeId = player.getAttribute('data-youtube-id');
+
+      // If no real video ID yet, show a friendly toast and stop
+      if (!youtubeId || youtubeId === 'YOUR_YOUTUBE_VIDEO_ID_HERE') {
         sound.playZenChime();
-        inPageStage.classList.add('is-active');
-        if (!inPageStage.querySelector('iframe')) {
-          const iframe = document.createElement('iframe');
-          iframe.src = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0&loop=1';
-          iframe.title = 'Portfolio Showcase Reel';
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.style.border = 'none';
-          iframe.setAttribute('allow', 'autoplay; encrypted-media');
-          inPageStage.appendChild(iframe);
+        // Pulse the "coming soon" text
+        const coming = poster.querySelector('.intro-video-coming');
+        if (coming) {
+          coming.style.color = '#f6ad55';
+          coming.textContent = '\uD83C\uDFAC Recording soon \u2014 check back!';
+          setTimeout(() => {
+            coming.style.color = '';
+            coming.textContent = '\uD83C\uDCF9\u00A0 Intro video coming soon';
+          }, 3000);
         }
-      });
-
-      inPageClose?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        sound.playClick();
-        inPageStage.classList.remove('is-active');
-        const iframe = inPageStage.querySelector('iframe');
-        if (iframe) iframe.remove();
-      });
-    }
-
-    if (!this.modal) return;
-
-    if (this.visualizer) {
-      for (let i = 0; i < 36; i++) {
-        const bar = document.createElement('div');
-        bar.className = 'visualizer-bar';
-        this.visualizer.appendChild(bar);
+        return;
       }
-    }
 
-    this.openBtn?.addEventListener('click', () => {
+      // Inject YouTube iframe
       sound.playZenChime();
-      this.open();
-    });
-
-    this.closeBtn?.addEventListener('click', () => {
-      sound.playClick();
-      this.close();
-    });
-
-    this.modal.querySelector('.reel-modal__backdrop')?.addEventListener('click', () => {
-      this.close();
-    });
-
-    this.playPauseBtn?.addEventListener('click', () => {
-      sound.playClick();
-      this.togglePlay();
-    });
-
-    this.renderCinemaCanvas();
-
-    setInterval(() => {
-      if (this.modal.classList.contains('is-active') && this.isPlaying) {
-        this.currentTime += 0.5;
-        if (this.currentTime >= this.duration) this.currentTime = 0;
-        this.updateTimeDisplay();
-      }
-    }, 500);
-  }
-
-  open() {
-    this.modal.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  close() {
-    this.modal.classList.remove('is-active');
-    document.body.style.overflow = '';
-  }
-
-  togglePlay() {
-    this.isPlaying = !this.isPlaying;
-    if (this.isPlaying) {
-      this.playIcon.style.display = 'none';
-      this.pauseIcon.style.display = 'block';
-    } else {
-      this.playIcon.style.display = 'block';
-      this.pauseIcon.style.display = 'none';
-    }
-  }
-
-  updateTimeDisplay() {
-    const mins = Math.floor(this.currentTime / 60).toString().padStart(2, '0');
-    const secs = Math.floor(this.currentTime % 60).toString().padStart(2, '0');
-    if (this.timecode) {
-      this.timecode.textContent = `${mins}:${secs} / 01:14`;
-    }
-    if (this.progressFill) {
-      this.progressFill.style.width = `${(this.currentTime / this.duration) * 100}%`;
+      player.innerHTML =
+        '<iframe' +
+        ' src="https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&rel=0&modestbranding=1"' +
+        ' title="Mohammed Basith Introduction Video"' +
+        ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"' +
+        ' allowfullscreen' +
+        '></iframe>';
+      player.hidden = false;
+      poster.style.opacity = '0';
+      poster.style.pointerEvents = 'none';
+      setTimeout(() => { poster.hidden = true; }, 300);
     }
 
-    const bars = this.visualizer?.querySelectorAll('.visualizer-bar');
-    bars?.forEach((b) => {
-      const h = 10 + Math.random() * 90;
-      b.style.height = `${h}%`;
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showVideo();
     });
+
+    // Clicking anywhere on the poster also plays
+    poster.addEventListener('click', showVideo);
   }
-
-  renderCinemaCanvas() {
-    if (!this.canvas) return;
-    const ctx = this.canvas.getContext('2d');
-    let t = 0;
-
-    const draw = () => {
-      if (this.canvas.offsetWidth) {
-        this.canvas.width = this.canvas.offsetWidth;
-        this.canvas.height = this.canvas.offsetHeight;
-      }
-
-      const w = this.canvas.width;
-      const h = this.canvas.height;
-
-      ctx.fillStyle = '#0a0a0a';
-      ctx.fillRect(0, 0, w, h);
-
-      ctx.save();
-      ctx.translate(w / 2, h / 2);
-
-      for (let wave = 0; wave < 3; wave++) {
-        ctx.beginPath();
-        ctx.strokeStyle = wave === 0 ? 'rgba(219, 91, 127, 0.8)' : wave === 1 ? 'rgba(214, 40, 40, 0.6)' : 'rgba(255, 255, 255, 0.3)';
-        ctx.lineWidth = 2;
-        for (let x = -w / 2; x < w / 2; x += 10) {
-          const y = Math.sin((x * 0.015) + (t * 0.05) + wave) * (40 + wave * 25);
-          if (x === -w / 2) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      ctx.font = '800 36px Kanit';
-      ctx.textAlign = 'center';
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
-      ctx.fillText('MOHAMMED BASITH • 2026', 0, -20);
-
-      ctx.font = '600 15px Poppins';
-      ctx.fillStyle = '#db5b7f';
-      ctx.fillText('PYTHON • DJANGO • REACT • TYPESCRIPT • SQL • AI DISPATCH', 0, 20);
-
-      ctx.restore();
-
-      if (this.isPlaying) t++;
-      requestAnimationFrame(draw);
-    };
-    draw();
-  }
-}
+};
 
 // ==========================================================================
 // 6. CASE STUDY DRAWER DATABASE & MODAL (TAILORED FROM RESUME)
@@ -620,7 +701,7 @@ class CaseStudyDrawer {
     this.drawer = document.getElementById('caseStudyDrawer');
     this.drawerBody = document.getElementById('caseDrawerBody');
     this.closeBtn = document.getElementById('closeCaseDrawer');
-    this.cards = document.querySelectorAll('.work-postcard');
+    this.cards = document.querySelectorAll('.work-card, .work-postcard');
 
     this.init();
   }
@@ -629,7 +710,8 @@ class CaseStudyDrawer {
     if (!this.drawer) return;
 
     this.cards.forEach((card) => {
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        e.preventDefault();
         sound.playZenChime();
         const pKey = card.getAttribute('data-project');
         if (pKey && PROJECT_DATA[pKey]) {
@@ -718,9 +800,7 @@ class CaseStudyDrawer {
 
     document.getElementById('caseDrawerCta')?.addEventListener('click', () => {
       this.close();
-      const postcard = document.getElementById('postcardModal');
-      postcard?.classList.add('is-active');
-      document.body.style.overflow = 'hidden';
+      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
     });
   }
 }
@@ -730,60 +810,13 @@ class CaseStudyDrawer {
 // ==========================================================================
 class PostcardContact {
   constructor() {
-    this.modal = document.getElementById('postcardModal');
-    this.closeBtn = document.getElementById('closePostcardModal');
-    this.form = document.getElementById('postcardForm');
-    this.success = document.getElementById('postcardSuccess');
-    this.resetBtn = document.getElementById('resetPostcardBtn');
-    this.chips = document.querySelectorAll('.chip');
-
-    this.triggers = [
-      document.getElementById('headerPostcardBtn'),
-      document.getElementById('mobilePostcardBtn'),
-      document.getElementById('heroPostcardTrigger'),
-      document.getElementById('footerPostcardBtn')
-    ];
-
-    this.serviceButtons = document.querySelectorAll('.open-contact-with-service');
+    this.form = document.getElementById('contactForm');
+    this.toast = document.getElementById('dispatchToast');
+    this.chips = document.querySelectorAll('#contactChips .chip, .chip');
     this.init();
   }
 
   init() {
-    if (!this.modal) return;
-
-    this.triggers.forEach((btn) => {
-      btn?.addEventListener('click', () => {
-        sound.playStamp();
-        this.open();
-      });
-    });
-
-    this.serviceButtons.forEach((btn) => {
-      btn?.addEventListener('click', () => {
-        sound.playZenChime();
-        const serviceName = btn.getAttribute('data-service-preset');
-        if (serviceName) {
-          this.chips.forEach(c => {
-            if (c.getAttribute('data-value')?.toLowerCase().includes(serviceName.toLowerCase())) {
-              c.classList.add('active');
-            } else {
-              c.classList.remove('active');
-            }
-          });
-        }
-        this.open();
-      });
-    });
-
-    this.closeBtn?.addEventListener('click', () => {
-      sound.playClick();
-      this.close();
-    });
-
-    this.modal.querySelector('.postcard-modal__backdrop')?.addEventListener('click', () => {
-      this.close();
-    });
-
     this.chips.forEach((chip) => {
       chip.addEventListener('click', () => {
         sound.playClick();
@@ -796,27 +829,12 @@ class PostcardContact {
       e.preventDefault();
       this.handleSubmit();
     });
-
-    this.resetBtn?.addEventListener('click', () => {
-      sound.playClick();
-      this.resetForm();
-    });
-  }
-
-  open() {
-    this.modal.classList.add('is-active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  close() {
-    this.modal.classList.remove('is-active');
-    document.body.style.overflow = '';
   }
 
   handleSubmit() {
-    const name = document.getElementById('senderName')?.value;
-    const email = document.getElementById('senderEmail')?.value;
-    const msg = document.getElementById('senderMessage')?.value;
+    const name = document.getElementById('contactName')?.value;
+    const email = document.getElementById('contactEmail')?.value;
+    const msg = document.getElementById('contactMessage')?.value;
 
     if (!name || !email || !msg) {
       alert('Please fill in your name, email, and inquiry details.');
@@ -824,14 +842,13 @@ class PostcardContact {
     }
 
     sound.playStamp();
-    this.form.style.display = 'none';
-    this.success.style.display = 'block';
-  }
-
-  resetForm() {
-    this.form.reset();
-    this.form.style.display = 'block';
-    this.success.style.display = 'none';
+    if (this.toast) {
+      this.toast.classList.add('is-active');
+      setTimeout(() => {
+        this.toast.classList.remove('is-active');
+      }, 5000);
+    }
+    this.form?.reset();
   }
 }
 
@@ -1168,24 +1185,18 @@ class FaqAccordion {
 class SoundToggleUI {
   constructor() {
     this.btn = document.getElementById('soundToggle');
-    this.iconOn = this.btn?.querySelector('.sound-icon--on');
-    this.iconOff = this.btn?.querySelector('.sound-icon--off');
     this.init();
   }
 
   init() {
     if (!this.btn) return;
-    this.btn.addEventListener('click', () => {
-      const isEnabled = sound.toggle();
-      if (isEnabled) {
-        if (this.iconOn) this.iconOn.style.display = 'block';
-        if (this.iconOff) this.iconOff.style.display = 'none';
-        sound.playClick();
-      } else {
-        if (this.iconOn) this.iconOn.style.display = 'none';
-        if (this.iconOff) this.iconOff.style.display = 'block';
-      }
+    this.btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sound.toggle();
     });
+
+    // Sync UI with current sound preference
+    sound.notifyUI(sound.enabled && sound.isMusicPlaying);
   }
 }
 
@@ -1294,9 +1305,10 @@ class ScrollbarIndicator {
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
-  new SakuraSimulation();
+  const sakuraSim = new SakuraSimulation();
+  new SakuraBranchInteractive(sakuraSim);
   const headline = new KineticHeadline();
-  new CinemaShowreel();
+  IntroVideo.init();
   new CaseStudyDrawer();
   new PostcardContact();
   new LanguageSwitcher(headline);
