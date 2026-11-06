@@ -22,6 +22,16 @@
 </head>
 <body>
 
+  <!-- ===== CINEMATIC PRELOADER (worksruthi-inspired word-flash) ===== -->
+  <div id="preloader" aria-hidden="true">
+    <!-- The JS will inject .pl-frame divs with words here -->
+    <span class="pl-word pl-probe" id="plProbe" aria-hidden="true">M</span>
+    <div class="pl-bar pl-bar--t" id="plBarT"></div>
+    <div class="pl-bar pl-bar--b" id="plBarB"></div>
+  </div>
+
+
+
   <!-- Custom Magnetic Cursor -->
   <div id="customCursor" aria-hidden="true">
     <span class="cursor-label"></span>
@@ -231,11 +241,11 @@
     <!-- MAIN PAGE CONTENT -->
     <main class="home">
 
-      <!-- ===== AWWWARDS-INSPIRED HERO SECTION (EXACT WORKS-RUTHI SPECIFICATION) ===== -->
+            <!-- ===== AWWWARDS SRUTHI-STYLE HERO SECTION — BASITH EDITION ===== -->
       <div class="home__group">
-        <section class="hero hero--sruthi is-live in" id="top" aria-label="hello, meet basith">
+        <section class="hero hero--sruthi" id="top" aria-label="hello, meet basith">
 
-          <!-- Exact Hero Stage Container -->
+          <!-- Hero Stage Container (desktop: container-query sized box) -->
           <div class="hero-stage" id="heroStage">
 
             <!-- Word 1 (Top-Left): HELLO -->
@@ -246,7 +256,8 @@
             <!-- Word 2 (Top-Right): {{ first name }} Interactive Slot -->
             <p class="display hero-word hero-word--stranger" id="heroStrangerWord">
               <span class="hero-word__txt">
-                <button type="button" class="hero-slot-btn tap hero-placeholder" id="heroSlotBtn" aria-label="type your first name" title="Click to personalize with your name">
+                <button type="button" class="hero-slot-btn tap hero-placeholder" id="heroSlotBtn"
+                  aria-label="type your first name" title="Click to personalize — type your name">
                   <span class="hero-slot-bracket">{{</span>&nbsp;<span class="hero-slot-name" id="heroSlotName">first name</span><span class="hero-slot-caret" aria-hidden="true"></span>&nbsp;<span class="hero-slot-bracket">}}</span>
                 </button>
               </span>
@@ -256,7 +267,7 @@
             <div class="hero-photo-wrap" id="heroPhotoWrap">
               <img class="hero-photo" id="heroPhoto"
                    src="/images/basith-hero-portrait.png"
-                   alt="mohammed basith taking a mirror selfie"
+                   alt="mohammed basith — mirror selfie in black suit"
                    width="431" height="579"
                    loading="eager" decoding="async" />
             </div>
@@ -266,7 +277,7 @@
               <span class="hero-word__txt">meet</span>
             </p>
 
-            <!-- Typewriter Byline: Exact worksruthi phrasing & typography -->
+            <!-- Typewriter Byline: a full-stack developer/ai engineer with chutzpah. -->
             <p class="hero-byline" id="heroByline" aria-label="a full-stack developer / ai engineer with chutzpah.">
               <span class="hero-byline__l" id="heroBylineL1">
                 <span class="hero-byline__text">a full-stack developer/ai engineer</span>
@@ -277,7 +288,7 @@
               </span>
             </p>
 
-            <!-- Word 4 (Bottom-Right): BASITH -->
+            <!-- Word 4 (Bottom-Right): BASITH (h1 for SEO) -->
             <h1 class="display hero-word hero-word--sruthi hero-word--basith">
               <span class="hero-word__txt">basith</span>
             </h1>

@@ -496,6 +496,274 @@ class SakuraBranchInteractive {
 }
 
 // ==========================================================================
+// 3b. CINEMATIC PRELOADER — WORD FLASH & SHUTTER INTRO (worksruthi-style)
+// ==========================================================================
+class CinematicPreloader {
+  constructor() {
+    this.el = document.getElementById('preloader');
+    this.barT = document.getElementById('plBarT');
+    this.barB = document.getElementById('plBarB');
+    this.probe = document.getElementById('plProbe');
+    if (!this.el) return;
+
+    this.audioCtx = null;
+    this.isMuted = false;
+
+    // Montage frames: words and photos
+    this.frames = [
+      { type: 'word', word: 'NEED', ms: 400, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 300 },
+      { type: 'word', word: 'MONEY', ms: 280, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 240 },
+      { type: 'word', word: 'FOR', ms: 200, invert: true },
+      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 180 },
+      { type: 'word', word: 'MY', ms: 160, invert: false },
+      { type: 'photo', src: '/images/basith-hero-portrait.png', ms: 150 },
+      { type: 'word', word: 'PORSCHE', ms: 190, full: true },
+      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 100 },
+      { type: 'word', word: 'NEED', ms: 80, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 70, flip: true },
+      { type: 'word', word: 'MONEY', ms: 70, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 60 },
+      { type: 'word', word: 'FOR', ms: 60, invert: true },
+      { type: 'photo', src: '/images/basith-hero-portrait.png', ms: 60 },
+      { type: 'word', word: 'MY', ms: 60, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 60, flip: true },
+      { type: 'word', word: 'PORSCHE', ms: 60, invert: false },
+      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 60, invert: true },
+      { type: 'word', word: 'BASITH', ms: 60, invert: true },
+      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 60 },
+      { type: 'word', word: 'BASITH', ms: 120, full: true, invert: false }
+    ];
+
+    this.init();
+  }
+
+  getAudioContext() {
+    if (!this.audioCtx) {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) {
+        this.audioCtx = new AudioContext();
+      }
+    }
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume().catch(() => {});
+    }
+    return this.audioCtx;
+  }
+
+  playShutterClick(pitch = 1) {
+    if (this.isMuted) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx || ctx.state !== 'running') return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(800 * pitch, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.04);
+
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.045);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start();
+      osc.stop(ctx.currentTime + 0.05);
+    } catch (e) {}
+  }
+
+  measureWord(text, fontSize) {
+    if (!this.probe) return fontSize * 0.6 * text.length;
+    this.probe.style.fontSize = fontSize + 'px';
+    this.probe.textContent = text;
+    return this.probe.offsetWidth;
+  }
+
+  renderWordFrame(word, invert, full) {
+    const frame = document.createElement('div');
+    frame.className = 'pl-frame ' + (invert ? 'is-red' : 'is-black');
+
+    const W = window.innerWidth;
+    const targetW = full ? W * 0.94 : W * 0.82;
+
+    let fontSize = 72;
+    for (let lo = 20, hi = 600, iter = 0; iter < 18; iter++) {
+      const mid = (lo + hi) / 2;
+      const measured = this.measureWord(word, mid);
+      if (measured < targetW) lo = mid; else hi = mid;
+      fontSize = mid;
+    }
+
+    const wordEl = document.createElement('span');
+    wordEl.className = 'pl-word';
+    wordEl.style.fontSize = Math.round(fontSize) + 'px';
+    wordEl.textContent = word;
+    frame.appendChild(wordEl);
+
+    this.el.insertBefore(frame, this.barT);
+    return frame;
+  }
+
+  renderPhotoFrame(src, flip, invert) {
+    const frame = document.createElement('div');
+    frame.className = 'pl-frame is-black';
+
+    const cut = document.createElement('div');
+    cut.className = 'pl-cut' + (flip ? ' is-flipped' : '') + (invert ? ' is-inverted' : '');
+    cut.style.backgroundImage = `url("${src}")`;
+
+    frame.appendChild(cut);
+    this.el.insertBefore(frame, this.barT);
+    return frame;
+  }
+
+  setupUnmuteButton() {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'pl-unmute';
+    btn.setAttribute('aria-label', 'Toggle audio sound effects');
+    btn.innerHTML = `
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+      </svg>
+      <span class="pl-unmute-txt">sound on</span>
+    `;
+
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.getAudioContext();
+      this.playShutterClick(1.5);
+      btn.style.opacity = '0.5';
+    });
+
+    const unlockAudio = () => {
+      this.getAudioContext();
+      window.removeEventListener('pointerdown', unlockAudio);
+      window.removeEventListener('keydown', unlockAudio);
+    };
+    window.addEventListener('pointerdown', unlockAudio, { passive: true });
+    window.addEventListener('keydown', unlockAudio, { passive: true });
+
+    this.el.appendChild(btn);
+    this.unmuteBtn = btn;
+  }
+
+  init() {
+    // Lock scrolling during preloader
+    document.documentElement.style.overflow = 'hidden';
+
+    // Warm up image cache
+    this.frames.forEach(f => {
+      if (f.type === 'photo' && f.src) {
+        const img = new Image();
+        img.src = f.src;
+      }
+    });
+
+    this.setupUnmuteButton();
+
+    let currentFrame = null;
+    let frameIdx = 0;
+    const totalFrames = this.frames.length;
+    let timers = [];
+
+    // Progressive shutter bar closing as timeline nears end
+    const lastWordIdx = totalFrames - 4;
+
+    const playNext = () => {
+      if (frameIdx >= totalFrames) return;
+      const f = this.frames[frameIdx];
+
+      if (currentFrame) currentFrame.remove();
+
+      if (f.type === 'word') {
+        currentFrame = this.renderWordFrame(f.word, f.invert, f.full);
+        this.playShutterClick(1 + (frameIdx / totalFrames) * 0.4);
+      } else if (f.type === 'photo') {
+        currentFrame = this.renderPhotoFrame(f.src, f.flip, f.invert);
+        this.playShutterClick(0.9);
+      }
+
+      // Start easing the bars closed as we reach the finale
+      if (frameIdx >= lastWordIdx) {
+        const progress = (frameIdx - lastWordIdx + 1) / 4;
+        const scaleVal = Math.min(1, progress * 1.05);
+        this.barT.style.transition = 'transform 100ms linear';
+        this.barB.style.transition = 'transform 100ms linear';
+        this.barT.style.transform = `scaleY(${scaleVal})`;
+        this.barB.style.transform = `scaleY(${scaleVal})`;
+      }
+
+      frameIdx++;
+      if (frameIdx < totalFrames) {
+        timers.push(setTimeout(playNext, f.ms));
+      } else {
+        // Finale shutter slit transition
+        timers.push(setTimeout(() => {
+          this.finishIntro(currentFrame);
+        }, f.ms + 60));
+      }
+    };
+
+    // Begin montage sequence
+    playNext();
+  }
+
+  finishIntro(finalFrame) {
+    // Ensure shutter bars are solidly closed (meeting in exact middle)
+    this.barT.style.transition = 'none';
+    this.barB.style.transition = 'none';
+    this.barT.style.transform = 'scaleY(1)';
+    this.barB.style.transform = 'scaleY(1)';
+
+    if (finalFrame) finalFrame.remove();
+    if (this.unmuteBtn) this.unmuteBtn.remove();
+
+    // Small pause in solid black (80ms), then theatrical curtain split
+    setTimeout(() => {
+      const ease = 'cubic-bezier(.22, 1, .36, 1)';
+      const dur = '920ms';
+
+      this.barT.style.transition = `transform ${dur} ${ease}`;
+      this.barB.style.transition = `transform ${dur} ${ease}`;
+
+      // Open top bar upwards and bottom bar downwards
+      this.barT.style.transform = 'translateY(-101%)';
+      this.barB.style.transform = 'translateY(101%)';
+
+      // Play final deep whoosh / open click
+      this.playShutterClick(0.7);
+
+      // Trigger hero entrance animations
+      const hero = document.querySelector('.hero--sruthi');
+      if (hero) {
+        hero.classList.add('is-live', 'in');
+      }
+
+      // Unlock scrolling
+      document.documentElement.style.overflow = '';
+
+      // Announce hero revealed for typewriter
+      window.dispatchEvent(new CustomEvent('hero:revealed'));
+
+      // Clean up preloader DOM overlay
+      setTimeout(() => {
+        this.el.classList.add('pl-done');
+        setTimeout(() => {
+          this.el.style.display = 'none';
+        }, 500);
+      }, 950);
+
+    }, 90);
+  }
+}
+
+// ==========================================================================
 // 4. HERO AWWWARDS INTERACTIVE NAME SLOT & TYPEWRITER CONTROLLER
 // ==========================================================================
 class HeroSlotStranger {
@@ -505,18 +773,23 @@ class HeroSlotStranger {
     this.bylineL1 = document.getElementById('heroBylineL1');
     this.bylineL2 = document.getElementById('heroBylineL2');
     if (!this.slotBtn || !this.slotName) return;
+    this.hasTyped = false;
     this.init();
   }
 
   init() {
     const askName = () => {
-      sound.playClick();
+      if (window.sound && typeof window.sound.playClick === 'function') {
+        window.sound.playClick();
+      }
       const current = this.slotName.textContent.trim();
       const entered = window.prompt("What's your first name?", current === 'first name' || current === 'stranger' ? '' : current);
       if (entered && entered.trim()) {
         const clean = entered.trim().toLowerCase().slice(0, 16);
         this.slotName.textContent = clean;
-        sound.playZenChime();
+        if (window.sound && typeof window.sound.playZenChime === 'function') {
+          window.sound.playZenChime();
+        }
         try { localStorage.setItem('visitor_name', clean); } catch (e) {}
       }
     };
@@ -531,11 +804,26 @@ class HeroSlotStranger {
       if (saved) this.slotName.textContent = saved;
     } catch (e) {}
 
-    this.initTypewriter();
+    // Wait for hero reveal event from preloader
+    window.addEventListener('hero:revealed', () => {
+      setTimeout(() => {
+        this.startTypewriter();
+      }, 320);
+    }, { once: true });
+
+    // Fallback if preloader was skipped or not present
+    setTimeout(() => {
+      if (!this.hasTyped) {
+        this.startTypewriter();
+      }
+    }, 4500);
   }
 
-  initTypewriter() {
+  startTypewriter() {
+    if (this.hasTyped) return;
+    this.hasTyped = true;
     if (!this.bylineL1 || !this.bylineL2) return;
+
     const txt1 = "a full-stack developer/ai engineer";
     const txt2 = "with chutzpah.";
 
@@ -546,29 +834,30 @@ class HeroSlotStranger {
     tEl1.textContent = "";
     tEl2.textContent = "";
 
-    setTimeout(() => {
-      let i = 0;
-      const typeL1 = () => {
-        if (i < txt1.length) {
-          tEl1.textContent += txt1.charAt(i);
-          i++;
-          setTimeout(typeL1, 26 + Math.random() * 18);
-        } else {
+    let i = 0;
+    const typeL1 = () => {
+      if (i < txt1.length) {
+        tEl1.textContent += txt1.charAt(i);
+        i++;
+        setTimeout(typeL1, 24 + Math.random() * 16);
+      } else {
+        setTimeout(() => {
           let j = 0;
           const typeL2 = () => {
             if (j < txt2.length) {
               tEl2.textContent += txt2.charAt(j);
               j++;
-              setTimeout(typeL2, 26 + Math.random() * 18);
+              setTimeout(typeL2, 28 + Math.random() * 18);
             }
           };
-          setTimeout(typeL2, 110);
-        }
-      };
-      typeL1();
-    }, 450);
+          typeL2();
+        }, 120);
+      }
+    };
+    typeL1();
   }
 }
+
 
 // ==========================================================================
 // 4. KINETIC ROTATING HEADLINE
@@ -1382,6 +1671,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
   const sakuraSim = new SakuraSimulation();
   new SakuraBranchInteractive(sakuraSim);
+  new CinematicPreloader();
   new HeroSlotStranger();
   const headline = new KineticHeadline();
   IntroVideo.init();
