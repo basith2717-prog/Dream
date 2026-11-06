@@ -496,7 +496,7 @@ class SakuraBranchInteractive {
 }
 
 // ==========================================================================
-// 3b. CINEMATIC PRELOADER — WORD FLASH & SHUTTER INTRO (worksruthi-style)
+// 3b. CINEMATIC PRELOADER — EXACT WORKSRUTHI ANIMATION TIMINGS & PAUSES
 // ==========================================================================
 class CinematicPreloader {
   constructor() {
@@ -509,31 +509,47 @@ class CinematicPreloader {
     this.audioCtx = null;
     this.isMuted = false;
 
-    // Montage frames: words and photos
-    this.frames = [
-      { type: 'word', word: 'NEED', ms: 400, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 300 },
-      { type: 'word', word: 'MONEY', ms: 280, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 240 },
-      { type: 'word', word: 'FOR', ms: 200, invert: true },
-      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 180 },
-      { type: 'word', word: 'MY', ms: 160, invert: false },
-      { type: 'photo', src: '/images/basith-hero-portrait.png', ms: 150 },
-      { type: 'word', word: 'PORSCHE', ms: 190, full: true },
-      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 100 },
-      { type: 'word', word: 'NEED', ms: 80, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 70, flip: true },
-      { type: 'word', word: 'MONEY', ms: 70, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 60 },
-      { type: 'word', word: 'FOR', ms: 60, invert: true },
-      { type: 'photo', src: '/images/basith-hero-portrait.png', ms: 60 },
-      { type: 'word', word: 'MY', ms: 60, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-1.jpg', ms: 60, flip: true },
-      { type: 'word', word: 'PORSCHE', ms: 60, invert: false },
-      { type: 'photo', src: '/images/preloader/cut-2.png', ms: 60, invert: true },
-      { type: 'word', word: 'BASITH', ms: 60, invert: true },
-      { type: 'photo', src: '/images/preloader/cut-3.png', ms: 60 },
-      { type: 'word', word: 'BASITH', ms: 120, full: true, invert: false }
+    // 4 high-octane intro images supplied by the user
+    this.photos = {
+      garage: '/images/preloader/garage.webp',
+      eyes:   '/images/preloader/eyes.jpg',
+      f1:     '/images/preloader/f1.jpg',
+      lambo:  '/images/preloader/lambo.jpg'
+    };
+
+    // EXACT sequence, animation pauses and timings extracted directly from worksruthi.com
+    this.T = [
+      { ms: 420, word: "NEED" },
+      { ms: 360, photo: "garage" },
+      { ms: 310, word: "MONEY" },
+      { ms: 270, photo: "eyes" },
+      { ms: 230, word: "FOR" },
+      { ms: 200, photo: "f1" },
+      { ms: 170, word: "MY" },
+      { ms: 150, photo: "lambo" },
+      { ms: 190, word: "PORSCHE", full: true },
+      { ms: 110, photo: "garage" },
+      { ms: 90,  word: "NEED" },
+      { ms: 80,  photo: "eyes", flip: true },
+      { ms: 70,  word: "MONEY" },
+      { ms: 60,  photo: "f1" },
+      { ms: 60,  word: "FOR", invert: true },
+      { ms: 60,  photo: "lambo" },
+      { ms: 60,  word: "MY" },
+      { ms: 60,  photo: "garage", flip: true },
+      { ms: 60,  word: "PORSCHE" },
+      { ms: 60,  photo: "eyes", invert: true },
+      { ms: 60,  word: "NEED", invert: true },
+      { ms: 60,  photo: "f1" },
+      { ms: 60,  word: "MONEY" },
+      { ms: 60,  photo: "lambo" },
+      { ms: 60,  word: "FOR" },
+      { ms: 60,  photo: "garage", invert: true },
+      { ms: 60,  word: "MY", invert: true },
+      { ms: 60,  photo: "eyes" },
+      { ms: 60,  word: "PORSCHE" },
+      { ms: 60,  photo: "f1" },
+      { ms: 60,  word: "BASITH", invert: true, full: true }
     ];
 
     this.init();
@@ -562,22 +578,22 @@ class CinematicPreloader {
       const gain = ctx.createGain();
 
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(800 * pitch, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.04);
+      osc.frequency.setValueAtTime(850 * pitch, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(70, ctx.currentTime + 0.038);
 
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.045);
+      gain.gain.setValueAtTime(0.22, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.042);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start();
-      osc.stop(ctx.currentTime + 0.05);
+      osc.stop(ctx.currentTime + 0.045);
     } catch (e) {}
   }
 
   measureWord(text, fontSize) {
-    if (!this.probe) return fontSize * 0.6 * text.length;
+    if (!this.probe) return fontSize * 0.58 * text.length;
     this.probe.style.fontSize = fontSize + 'px';
     this.probe.textContent = text;
     return this.probe.offsetWidth;
@@ -591,7 +607,7 @@ class CinematicPreloader {
     const targetW = full ? W * 0.94 : W * 0.82;
 
     let fontSize = 72;
-    for (let lo = 20, hi = 600, iter = 0; iter < 18; iter++) {
+    for (let lo = 20, hi = 650, iter = 0; iter < 18; iter++) {
       const mid = (lo + hi) / 2;
       const measured = this.measureWord(word, mid);
       if (measured < targetW) lo = mid; else hi = mid;
@@ -608,7 +624,8 @@ class CinematicPreloader {
     return frame;
   }
 
-  renderPhotoFrame(src, flip, invert) {
+  renderPhotoFrame(photoKey, flip, invert) {
+    const src = this.photos[photoKey] || photoKey;
     const frame = document.createElement('div');
     frame.className = 'pl-frame is-black';
 
@@ -637,7 +654,7 @@ class CinematicPreloader {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       this.getAudioContext();
-      this.playShutterClick(1.5);
+      this.playShutterClick(1.4);
       btn.style.opacity = '0.5';
     });
 
@@ -654,80 +671,95 @@ class CinematicPreloader {
   }
 
   init() {
-    // Lock scrolling during preloader
+    // Lock scrolling while preloader runs
     document.documentElement.style.overflow = 'hidden';
 
-    // Warm up image cache
-    this.frames.forEach(f => {
-      if (f.type === 'photo' && f.src) {
-        const img = new Image();
-        img.src = f.src;
-      }
+    // Warm up image cache to prevent any decoding stutter
+    const preloadPromises = Object.values(this.photos).map(src => {
+      const img = new Image();
+      img.src = src;
+      return img.decode ? img.decode().catch(() => {}) : Promise.resolve();
     });
 
     this.setupUnmuteButton();
 
+    // Start after images are pre-decoded or max 250ms
+    Promise.race([
+      Promise.all(preloadPromises),
+      new Promise(resolve => setTimeout(resolve, 250))
+    ]).then(() => {
+      this.runSequence();
+    });
+  }
+
+  runSequence() {
+    const totalDuration = this.T.reduce((sum, item) => sum + item.ms, 0); // 3730ms
+    const firstPorscheEnd = 2300; // Exact time when the first full PORSCHE frame completes
+    const accelDuration = totalDuration - firstPorscheEnd; // 1430ms acceleration window
+
     let currentFrame = null;
     let frameIdx = 0;
-    const totalFrames = this.frames.length;
-    let timers = [];
+    const startTime = performance.now();
+    let animFrameId = null;
 
-    // Progressive shutter bar closing as timeline nears end
-    const lastWordIdx = totalFrames - 4;
+    // Shutter bar close update tick (cosine curve matching worksruthi)
+    const updateCurtainProgress = () => {
+      const elapsed = performance.now() - startTime;
+      if (elapsed >= firstPorscheEnd) {
+        const progress = Math.min(1, Math.max(0, elapsed - firstPorscheEnd) / accelDuration);
+        // Exact worksruthi easing: (1 - Math.cos(progress * Math.PI)) / 2
+        const closeScale = (1 - Math.cos(progress * Math.PI)) / 2;
+        this.barT.style.transform = `scaleY(${closeScale})`;
+        this.barB.style.transform = `scaleY(${closeScale})`;
+      }
+      if (elapsed < totalDuration + 20) {
+        animFrameId = requestAnimationFrame(updateCurtainProgress);
+      }
+    };
+    animFrameId = requestAnimationFrame(updateCurtainProgress);
 
-    const playNext = () => {
-      if (frameIdx >= totalFrames) return;
-      const f = this.frames[frameIdx];
+    // Frame scheduler
+    const scheduleNext = () => {
+      if (frameIdx >= this.T.length) return;
+      const item = this.T[frameIdx];
 
       if (currentFrame) currentFrame.remove();
 
-      if (f.type === 'word') {
-        currentFrame = this.renderWordFrame(f.word, f.invert, f.full);
-        this.playShutterClick(1 + (frameIdx / totalFrames) * 0.4);
-      } else if (f.type === 'photo') {
-        currentFrame = this.renderPhotoFrame(f.src, f.flip, f.invert);
+      if (item.word) {
+        currentFrame = this.renderWordFrame(item.word, item.invert, item.full);
+        this.playShutterClick(1 + (frameIdx / this.T.length) * 0.4);
+      } else if (item.photo) {
+        currentFrame = this.renderPhotoFrame(item.photo, item.flip, item.invert);
         this.playShutterClick(0.9);
       }
 
-      // Start easing the bars closed as we reach the finale
-      if (frameIdx >= lastWordIdx) {
-        const progress = (frameIdx - lastWordIdx + 1) / 4;
-        const scaleVal = Math.min(1, progress * 1.05);
-        this.barT.style.transition = 'transform 100ms linear';
-        this.barB.style.transition = 'transform 100ms linear';
-        this.barT.style.transform = `scaleY(${scaleVal})`;
-        this.barB.style.transform = `scaleY(${scaleVal})`;
-      }
-
       frameIdx++;
-      if (frameIdx < totalFrames) {
-        timers.push(setTimeout(playNext, f.ms));
+      if (frameIdx < this.T.length) {
+        setTimeout(scheduleNext, item.ms);
       } else {
-        // Finale shutter slit transition
-        timers.push(setTimeout(() => {
+        // Final frame completed — trigger theatrical curtain reveal
+        setTimeout(() => {
+          if (animFrameId) cancelAnimationFrame(animFrameId);
           this.finishIntro(currentFrame);
-        }, f.ms + 60));
+        }, item.ms);
       }
     };
 
-    // Begin montage sequence
-    playNext();
+    scheduleNext();
   }
 
   finishIntro(finalFrame) {
-    // Ensure shutter bars are solidly closed (meeting in exact middle)
-    this.barT.style.transition = 'none';
-    this.barB.style.transition = 'none';
+    // 1. Shutter bars solidly closed (scaleY: 1)
     this.barT.style.transform = 'scaleY(1)';
     this.barB.style.transform = 'scaleY(1)';
 
     if (finalFrame) finalFrame.remove();
     if (this.unmuteBtn) this.unmuteBtn.remove();
 
-    // Small pause in solid black (80ms), then theatrical curtain split
+    // 2. Exact worksruthi pause: 120ms delay before curtain split
     setTimeout(() => {
-      const ease = 'cubic-bezier(.22, 1, .36, 1)';
-      const dur = '920ms';
+      const ease = 'cubic-bezier(.22, 1, .36, 1)'; // GSAP_EASE from worksruthi
+      const dur = '900ms';
 
       this.barT.style.transition = `transform ${dur} ${ease}`;
       this.barB.style.transition = `transform ${dur} ${ease}`;
@@ -736,7 +768,7 @@ class CinematicPreloader {
       this.barT.style.transform = 'translateY(-101%)';
       this.barB.style.transform = 'translateY(101%)';
 
-      // Play final deep whoosh / open click
+      // Play final deep shutter release click
       this.playShutterClick(0.7);
 
       // Trigger hero entrance animations
@@ -748,18 +780,18 @@ class CinematicPreloader {
       // Unlock scrolling
       document.documentElement.style.overflow = '';
 
-      // Announce hero revealed for typewriter
+      // Dispatch event for typewriter
       window.dispatchEvent(new CustomEvent('hero:revealed'));
 
-      // Clean up preloader DOM overlay
+      // Fade out and cleanup preloader overlay
       setTimeout(() => {
         this.el.classList.add('pl-done');
         setTimeout(() => {
           this.el.style.display = 'none';
-        }, 500);
-      }, 950);
+        }, 450);
+      }, 920);
 
-    }, 90);
+    }, 120);
   }
 }
 
