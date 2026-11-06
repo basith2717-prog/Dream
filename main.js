@@ -967,56 +967,21 @@ class KineticHeadline {
 // ==========================================================================
 // 5. INTRO VIDEO SECTION — simple YouTube embed on play click
 // ==========================================================================
-const IntroVideo = {
+const BossQuoteObserver = {
   init() {
-    const playBtn   = document.getElementById('introPlayBtn');
-    const poster    = document.getElementById('introVideoPoster');
-    const player    = document.getElementById('introVideoPlayer');
-    const wrapper   = document.getElementById('introVideoWrapper');
+    const bqSection = document.getElementById('boss-quote');
+    const scribbles = document.getElementById('bqScribbles');
+    if (!bqSection || !scribbles) return;
 
-    if (!playBtn || !poster || !player) return;
-
-    function showVideo() {
-      const youtubeId = player.getAttribute('data-youtube-id');
-
-      // If no real video ID yet, show a friendly toast and stop
-      if (!youtubeId || youtubeId === 'YOUR_YOUTUBE_VIDEO_ID_HERE') {
-        sound.playZenChime();
-        // Pulse the "coming soon" text
-        const coming = poster.querySelector('.intro-video-coming');
-        if (coming) {
-          coming.style.color = '#f6ad55';
-          coming.textContent = '\uD83C\uDFAC Recording soon \u2014 check back!';
-          setTimeout(() => {
-            coming.style.color = '';
-            coming.textContent = '\uD83C\uDCF9\u00A0 Intro video coming soon';
-          }, 3000);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          scribbles.classList.add('in');
         }
-        return;
-      }
+      });
+    }, { threshold: 0.2 });
 
-      // Inject YouTube iframe
-      sound.playZenChime();
-      player.innerHTML =
-        '<iframe' +
-        ' src="https://www.youtube-nocookie.com/embed/' + youtubeId + '?autoplay=1&rel=0&modestbranding=1"' +
-        ' title="Mohammed Basith Introduction Video"' +
-        ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"' +
-        ' allowfullscreen' +
-        '></iframe>';
-      player.hidden = false;
-      poster.style.opacity = '0';
-      poster.style.pointerEvents = 'none';
-      setTimeout(() => { poster.hidden = true; }, 300);
-    }
-
-    playBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      showVideo();
-    });
-
-    // Clicking anywhere on the poster also plays
-    poster.addEventListener('click', showVideo);
+    observer.observe(bqSection);
   }
 };
 
@@ -1706,7 +1671,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new CinematicPreloader();
   new HeroSlotStranger();
   const headline = new KineticHeadline();
-  IntroVideo.init();
+  BossQuoteObserver.init();
   new CaseStudyDrawer();
   new PostcardContact();
   new LanguageSwitcher(headline);

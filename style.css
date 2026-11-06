@@ -3519,3 +3519,210 @@ body {
     animation: none;
   }
 }
+
+
+/* ============================================================
+   SECTION 2: EX-BOSS QUOTE & SCRIBBLING ART (worksruthi model)
+   ============================================================ */
+
+.bq {
+  min-height: 100svh;
+  padding-block: var(--nav-h, 56px) var(--page-pad-x, 24px);
+  place-items: center;
+  display: grid;
+  position: relative;
+  overflow: clip;
+  background: var(--spring, #f3f3e9);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Scribbles container across the whole stage */
+.bq-scribbles {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  container-type: size;
+  z-index: 1;
+}
+
+.bq-s {
+  --u: calc(.5 * min(max(100cqw / 2160, 100cqh / 1620), 100cqw / 1150));
+  left: calc(var(--x) * 100%);
+  top: calc(var(--y) * 100%);
+  width: calc(var(--sw) * var(--u));
+  height: calc(var(--sh) * var(--u));
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.bq-s-ink {
+  background: var(--cinnabar, #e33529);
+  -webkit-mask: var(--src) center / 100% 100% no-repeat;
+  mask: var(--src) center / 100% 100% no-repeat;
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+[data-axis=y] .bq-s-ink {
+  clip-path: inset(0 0 100%);
+}
+
+.bq-scribbles.in .bq-s-ink {
+  animation: bq-scratch-x .42s steps(var(--zigs, 5), end) var(--beat, 0s) forwards, bq-scratch-shake .42s linear var(--beat, 0s);
+}
+
+.bq-scribbles.in [data-axis=y] .bq-s-ink {
+  animation-name: bq-scratch-y, bq-scratch-shake;
+}
+
+@keyframes bq-scratch-x {
+  to { clip-path: inset(0); }
+}
+
+@keyframes bq-scratch-y {
+  to { clip-path: inset(0); }
+}
+
+@keyframes bq-scratch-shake {
+  0%, 100% { translate: 0; rotate: none; }
+  20% { translate: -1px 1px; rotate: -2deg; }
+  40% { translate: 1px -1px; rotate: 2deg; }
+  60% { translate: -1px -1px; rotate: -1deg; }
+  80% { translate: 1px 1px; rotate: 1deg; }
+}
+
+/* Handwritten Cursive Quote Container */
+.bq-ink {
+  z-index: 2;
+  width: min(88vw, calc(76svh * var(--w) / var(--h)));
+  aspect-ratio: var(--w) / var(--h);
+  position: relative;
+  display: block;
+}
+
+.bq-line {
+  background: var(--cinnabar, #e33529);
+  -webkit-mask: var(--src) center / 100% 100% no-repeat;
+  mask: var(--src) center / 100% 100% no-repeat;
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+@media (min-width: 810px) {
+  .bq-s--desktop { display: block; }
+  .bq-s--phone { display: none; }
+}
+
+@media (max-width: 809px) {
+  .bq-s--desktop { display: none; }
+  .bq-s--phone { display: block; }
+}
+
+/* Awwwards Left Ribbon Badge */
+.bq-awwwards-badge {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border: 1px solid rgba(28, 27, 26, 0.12);
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  padding: 12px 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  box-shadow: 2px 4px 14px rgba(0,0,0,0.06);
+  font-family: var(--font-mono, monospace);
+  pointer-events: none;
+}
+
+.bq-awwwards-w {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--ink, #1c1b1a);
+}
+
+.bq-awwwards-txt {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink, #1c1b1a);
+}
+
+/* Top-Left Red Dotted Trail */
+.bq-dot-trail {
+  position: absolute;
+  top: 10%;
+  left: 7%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
+  transform: rotate(24deg);
+  opacity: 0.9;
+  z-index: 2;
+}
+
+.bq-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--cinnabar, #e33529);
+}
+
+.bq-dot--dash {
+  width: 22px;
+  height: 9px;
+  border-radius: 6px;
+}
+
+.bq-dot:nth-child(2) { opacity: 0.92; transform: scale(0.95); }
+.bq-dot:nth-child(3) { opacity: 0.78; transform: scale(0.85); }
+.bq-dot:nth-child(4) { opacity: 0.62; transform: scale(0.75); }
+.bq-dot:nth-child(5) { opacity: 0.46; transform: scale(0.65); }
+.bq-dot:nth-child(6) { opacity: 0.32; transform: scale(0.55); }
+.bq-dot:nth-child(7) { opacity: 0.20; transform: scale(0.45); }
+.bq-dot:nth-child(8) { opacity: 0.10; transform: scale(0.35); }
+
+/* Right Floating 3D Red Envelope */
+.bq-floating-envelope {
+  position: absolute;
+  right: clamp(20px, 6vw, 80px);
+  top: 50%;
+  transform: translateY(-50%) rotate(7deg);
+  z-index: 10;
+  display: block;
+  width: clamp(70px, 7vw, 105px);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(.22, 1, .36, 1);
+  animation: bqEnvelopeFloat 3.2s ease-in-out infinite alternate;
+}
+
+.bq-floating-envelope:hover {
+  transform: translateY(-56%) rotate(0deg) scale(1.12);
+}
+
+.bq-envelope-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes bqEnvelopeFloat {
+  0% {
+    transform: translateY(-50%) rotate(7deg);
+  }
+  100% {
+    transform: translateY(-64%) rotate(2deg);
+  }
+}
