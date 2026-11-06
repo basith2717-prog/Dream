@@ -511,7 +511,7 @@ class CinematicPreloader {
 
     // 4 high-octane intro images supplied by the user
     this.photos = {
-      garage: '/images/preloader/garage.webp',
+      garage: '/images/preloader/lambo_front.jpg',
       eyes:   '/images/preloader/eyes.jpg',
       f1:     '/images/preloader/f1.jpg',
       lambo:  '/images/preloader/lambo.jpg'
