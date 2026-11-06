@@ -3244,6 +3244,10 @@ body {
   max-height: 70svh;
   width: auto;
   display: block;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: high-quality;
+  transform: translateZ(0);
+  backface-visibility: hidden;
   filter: drop-shadow(0 20px 40px rgba(28, 27, 26, .22));
 }
 
@@ -3423,8 +3427,12 @@ body {
     height: 100%;
     max-height: none;
     width: auto;
-    object-fit: initial;
+    object-fit: contain;
     flex: none;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: high-quality;
+    transform: translateZ(0);
+    backface-visibility: hidden;
     filter: drop-shadow(0 30px 60px rgba(28, 27, 26, .28));
   }
 
