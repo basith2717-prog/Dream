@@ -832,16 +832,19 @@ main.home, main {
   font-size: var(--clients-title-size);
   font-weight: 700;
   grid-area: 1 / 1;
-  justify-self: end;
+  justify-self: start !important;
   letter-spacing: -0.06em;
   line-height: 1.05;
-  margin: 0;
-  text-align: left;
+  margin: 0 !important;
+  text-align: left !important;
   text-transform: uppercase;
   text-wrap: balance;
-  width: 62%;
+  width: auto !important;
+  max-width: min(100%, clamp(360px, 46vw, 680px)) !important;
   word-spacing: 0.08em;
   color: #202020;
+  z-index: 2 !important;
+  position: relative !important;
 }
 
 .home-clients__reel {
@@ -3899,4 +3902,35 @@ main.home,
 .home-team__name,
 .faq-accordion__question {
   color: var(--ink, #1c1b1a) !important;
+}
+
+/* Technical Proficiency Section Heading — Positioned strictly on the left side */
+.home-clients__head {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  justify-items: start !important;
+  text-align: left !important;
+}
+
+.home-clients__title {
+  justify-self: start !important;
+  text-align: left !important;
+  align-self: flex-start !important;
+  width: auto !important;
+  max-width: min(100%, clamp(360px, 48vw, 700px)) !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  z-index: 2 !important;
+  position: relative !important;
+}
+
+.home-clients__title-text {
+  text-align: left !important;
+  display: block !important;
+}
+
+.home-clients__title-line {
+  justify-content: flex-start !important;
+  text-align: left !important;
+  display: block !important;
 }
