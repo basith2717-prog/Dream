@@ -2976,7 +2976,7 @@ body {
   background-repeat: repeat;
   background-size: 256px 256px;
   mix-blend-mode: overlay;
-  opacity: 0.55;
+  opacity: 0.38;
   will-change: transform;
   animation: siteGrainJitter 0.45s steps(5) infinite;
 }
@@ -3087,7 +3087,9 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+  background: url("/images/preloader-grain.webp") var(--grain-x, 0) var(--grain-y, 0) / 256px 256px repeat,
+              radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.4) 100%);
+  mix-blend-mode: overlay;
   pointer-events: none;
 }
 
@@ -3725,4 +3727,70 @@ body {
   100% {
     transform: translateY(-64%) rotate(2deg);
   }
+}
+
+/* ============================================================
+   AUTHENTIC WORKSRUTHI CREAM PAPER TEXTURE BACKGROUND SYSTEM
+   ============================================================ */
+:root {
+  --spring: #f3f3e9;
+  --ink: #1c1b1a;
+  --cinnabar: #e33529;
+  --color-paper: var(--spring);
+  --color-paper-warm: var(--spring);
+  --color-background: var(--spring);
+  --color-surface: var(--spring);
+  --color-text: var(--ink);
+  --dark-grey: var(--spring);
+}
+
+html,
+body {
+  background-color: var(--spring, #f3f3e9) !important;
+  background-image: url("/images/site-paper-texture.png") !important;
+  background-repeat: repeat !important;
+  background-size: 302px 362px !important;
+  background-attachment: fixed !important;
+  color: var(--ink, #1c1b1a) !important;
+}
+
+/* Ensure all page containers and sections are transparent so the repeating paper texture shines everywhere */
+main,
+main.home,
+.home,
+#__nuxt,
+.scrollable,
+.paper-page,
+.section,
+.p-wrap,
+.hero--sruthi,
+.bq,
+.home-clients,
+.home__services,
+.services,
+.home-work,
+.home-team,
+.home-certs,
+.service-faq,
+.home-contact {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Harmonize cards with the warm paper canvas */
+.p-card,
+.home-team__card,
+.tech-badge,
+.faq-accordion__item {
+  background-color: rgba(255, 255, 255, 0.65) !important;
+  border-color: rgba(28, 27, 26, 0.12) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.p-card-title,
+.home-work__title,
+.home-team__name,
+.faq-accordion__question {
+  color: var(--ink, #1c1b1a) !important;
 }

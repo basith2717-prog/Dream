@@ -632,6 +632,8 @@ class CinematicPreloader {
     const cut = document.createElement('div');
     cut.className = 'pl-cut' + (flip ? ' is-flipped' : '') + (invert ? ' is-inverted' : '');
     cut.style.backgroundImage = `url("${src}")`;
+    cut.style.setProperty('--grain-x', `${Math.floor(256 * Math.random())}px`);
+    cut.style.setProperty('--grain-y', `${Math.floor(256 * Math.random())}px`);
 
     frame.appendChild(cut);
     this.el.insertBefore(frame, this.barT);
