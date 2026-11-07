@@ -3595,20 +3595,22 @@ body {
   80% { translate: 1px 1px; rotate: 1deg; }
 }
 
-/* Authentic Handwritten Red Ink Cursive Quote */
+/* Authentic Handwritten Red Ink Cursive Quote (worksruthi model) */
 .bq-quote {
   position: relative;
   z-index: 2;
   margin: 0 auto;
-  padding: clamp(20px, 4vh, 48px) clamp(20px, 4vw, 56px);
-  max-width: min(92vw, 880px);
+  padding: clamp(16px, 3.5vh, 44px) clamp(16px, 3vw, 48px);
+  max-width: min(92vw, 700px);
   width: 100%;
   box-sizing: border-box;
-  font-family: 'Caveat', 'Marck Script', cursive;
+  font-family: 'Cedarville Cursive', 'Nothing You Could Do', 'Covered By Your Grace', cursive;
   color: var(--cinnabar, #e33529);
   text-align: left;
   user-select: text;
   -webkit-user-select: text;
+  -webkit-text-stroke: 1.2px var(--cinnabar, #e33529);
+  text-shadow: 0 0 0.5px rgba(227, 53, 41, 0.45);
 }
 
 .bq-quote-body {
@@ -3616,61 +3618,65 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: clamp(8px, 1.6vh, 18px);
-  font-size: clamp(34px, 4.4vw, 68px);
-  line-height: 1.28;
-  font-weight: 700;
-  letter-spacing: 0.012em;
-  text-shadow: 0.25px 0.25px 0 rgba(227, 53, 41, 0.45), -0.2px -0.2px 0 rgba(227, 53, 41, 0.25);
+  gap: clamp(10px, 2.2vh, 22px);
+  font-size: clamp(34px, 4.4vw, 56px);
+  line-height: 1.34;
+  font-weight: 400;
+  letter-spacing: 0.02em;
 }
 
 .bq-qline {
   display: block;
-  white-space: normal;
+  white-space: nowrap;
   will-change: transform;
 }
 
 .bq-qline--1 {
-  transform: rotate(-0.8deg);
+  transform: rotate(-1.2deg);
   transform-origin: left center;
 }
 
 .bq-qline--2 {
-  transform: rotate(0.6deg) translateX(clamp(8px, 1.5vw, 24px));
+  transform: rotate(0.8deg) translateX(clamp(12px, 2.2vw, 26px));
   transform-origin: left center;
 }
 
 .bq-qline--3 {
-  transform: rotate(-0.4deg) translateX(clamp(4px, 1vw, 14px));
+  transform: rotate(-0.5deg) translateX(clamp(6px, 1.2vw, 16px));
+  transform-origin: left center;
+}
+
+.bq-qline--4 {
+  transform: rotate(0.6deg) translateX(clamp(14px, 2.4vw, 28px));
   transform-origin: left center;
 }
 
 .bq-author {
-  margin-top: clamp(20px, 3.5vh, 40px);
-  font-size: clamp(26px, 3vw, 44px);
-  font-weight: 600;
+  margin-top: clamp(24px, 4.2vh, 44px);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 400;
   letter-spacing: 0.02em;
   text-align: right;
-  padding-right: clamp(20px, 6vw, 72px);
-  transform: rotate(-1.2deg);
+  padding-right: clamp(20px, 6vw, 64px);
+  transform: rotate(-1.0deg);
   transform-origin: right center;
   color: var(--cinnabar, #e33529);
-}
-
-.bq-author .bq-dash {
-  display: inline-block;
-  margin-right: 6px;
-  font-weight: 700;
+  -webkit-text-stroke: 1.2px var(--cinnabar, #e33529);
 }
 
 @media (max-width: 600px) {
   .bq-quote-body {
-    font-size: clamp(28px, 7.5vw, 38px);
-    line-height: 1.32;
+    font-size: clamp(26px, 6.8vw, 36px);
+    line-height: 1.38;
+    gap: 8px;
+  }
+  .bq-qline {
+    white-space: normal;
   }
   .bq-author {
-    font-size: clamp(22px, 5.5vw, 28px);
-    padding-right: 8px;
+    font-size: clamp(22px, 5.6vw, 28px);
+    padding-right: 12px;
+    margin-top: 20px;
   }
 }
 
