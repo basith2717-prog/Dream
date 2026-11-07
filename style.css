@@ -3745,13 +3745,36 @@ body {
 }
 
 html,
-body {
+body,
+#preloader,
+.pl-frame.is-black,
+.pl-bar,
+.hero--sruthi,
+.home__group,
+.bq {
   background-color: var(--spring, #f3f3e9) !important;
   background-image: url("/images/site-paper-texture.png") !important;
   background-repeat: repeat !important;
   background-size: 302px 362px !important;
+}
+
+html,
+body {
   background-attachment: fixed !important;
   color: var(--ink, #1c1b1a) !important;
+}
+
+.pl-bar {
+  border-top: 1px solid rgba(28, 27, 26, 0.12);
+  border-bottom: 1px solid rgba(28, 27, 26, 0.12);
+}
+
+.pl-unmute {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border: 1px solid rgba(28, 27, 26, 0.18) !important;
+  color: var(--cinnabar, #e33529) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 /* Ensure all page containers and sections are transparent so the repeating paper texture shines everywhere */
@@ -3763,8 +3786,6 @@ main.home,
 .paper-page,
 .section,
 .p-wrap,
-.hero--sruthi,
-.bq,
 .home-clients,
 .home__services,
 .services,
