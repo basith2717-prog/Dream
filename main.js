@@ -1664,13 +1664,170 @@ class ScrollbarIndicator {
 }
 
 // ==========================================================================
+// NESIL NOBLE AESTHETIC INTRO CONTROLLER
+// Handles drifting dust particles, audio toggle, ruler tracking, and navigation
+// ==========================================================================
+class NesilIntroController {
+  constructor() {
+    this.stage = document.getElementById('nesilStage');
+    if (!this.stage) return;
+
+    this.initDust();
+    this.initSound();
+    this.initRuler();
+    this.initScrollHeader();
+  }
+
+  initDust() {
+    const canvas = document.getElementById('dust');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let DW = 0, DH = 0, specks = [];
+
+    const sizeDust = () => {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      DW = this.stage.clientWidth;
+      DH = this.stage.clientHeight;
+      canvas.width = DW * dpr;
+      canvas.height = DH * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      const count = Math.round(Math.min(85, DW * DH / 14000));
+      specks = Array.from({ length: count }, () => ({
+        x: Math.random() * DW,
+        y: Math.random() * DH,
+        r: 0.6 + Math.random() * 1.5,
+        vy: 0.12 + Math.random() * 0.28,
+        sway: Math.random() * Math.PI * 2,
+        tw: Math.random() * Math.PI * 2,
+        c: Math.random() < 0.72 ? '244, 242, 255' : '186, 186, 251'
+      }));
+    };
+
+    sizeDust();
+    window.addEventListener('resize', sizeDust, { passive: true });
+
+    const animateDust = () => {
+      ctx.clearRect(0, 0, DW, DH);
+      for (const p of specks) {
+        p.sway += 0.015;
+        p.tw += 0.035;
+        p.y -= p.vy;
+        p.x += Math.sin(p.sway) * 0.35;
+        if (p.y < -5) {
+          p.y = DH + 5;
+          p.x = Math.random() * DW;
+        }
+        const alpha = 0.25 + 0.45 * (0.5 + 0.5 * Math.sin(p.tw));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.c}, ${alpha.toFixed(2)})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(animateDust);
+    };
+    animateDust();
+  }
+
+  initSound() {
+    this.soundBtn = document.getElementById('nesilSoundBtn');
+    this.soundLabel = document.getElementById('nesilSoundLabel');
+    this.audio = new Audio('/audio/portfolio-bgm.mp3');
+    this.audio.loop = true;
+    this.audio.volume = 0.45;
+    this.isPlaying = false;
+
+    if (this.soundBtn) {
+      this.soundBtn.addEventListener('click', () => {
+        if (!this.isPlaying) {
+          this.audio.play().then(() => {
+            this.isPlaying = true;
+            this.soundBtn.classList.add('is-playing');
+            if (this.soundLabel) this.soundLabel.textContent = 'Sound on';
+            this.soundBtn.setAttribute('aria-pressed', 'true');
+          }).catch(err => {
+            console.log('Audio playback prevented:', err);
+          });
+        } else {
+          this.audio.pause();
+          this.isPlaying = false;
+          this.soundBtn.classList.remove('is-playing');
+          if (this.soundLabel) this.soundLabel.textContent = 'Sound off';
+          this.soundBtn.setAttribute('aria-pressed', 'false');
+        }
+      });
+    }
+  }
+
+  initRuler() {
+    const ruler = document.getElementById('ruler');
+    const head = document.getElementById('rulerHead');
+    if (!ruler || !head) return;
+
+    const buttons = ruler.querySelectorAll('.ruler-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const leftPercent = btn.style.left;
+        head.style.left = leftPercent;
+
+        const targetId = btn.dataset.go;
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Update active ruler position on scroll
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const windowH = window.innerHeight;
+      let activeIndex = 0;
+
+      const sections = ['top', 'boss-quote', 'clients', 'services', 'projects', 'faq', 'contact'];
+      sections.forEach((secId, i) => {
+        const el = document.getElementById(secId);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= windowH * 0.45) {
+            activeIndex = i;
+          }
+        }
+      });
+
+      if (buttons[activeIndex]) {
+        buttons.forEach(b => b.classList.remove('is-active'));
+        buttons[activeIndex].classList.add('is-active');
+        head.style.left = buttons[activeIndex].style.left;
+      }
+    }, { passive: true });
+  }
+
+  initScrollHeader() {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const threshold = window.innerHeight * 0.75;
+      if (scrollY > threshold) {
+        document.body.classList.add('scrolled-past-hero');
+      } else {
+        document.body.classList.remove('scrolled-past-hero');
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
+}
+
+// ==========================================================================
 // BOOTSTRAP APPLICATION
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
   const sakuraSim = new SakuraSimulation();
   new SakuraBranchInteractive(sakuraSim);
-  new CinematicPreloader();
+  new NesilIntroController();
   new HeroSlotStranger();
   const headline = new KineticHeadline();
   BossQuoteObserver.init();
