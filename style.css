@@ -3832,15 +3832,11 @@ main.home,
   --font-nesil-text: "Big Shoulders Text", system-ui, sans-serif;
 }
 
-/* Hide standard sticky header on hero view so Nesil embedded header shines */
-body:not(.scrolled-past-hero) .header {
+/* Hide standard sticky header only while viewing the Nesil section so its embedded header shines */
+body.inside-nesil-frame .header {
   opacity: 0 !important;
   pointer-events: none !important;
   transition: opacity 0.3s ease;
-}
-body.scrolled-past-hero .header {
-  opacity: 1 !important;
-  pointer-events: auto !important;
 }
 
 /* 1. Outer Frame: Dark bezel wrapping the rounded canvas */
@@ -3853,7 +3849,7 @@ body.scrolled-past-hero .header {
   background: #0d0a11 !important;
   box-sizing: border-box;
   overflow: hidden;
-  z-index: 10;
+  z-index: 105;
 }
 
 /* 2. Inner Rounded Stage: Hibiscus Canvas */

@@ -1782,11 +1782,10 @@ class NesilIntroController {
 
     // Update active ruler position on scroll
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
       const windowH = window.innerHeight;
       let activeIndex = 0;
 
-      const sections = ['top', 'boss-quote', 'clients', 'services', 'projects', 'faq', 'contact'];
+      const sections = ['intro-nesil', 'boss-quote', 'clients', 'services', 'projects', 'faq', 'contact'];
       sections.forEach((secId, i) => {
         const el = document.getElementById(secId);
         if (el) {
@@ -1806,13 +1805,16 @@ class NesilIntroController {
   }
 
   initScrollHeader() {
+    const nesilFrame = document.querySelector('.nesil-frame');
+    if (!nesilFrame) return;
+
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const threshold = window.innerHeight * 0.75;
-      if (scrollY > threshold) {
-        document.body.classList.add('scrolled-past-hero');
+      const rect = nesilFrame.getBoundingClientRect();
+      // When nesilFrame occupies the header zone
+      if (rect.top <= 75 && rect.bottom >= 75) {
+        document.body.classList.add('inside-nesil-frame');
       } else {
-        document.body.classList.remove('scrolled-past-hero');
+        document.body.classList.remove('inside-nesil-frame');
       }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -1827,6 +1829,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
   const sakuraSim = new SakuraSimulation();
   new SakuraBranchInteractive(sakuraSim);
+  new CinematicPreloader();
   new NesilIntroController();
   new HeroSlotStranger();
   const headline = new KineticHeadline();

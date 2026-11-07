@@ -22,10 +22,13 @@
 </head>
 <body>
 
-
-
-
-
+  <!-- ===== CINEMATIC PRELOADER (worksruthi-inspired word-flash) ===== -->
+  <div id="preloader" aria-hidden="true">
+    <!-- The JS will inject .pl-frame divs with words here -->
+    <span class="pl-word pl-probe" id="plProbe" aria-hidden="true">M</span>
+    <div class="pl-bar pl-bar--t" id="plBarT"></div>
+    <div class="pl-bar pl-bar--b" id="plBarB"></div>
+  </div>
   <!-- ===== GLOBAL FILM GRAIN FILTER OVERLAY (worksruthi model) ===== -->
   <div class="site-grain-overlay" aria-hidden="true"></div>
 
@@ -238,8 +241,64 @@
     <!-- MAIN PAGE CONTENT -->
     <main class="home">
 
+      <!-- ===== 1ST PAGE: AWWWARDS SRUTHI-STYLE HERO SECTION (BASITH CUTOUT EDITION) ===== -->
+      <div class="home__group" id="hero">
+        <section class="hero hero--sruthi" id="top" aria-label="hello, meet basith">
+
+          <!-- Hero Stage Container (desktop: container-query sized box) -->
+          <div class="hero-stage" id="heroStage">
+
+            <!-- Word 1 (Top-Left): HELLO -->
+            <p class="display hero-word hero-word--hello">
+              <span class="hero-word__txt">hello</span>
+            </p>
+
+            <!-- Word 2 (Top-Right): {{ first name }} Interactive Slot -->
+            <p class="display hero-word hero-word--stranger" id="heroStrangerWord">
+              <span class="hero-word__txt">
+                <button type="button" class="hero-slot-btn tap hero-placeholder" id="heroSlotBtn"
+                  aria-label="type your first name" title="Click to personalize — type your name">
+                  <span class="hero-slot-bracket">{{</span>&nbsp;<span class="hero-slot-name" id="heroSlotName">first name</span><span class="hero-slot-caret" aria-hidden="true"></span>&nbsp;<span class="hero-slot-bracket">}}</span>
+                </button>
+              </span>
+            </p>
+
+            <!-- Center Cutout Photo: Mohammed Basith Mirror Selfie (High Resolution) -->
+            <div class="hero-photo-wrap" id="heroPhotoWrap">
+              <img class="hero-photo" id="heroPhoto"
+                   src="/images/basith-hero-portrait.png"
+                   alt="mohammed basith — mirror selfie in black suit"
+                   width="762" height="1024"
+                   loading="eager" decoding="async" />
+            </div>
+
+            <!-- Word 3 (Mid-Left): MEET -->
+            <p class="display hero-word hero-word--meet">
+              <span class="hero-word__txt">meet</span>
+            </p>
+
+            <!-- Typewriter Byline: a full-stack developer/ai engineer with chutzpah. -->
+            <p class="hero-byline" id="heroByline" aria-label="a full-stack developer / ai engineer with chutzpah.">
+              <span class="hero-byline__l" id="heroBylineL1">
+                <span class="hero-byline__text">a full-stack developer/ai engineer</span>
+              </span>
+              <span class="hero-byline__l" id="heroBylineL2">
+                <span class="hero-byline__text">with chutzpah<span class="fullstop">.</span></span>
+                <span class="hero-byline__caret" aria-hidden="true"></span>
+              </span>
+            </p>
+
+            <!-- Word 4 (Bottom-Right): BASITH (h1 for SEO) -->
+            <h1 class="display hero-word hero-word--sruthi hero-word--basith">
+              <span class="hero-word__txt">basith</span>
+            </h1>
+          </div>
+
+        </section>
+      </div>
+
       <!-- ===== NESIL NOBLE AESTHETIC INTRO HERO SECTION ===== -->
-      <div class="nesil-frame" id="top">
+      <div class="nesil-frame" id="intro-nesil">
         <div class="nesil-stage" id="nesilStage">
           <!-- Drifting Dust Canvas -->
           <canvas class="nesil-dust" id="dust" aria-hidden="true"></canvas>
@@ -298,7 +357,7 @@
           <div class="nesil-ruler" id="ruler" aria-hidden="true">
             <div class="ruler-ticks"></div>
             <div class="ruler-head" id="rulerHead" style="left: 14%;"></div>
-            <button type="button" class="ruler-btn is-active" data-go="top" style="left:14%">Hello</button>
+            <button type="button" class="ruler-btn is-active" data-go="intro-nesil" style="left:14%">Hello</button>
             <button type="button" class="ruler-btn" data-go="boss-quote" style="left:28%">Beliefs</button>
             <button type="button" class="ruler-btn" data-go="clients" style="left:42%">Systems</button>
             <button type="button" class="ruler-btn" data-go="services" style="left:60%">Capabilities</button>
