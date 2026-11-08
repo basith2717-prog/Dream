@@ -3473,7 +3473,7 @@ body {
     image-rendering: high-quality;
     transform: translateZ(0);
     backface-visibility: hidden;
-    filter: drop-shadow(0 30px 60px rgba(28, 27, 26, .28));
+    filter: drop-shadow(0 14px 32px rgba(28, 27, 26, .14));
   }
 
   /* meet — mid-left */
