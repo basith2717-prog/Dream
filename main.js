@@ -1973,8 +1973,9 @@ class ButterflyFlightSystem {
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
-  const sakuraSim = new SakuraSimulation();
-  new SakuraBranchInteractive(sakuraSim);
+  // Sakura petals stopped per user request
+  // const sakuraSim = new SakuraSimulation();
+  // new SakuraBranchInteractive(sakuraSim);
   new ButterflyFlightSystem();
   new CinematicPreloader();
   new HeroSlotStranger();
