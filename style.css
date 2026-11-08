@@ -4128,7 +4128,7 @@ html body .footer {
 }
 
 /* ============================================================
-   FLYING BUTTERFLIES AMBIENT FLIGHT SYSTEM
+   FLYING BUTTERFLIES AMBIENT FLIGHT SYSTEM (REALISTIC & DELICATE)
    ============================================================ */
 .butterfly-stage {
   position: fixed;
@@ -4138,25 +4138,25 @@ html body .footer {
   pointer-events: none;
   z-index: 9985;
   overflow: hidden;
-  perspective: 900px;
+  perspective: 700px;
 }
 
 .butterfly {
   position: absolute;
   top: 0;
   left: 0;
-  width: var(--b-size, 52px);
+  width: var(--b-size, 20px);
   height: auto;
   pointer-events: none;
   will-change: transform;
   transform-style: preserve-3d;
   contain: layout style;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.5s ease;
 }
 
 .butterfly.is-visible {
-  opacity: 1;
+  opacity: 0.95;
 }
 
 .butterfly__rotator {
@@ -4170,8 +4170,8 @@ html body .footer {
   height: 100%;
   transform-origin: 75% 65%;
   transform-style: preserve-3d;
-  animation: butterflyFlap var(--b-flap-dur, 0.28s) cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite alternate;
-  filter: drop-shadow(2px 8px 12px rgba(28, 27, 26, 0.16));
+  animation: butterflyFlap var(--b-flap-dur, 0.09s) cubic-bezier(0.42, 0.05, 0.58, 0.95) infinite alternate;
+  filter: drop-shadow(1px 2px 3px rgba(28, 27, 26, 0.22));
 }
 
 .butterfly__wings img {
@@ -4185,21 +4185,21 @@ html body .footer {
 
 @keyframes butterflyFlap {
   0% {
-    transform: rotateY(0deg) skewY(0deg) scaleY(1);
+    transform: rotateY(-10deg) skewY(2deg) scaleY(1.02);
   }
   100% {
-    transform: rotateY(68deg) skewY(-7deg) scaleY(0.88);
+    transform: rotateY(74deg) skewY(-8deg) scaleY(0.85);
   }
 }
 
 .butterfly.is-gliding .butterfly__wings {
   animation-play-state: paused;
-  transform: rotateY(16deg) skewY(-2deg);
-  transition: transform 0.4s ease-out;
+  transform: rotateY(18deg) skewY(-2deg) scaleY(0.96);
+  transition: transform 0.25s ease-out;
 }
 
 .butterfly.is-startled .butterfly__wings {
-  animation-duration: 0.13s !important;
+  animation-duration: 0.065s !important;
 }
 
 @media (prefers-reduced-motion: reduce) {

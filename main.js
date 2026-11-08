@@ -1664,7 +1664,7 @@ class ScrollbarIndicator {
 }
 
 // ==========================================================================
-// 15. FLYING BUTTERFLIES AMBIENT FLIGHT SYSTEM
+// 15. FLYING BUTTERFLIES AMBIENT FLIGHT SYSTEM (REALISTIC & DELICATE)
 // ==========================================================================
 class ButterflyFlightSystem {
   constructor() {
@@ -1678,14 +1678,16 @@ class ButterflyFlightSystem {
     this.scrollVelocity = 0;
     this.rafId = null;
 
+    // Really small, delicate real-world butterfly sizes (15px - 22px) and rapid wing flutters (~10-12Hz)
     this.configs = [
-      { src: '/images/butterflies/butterfly-red.png', size: 48, flapDur: 0.24, name: 'red' },
-      { src: '/images/butterflies/butterfly-magenta.png', size: 44, flapDur: 0.27, name: 'magenta' },
-      { src: '/images/butterflies/butterfly-blue.png', size: 54, flapDur: 0.31, name: 'blue' },
-      { src: '/images/butterflies/butterfly-crimson.png', size: 58, flapDur: 0.25, name: 'crimson' },
-      { src: '/images/butterflies/butterfly-gold.png', size: 46, flapDur: 0.29, name: 'gold' },
-      { src: '/images/butterflies/butterfly-blue.png', size: 38, flapDur: 0.22, name: 'blue-small' },
-      { src: '/images/butterflies/butterfly-red.png', size: 36, flapDur: 0.20, name: 'red-small' }
+      { src: '/images/butterflies/butterfly-crimson.png', size: 21, flapDur: 0.085, name: 'crimson' },
+      { src: '/images/butterflies/butterfly-red.png', size: 19, flapDur: 0.090, name: 'red' },
+      { src: '/images/butterflies/butterfly-blue.png', size: 22, flapDur: 0.095, name: 'blue' },
+      { src: '/images/butterflies/butterfly-magenta.png', size: 18, flapDur: 0.088, name: 'magenta' },
+      { src: '/images/butterflies/butterfly-gold.png', size: 20, flapDur: 0.092, name: 'gold' },
+      { src: '/images/butterflies/butterfly-crimson.png', size: 16, flapDur: 0.080, name: 'crimson-mini' },
+      { src: '/images/butterflies/butterfly-blue.png', size: 17, flapDur: 0.085, name: 'blue-mini' },
+      { src: '/images/butterflies/butterfly-gold.png', size: 15, flapDur: 0.078, name: 'gold-mini' }
     ];
 
     this.init();
@@ -1720,41 +1722,47 @@ class ButterflyFlightSystem {
       el.appendChild(rotator);
       this.stage.appendChild(el);
 
-      const spawnX = Math.random() * (w - 120) + 60;
-      const spawnY = Math.random() * (h - 160) + 80;
+      const spawnX = Math.random() * (w - 80) + 40;
+      const spawnY = Math.random() * (h - 100) + 50;
+      const initialAngle = Math.random() * Math.PI * 2;
 
       const butterfly = {
+        id: idx,
         el,
         rotator,
         wings,
         size: cfg.size,
         x: spawnX,
         y: spawnY,
-        vx: (Math.random() - 0.5) * 2,
-        vy: (Math.random() - 0.5) * 2,
-        targetX: Math.random() * (w - 100) + 50,
-        targetY: Math.random() * (h - 100) + 50,
-        facing: Math.random() > 0.5 ? 1 : -1,
+        vx: Math.cos(initialAngle) * 1.5,
+        vy: Math.sin(initialAngle) * 1.5,
+        heading: initialAngle,
+        targetHeading: initialAngle,
+        headingTimer: 30 + Math.floor(Math.random() * 50),
+        facing: Math.cos(initialAngle) >= 0 ? 1 : -1,
         targetFacing: 1,
         currentFacing: 1,
         pitch: 0,
-        cruiseSpeed: 1.4 + Math.random() * 1.4,
+        flapPhase: Math.random() * Math.PI * 2,
+        flapFreq: 0.35 + Math.random() * 0.15,
         isGliding: false,
-        glideCountdown: 160 + Math.random() * 220,
-        glideDuration: 0,
-        bobPhase: Math.random() * Math.PI * 2,
-        bobSpeed: 0.12 + Math.random() * 0.08,
-        bobAmp: 2.2 + Math.random() * 2.2,
-        startledTimer: 0
+        flapCount: 0,
+        flapBurstTarget: 8 + Math.floor(Math.random() * 14),
+        glideFrames: 0,
+        maxGlideFrames: 12 + Math.floor(Math.random() * 20),
+        cruiseSpeed: 1.5 + Math.random() * 1.0,
+        startledTimer: 0,
+        companionId: (idx % 2 === 1) ? idx - 1 : -1 // Pair butterflies 0-1, 2-3 for companion dancing
       };
 
       this.butterflies.push(butterfly);
 
       setTimeout(() => {
         el.classList.add('is-visible');
-      }, 350 + idx * 240);
+      }, 200 + idx * 180);
     });
 
+    // Proximity to mouse
     window.addEventListener('mousemove', (e) => {
       this.mouseX = e.clientX;
       this.mouseY = e.clientY;
@@ -1767,6 +1775,7 @@ class ButterflyFlightSystem {
       }
     }, { passive: true });
 
+    // Interactive burst on click
     window.addEventListener('click', (e) => {
       const cx = e.clientX;
       const cy = e.clientY;
@@ -1774,11 +1783,12 @@ class ButterflyFlightSystem {
         const dx = b.x - cx;
         const dy = b.y - cy;
         const dist = Math.hypot(dx, dy);
-        if (dist < 260) {
-          const force = ((260 - dist) / 260) * 8;
-          b.vx += (dx / (dist || 1)) * force;
-          b.vy += (dy / (dist || 1)) * force - 3;
-          b.startledTimer = 60;
+        if (dist < 280) {
+          const force = ((280 - dist) / 280) * 9;
+          const awayAngle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.8;
+          b.vx = Math.cos(awayAngle) * force;
+          b.vy = Math.sin(awayAngle) * force - 3;
+          b.startledTimer = 55;
           b.isGliding = false;
           b.el.classList.remove('is-gliding');
           b.el.classList.add('is-startled');
@@ -1786,10 +1796,11 @@ class ButterflyFlightSystem {
       });
     }, { passive: true });
 
+    // Scroll air current tracking
     window.addEventListener('scroll', () => {
       const curScroll = window.scrollY;
       const diff = curScroll - this.lastScrollY;
-      this.scrollVelocity = Math.max(-15, Math.min(15, diff * 0.12));
+      this.scrollVelocity = Math.max(-14, Math.min(14, diff * 0.1));
       this.lastScrollY = curScroll;
     }, { passive: true });
 
@@ -1801,37 +1812,108 @@ class ButterflyFlightSystem {
     const w = window.innerWidth;
     const h = window.innerHeight;
 
-    this.scrollVelocity *= 0.92;
+    this.scrollVelocity *= 0.90;
 
     this.butterflies.forEach((b) => {
-      const dx = b.targetX - b.x;
-      const dy = b.targetY - b.y;
-      const distToTarget = Math.hypot(dx, dy);
-
-      if (distToTarget < 80 || Math.random() < 0.005) {
-        b.targetX = 60 + Math.random() * (w - 120);
-        b.targetY = 60 + Math.random() * (h - 120);
+      // 1. Erratic wandering heading change
+      b.headingTimer--;
+      if (b.headingTimer <= 0) {
+        // Whimsical course alteration
+        b.headingTimer = 25 + Math.floor(Math.random() * 65);
+        b.targetHeading += (Math.random() - 0.5) * 1.8;
       }
 
-      const steerStrength = b.isGliding ? 0.0005 : 0.0014;
-      b.vx += dx * steerStrength;
-      b.vy += dy * steerStrength;
+      // If butterfly has a companion nearby, gently dance around each other
+      if (b.companionId >= 0 && this.butterflies[b.companionId]) {
+        const comp = this.butterflies[b.companionId];
+        const cdx = comp.x - b.x;
+        const cdy = comp.y - b.y;
+        const cdist = Math.hypot(cdx, cdy);
+        if (cdist > 70 && cdist < 320) {
+          // Attract towards companion with slight swirl
+          const toAngle = Math.atan2(cdy, cdx) + 0.5;
+          b.targetHeading += (toAngle - b.targetHeading) * 0.04;
+        }
+      }
 
-      b.bobPhase += b.bobSpeed;
-      const bob = Math.sin(b.bobPhase) * b.bobAmp;
-      b.vy += bob * 0.04;
+      // Boundary soft steering (keeps butterflies wandering across entire viewport)
+      const margin = 70;
+      if (b.x < margin) b.targetHeading = 0 + (Math.random() - 0.5) * 0.6;
+      else if (b.x > w - margin) b.targetHeading = Math.PI + (Math.random() - 0.5) * 0.6;
+      if (b.y < margin) b.targetHeading = Math.PI * 0.5 + (Math.random() - 0.5) * 0.6;
+      else if (b.y > h - margin) b.targetHeading = -Math.PI * 0.5 + (Math.random() - 0.5) * 0.6;
 
-      b.vy -= this.scrollVelocity * 0.18;
+      // Smooth heading rotation
+      let angleDiff = b.targetHeading - b.heading;
+      while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+      while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+      b.heading += angleDiff * 0.08;
 
+      // 2. Flap burst vs Glide cycle
+      b.flapPhase += b.flapFreq;
+      const flapSin = Math.sin(b.flapPhase);
+
+      if (!b.startledTimer) {
+        if (!b.isGliding) {
+          // In active flapping state: each downstroke produces upward lift and a slight horizontal dart
+          if (flapSin > 0.8) {
+            b.flapCount++;
+            if (b.flapCount >= b.flapBurstTarget) {
+              b.isGliding = true;
+              b.glideFrames = 0;
+              b.maxGlideFrames = 10 + Math.floor(Math.random() * 18);
+              b.el.classList.add('is-gliding');
+            }
+          }
+        } else {
+          // In gliding state: wings hold still, butterfly floats smoothly forward & downward
+          b.glideFrames++;
+          if (b.glideFrames >= b.maxGlideFrames) {
+            b.isGliding = false;
+            b.flapCount = 0;
+            b.flapBurstTarget = 7 + Math.floor(Math.random() * 12);
+            b.el.classList.remove('is-gliding');
+          }
+        }
+      }
+
+      // 3. Realistic Butterfly Aerodynamics:
+      // Real butterflies bounce/hop upwards on each flap stroke
+      let thrust = b.isGliding ? (b.cruiseSpeed * 0.75) : b.cruiseSpeed;
+      let lift = 0;
+      let flutterWiggle = 0;
+
+      if (!b.isGliding) {
+        // Upward flutter bounce on downstroke
+        lift = (flapSin > 0 ? -1 : 0.3) * 0.95;
+        // Lateral zigzag flutter (vortex shedding)
+        flutterWiggle = Math.cos(b.flapPhase * 0.65) * 0.85;
+      } else {
+        // Gentle gravity drift during glide
+        lift = 0.32;
+      }
+
+      // Calculate desired velocity from heading + flutter
+      const desiredVx = Math.cos(b.heading) * thrust - Math.sin(b.heading) * flutterWiggle;
+      const desiredVy = Math.sin(b.heading) * thrust + lift;
+
+      b.vx += (desiredVx - b.vx) * 0.22;
+      b.vy += (desiredVy - b.vy) * 0.22;
+
+      // Updraft from user scrolling
+      b.vy -= this.scrollVelocity * 0.16;
+
+      // 4. Mouse proximity (natural panic flutter)
       const mouseDx = b.x - this.mouseX;
       const mouseDy = b.y - this.mouseY;
       const mouseDist = Math.hypot(mouseDx, mouseDy);
 
-      if (mouseDist < 120) {
-        const repelForce = ((120 - mouseDist) / 120) * 4;
-        b.vx += (mouseDx / (mouseDist || 1)) * repelForce;
-        b.vy += (mouseDy / (mouseDist || 1)) * repelForce - 1.2;
-        b.startledTimer = 45;
+      if (mouseDist < 100) {
+        const repelForce = ((100 - mouseDist) / 100) * 4.2;
+        const escapeAngle = Math.atan2(mouseDy, mouseDx) + (Math.random() - 0.5) * 0.6;
+        b.vx += Math.cos(escapeAngle) * repelForce;
+        b.vy += Math.sin(escapeAngle) * repelForce - 1.5;
+        b.startledTimer = 40;
         b.isGliding = false;
         b.el.classList.remove('is-gliding');
         b.el.classList.add('is-startled');
@@ -1844,80 +1926,42 @@ class ButterflyFlightSystem {
         }
       }
 
-      if (!b.startledTimer) {
-        if (!b.isGliding) {
-          b.glideCountdown--;
-          if (b.glideCountdown <= 0) {
-            b.isGliding = true;
-            b.glideDuration = 45 + Math.floor(Math.random() * 65);
-            b.el.classList.add('is-gliding');
-          }
-        } else {
-          b.glideDuration--;
-          b.vx *= 0.985;
-          b.vy *= 0.985;
-          if (b.glideDuration <= 0) {
-            b.isGliding = false;
-            b.glideCountdown = 140 + Math.floor(Math.random() * 200);
-            b.el.classList.remove('is-gliding');
-          }
-        }
-      }
-
-      const maxSpd = b.startledTimer > 0 ? 6.5 : (b.isGliding ? 2.2 : 3.8);
+      // Speed capping
+      const maxSpd = b.startledTimer > 0 ? 6.2 : (b.isGliding ? 2.4 : 3.4);
       const curSpeed = Math.hypot(b.vx, b.vy);
       if (curSpeed > maxSpd) {
         b.vx = (b.vx / curSpeed) * maxSpd;
         b.vy = (b.vy / curSpeed) * maxSpd;
       }
 
-      b.vx *= 0.988;
-      b.vy *= 0.988;
-
-      if (curSpeed < 0.6 && !b.isGliding) {
-        const boostAngle = Math.atan2(b.vy, b.vx) || (Math.random() * Math.PI * 2);
-        b.vx += Math.cos(boostAngle) * 0.4;
-        b.vy += Math.sin(boostAngle) * 0.4;
-      }
-
+      // 5. Integrate position
       b.x += b.vx;
       b.y += b.vy;
 
-      const pad = 80;
-      if (b.x < -pad) {
-        b.x = w + pad * 0.5;
-        b.y = Math.random() * h;
-      } else if (b.x > w + pad) {
-        b.x = -pad * 0.5;
-        b.y = Math.random() * h;
-      }
+      // Soft wrap around edges
+      const pad = 40;
+      if (b.x < -pad) b.x = w + pad * 0.5;
+      else if (b.x > w + pad) b.x = -pad * 0.5;
+      if (b.y < -pad) b.y = h + pad * 0.5;
+      else if (b.y > h + pad) b.y = -pad * 0.5;
 
-      if (b.y < -pad) {
-        b.y = h + pad * 0.5;
-        b.x = Math.random() * w;
-      } else if (b.y > h + pad) {
-        b.y = -pad * 0.5;
-        b.x = Math.random() * w;
-      }
+      // 6. Dynamic Facing & Banking Pitch
+      if (b.vx > 0.15) b.targetFacing = 1;
+      else if (b.vx < -0.15) b.targetFacing = -1;
 
-      if (b.vx > 0.3) {
-        b.targetFacing = 1;
-      } else if (b.vx < -0.3) {
-        b.targetFacing = -1;
-      }
+      // Smooth 3D turn lerp
+      b.currentFacing += (b.targetFacing - b.currentFacing) * 0.16;
 
-      b.currentFacing += (b.targetFacing - b.currentFacing) * 0.12;
+      // Pitch up when climbing, down when swooping
+      const targetPitch = Math.max(-32, Math.min(32, (b.vy / (Math.abs(b.vx) + 0.8)) * 28));
+      b.pitch += (targetPitch - b.pitch) * 0.12;
 
-      const targetPitch = Math.max(-35, Math.min(35, (b.vy / (Math.abs(b.vx) + 1)) * 26));
-      b.pitch += (targetPitch - b.pitch) * 0.1;
-
-      const renderY = b.y + bob;
+      // Apply hardware-accelerated transform
       const flipScale = b.currentFacing >= 0 ? 1 : -1;
-      const scaleMagnitude = Math.abs(b.currentFacing);
-      const safeScale = Math.max(0.2, scaleMagnitude);
+      const scaleMag = Math.max(0.18, Math.abs(b.currentFacing));
 
-      b.el.style.transform = `translate3d(${b.x.toFixed(1)}px, ${renderY.toFixed(1)}px, 0)`;
-      b.rotator.style.transform = `scaleX(${flipScale * safeScale}) rotate(${b.pitch.toFixed(1)}deg)`;
+      b.el.style.transform = `translate3d(${b.x.toFixed(1)}px, ${b.y.toFixed(1)}px, 0)`;
+      b.rotator.style.transform = `scaleX(${flipScale * scaleMag}) rotate(${b.pitch.toFixed(1)}deg)`;
     });
 
     this.rafId = requestAnimationFrame(this.tick);
