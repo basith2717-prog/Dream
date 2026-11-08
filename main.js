@@ -1664,12 +1664,274 @@ class ScrollbarIndicator {
 }
 
 // ==========================================================================
+// 15. FLYING BUTTERFLIES AMBIENT FLIGHT SYSTEM
+// ==========================================================================
+class ButterflyFlightSystem {
+  constructor() {
+    this.stage = document.getElementById('butterflyStage');
+    if (!this.stage) return;
+
+    this.butterflies = [];
+    this.mouseX = -1000;
+    this.mouseY = -1000;
+    this.lastScrollY = window.scrollY;
+    this.scrollVelocity = 0;
+    this.rafId = null;
+
+    this.configs = [
+      { src: '/images/butterflies/butterfly-red.png', size: 48, flapDur: 0.24, name: 'red' },
+      { src: '/images/butterflies/butterfly-magenta.png', size: 44, flapDur: 0.27, name: 'magenta' },
+      { src: '/images/butterflies/butterfly-blue.png', size: 54, flapDur: 0.31, name: 'blue' },
+      { src: '/images/butterflies/butterfly-crimson.png', size: 58, flapDur: 0.25, name: 'crimson' },
+      { src: '/images/butterflies/butterfly-gold.png', size: 46, flapDur: 0.29, name: 'gold' },
+      { src: '/images/butterflies/butterfly-blue.png', size: 38, flapDur: 0.22, name: 'blue-small' },
+      { src: '/images/butterflies/butterfly-red.png', size: 36, flapDur: 0.20, name: 'red-small' }
+    ];
+
+    this.init();
+  }
+
+  init() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    this.configs.forEach((cfg, idx) => {
+      const el = document.createElement('div');
+      el.className = `butterfly butterfly--${cfg.name}`;
+      el.style.setProperty('--b-size', `${cfg.size}px`);
+      el.style.setProperty('--b-flap-dur', `${cfg.flapDur}s`);
+
+      const rotator = document.createElement('div');
+      rotator.className = 'butterfly__rotator';
+
+      const wings = document.createElement('div');
+      wings.className = 'butterfly__wings';
+
+      const img = document.createElement('img');
+      img.src = cfg.src;
+      img.alt = '';
+      img.loading = 'eager';
+      img.decoding = 'async';
+
+      wings.appendChild(img);
+      rotator.appendChild(wings);
+      el.appendChild(rotator);
+      this.stage.appendChild(el);
+
+      const spawnX = Math.random() * (w - 120) + 60;
+      const spawnY = Math.random() * (h - 160) + 80;
+
+      const butterfly = {
+        el,
+        rotator,
+        wings,
+        size: cfg.size,
+        x: spawnX,
+        y: spawnY,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        targetX: Math.random() * (w - 100) + 50,
+        targetY: Math.random() * (h - 100) + 50,
+        facing: Math.random() > 0.5 ? 1 : -1,
+        targetFacing: 1,
+        currentFacing: 1,
+        pitch: 0,
+        cruiseSpeed: 1.4 + Math.random() * 1.4,
+        isGliding: false,
+        glideCountdown: 160 + Math.random() * 220,
+        glideDuration: 0,
+        bobPhase: Math.random() * Math.PI * 2,
+        bobSpeed: 0.12 + Math.random() * 0.08,
+        bobAmp: 2.2 + Math.random() * 2.2,
+        startledTimer: 0
+      };
+
+      this.butterflies.push(butterfly);
+
+      setTimeout(() => {
+        el.classList.add('is-visible');
+      }, 350 + idx * 240);
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      this.mouseX = e.clientX;
+      this.mouseY = e.clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (e.touches && e.touches[0]) {
+        this.mouseX = e.touches[0].clientX;
+        this.mouseY = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    window.addEventListener('click', (e) => {
+      const cx = e.clientX;
+      const cy = e.clientY;
+      this.butterflies.forEach((b) => {
+        const dx = b.x - cx;
+        const dy = b.y - cy;
+        const dist = Math.hypot(dx, dy);
+        if (dist < 260) {
+          const force = ((260 - dist) / 260) * 8;
+          b.vx += (dx / (dist || 1)) * force;
+          b.vy += (dy / (dist || 1)) * force - 3;
+          b.startledTimer = 60;
+          b.isGliding = false;
+          b.el.classList.remove('is-gliding');
+          b.el.classList.add('is-startled');
+        }
+      });
+    }, { passive: true });
+
+    window.addEventListener('scroll', () => {
+      const curScroll = window.scrollY;
+      const diff = curScroll - this.lastScrollY;
+      this.scrollVelocity = Math.max(-15, Math.min(15, diff * 0.12));
+      this.lastScrollY = curScroll;
+    }, { passive: true });
+
+    this.tick = this.tick.bind(this);
+    this.rafId = requestAnimationFrame(this.tick);
+  }
+
+  tick() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+
+    this.scrollVelocity *= 0.92;
+
+    this.butterflies.forEach((b) => {
+      const dx = b.targetX - b.x;
+      const dy = b.targetY - b.y;
+      const distToTarget = Math.hypot(dx, dy);
+
+      if (distToTarget < 80 || Math.random() < 0.005) {
+        b.targetX = 60 + Math.random() * (w - 120);
+        b.targetY = 60 + Math.random() * (h - 120);
+      }
+
+      const steerStrength = b.isGliding ? 0.0005 : 0.0014;
+      b.vx += dx * steerStrength;
+      b.vy += dy * steerStrength;
+
+      b.bobPhase += b.bobSpeed;
+      const bob = Math.sin(b.bobPhase) * b.bobAmp;
+      b.vy += bob * 0.04;
+
+      b.vy -= this.scrollVelocity * 0.18;
+
+      const mouseDx = b.x - this.mouseX;
+      const mouseDy = b.y - this.mouseY;
+      const mouseDist = Math.hypot(mouseDx, mouseDy);
+
+      if (mouseDist < 120) {
+        const repelForce = ((120 - mouseDist) / 120) * 4;
+        b.vx += (mouseDx / (mouseDist || 1)) * repelForce;
+        b.vy += (mouseDy / (mouseDist || 1)) * repelForce - 1.2;
+        b.startledTimer = 45;
+        b.isGliding = false;
+        b.el.classList.remove('is-gliding');
+        b.el.classList.add('is-startled');
+      }
+
+      if (b.startledTimer > 0) {
+        b.startledTimer--;
+        if (b.startledTimer === 0) {
+          b.el.classList.remove('is-startled');
+        }
+      }
+
+      if (!b.startledTimer) {
+        if (!b.isGliding) {
+          b.glideCountdown--;
+          if (b.glideCountdown <= 0) {
+            b.isGliding = true;
+            b.glideDuration = 45 + Math.floor(Math.random() * 65);
+            b.el.classList.add('is-gliding');
+          }
+        } else {
+          b.glideDuration--;
+          b.vx *= 0.985;
+          b.vy *= 0.985;
+          if (b.glideDuration <= 0) {
+            b.isGliding = false;
+            b.glideCountdown = 140 + Math.floor(Math.random() * 200);
+            b.el.classList.remove('is-gliding');
+          }
+        }
+      }
+
+      const maxSpd = b.startledTimer > 0 ? 6.5 : (b.isGliding ? 2.2 : 3.8);
+      const curSpeed = Math.hypot(b.vx, b.vy);
+      if (curSpeed > maxSpd) {
+        b.vx = (b.vx / curSpeed) * maxSpd;
+        b.vy = (b.vy / curSpeed) * maxSpd;
+      }
+
+      b.vx *= 0.988;
+      b.vy *= 0.988;
+
+      if (curSpeed < 0.6 && !b.isGliding) {
+        const boostAngle = Math.atan2(b.vy, b.vx) || (Math.random() * Math.PI * 2);
+        b.vx += Math.cos(boostAngle) * 0.4;
+        b.vy += Math.sin(boostAngle) * 0.4;
+      }
+
+      b.x += b.vx;
+      b.y += b.vy;
+
+      const pad = 80;
+      if (b.x < -pad) {
+        b.x = w + pad * 0.5;
+        b.y = Math.random() * h;
+      } else if (b.x > w + pad) {
+        b.x = -pad * 0.5;
+        b.y = Math.random() * h;
+      }
+
+      if (b.y < -pad) {
+        b.y = h + pad * 0.5;
+        b.x = Math.random() * w;
+      } else if (b.y > h + pad) {
+        b.y = -pad * 0.5;
+        b.x = Math.random() * w;
+      }
+
+      if (b.vx > 0.3) {
+        b.targetFacing = 1;
+      } else if (b.vx < -0.3) {
+        b.targetFacing = -1;
+      }
+
+      b.currentFacing += (b.targetFacing - b.currentFacing) * 0.12;
+
+      const targetPitch = Math.max(-35, Math.min(35, (b.vy / (Math.abs(b.vx) + 1)) * 26));
+      b.pitch += (targetPitch - b.pitch) * 0.1;
+
+      const renderY = b.y + bob;
+      const flipScale = b.currentFacing >= 0 ? 1 : -1;
+      const scaleMagnitude = Math.abs(b.currentFacing);
+      const safeScale = Math.max(0.2, scaleMagnitude);
+
+      b.el.style.transform = `translate3d(${b.x.toFixed(1)}px, ${renderY.toFixed(1)}px, 0)`;
+      b.rotator.style.transform = `scaleX(${flipScale * safeScale}) rotate(${b.pitch.toFixed(1)}deg)`;
+    });
+
+    this.rafId = requestAnimationFrame(this.tick);
+  }
+}
+
+// ==========================================================================
 // BOOTSTRAP APPLICATION
 // ==========================================================================
 document.addEventListener('DOMContentLoaded', () => {
   new MagneticCursor();
   const sakuraSim = new SakuraSimulation();
   new SakuraBranchInteractive(sakuraSim);
+  new ButterflyFlightSystem();
   new CinematicPreloader();
   new HeroSlotStranger();
   const headline = new KineticHeadline();
