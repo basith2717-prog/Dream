@@ -7,3 +7,5 @@ dist-ssr/
 !.env.example
 .DS_Store
 Thumbs.db
+temp-tiera/
+tiera/

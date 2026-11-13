@@ -774,7 +774,7 @@ class CinematicPreloader {
       this.playShutterClick(0.7);
 
       // Trigger hero entrance animations
-      const hero = document.querySelector('.hero--sruthi');
+      const hero = document.querySelector('.hero--gazu') || document.querySelector('.hero--sruthi');
       if (hero) {
         hero.classList.add('is-live', 'in');
       }
@@ -991,6 +991,18 @@ const BossQuoteObserver = {
 // 6. CASE STUDY DRAWER DATABASE & MODAL (TAILORED FROM RESUME)
 // ==========================================================================
 const PROJECT_DATA = {
+  tiera: {
+    title: 'TIERA: Luxury Gold, Diamonds & Platinum Jewellery Atelier',
+    client: 'Tiera Luxury Maison (Thrissur, Kerala)',
+    category: 'React 19, TypeScript & Gemini AI Luxury Commerce',
+    metric: 'Bespoke Atelier Experience',
+    accentColor: '#d4af37',
+    summary: 'A high-end digital jewellery atelier experience rooted in Thrissur, Kerala, uniting traditional fine gold craftsmanship with contemporary React 19 architecture, procedural HTML5 gold shimmer light canvas, and Google Gemini AI bespoke jewellery concierge.',
+    challenge: 'Replicating the tactile prestige, hallmark authentication (BIS 916, Platinum 950), and nuanced bespoke consultation of an elite Kerala jewellery maison in a high-performance web experience.',
+    solution: 'Built a bespoke React 19 application with TypeScript and Tailwind CSS v4 featuring procedural gold shimmer canvas light physics, an intelligent Gemini AI concierge for bespoke curation, and an interactive piece enquiry modal.',
+    stack: ['React 19', 'TypeScript', 'Tailwind CSS v4', 'Google Gemini AI (@google/genai)', 'HTML5 Shimmer Canvas', 'Vite', 'Lucide React'],
+    githubUrl: 'https://github.com/basith2717-prog/TIERA'
+  },
   civiccare: {
     title: 'CivicCare: AI-Powered Public Complaint System',
     client: 'Municipal Governance & Citizen Welfare',
@@ -1152,8 +1164,11 @@ class CaseStudyDrawer {
         </div>
       </div>
 
-      <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:1.8rem; display:flex; justify-content:space-between; align-items:center;">
-        <span style="font-size:0.85rem; color:#888888;">Interested in discussing this build?</span>
+      <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:1.8rem; display:flex; flex-wrap:wrap; gap:12px; justify-content:space-between; align-items:center;">
+        ${data.githubUrl ? `<a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn" style="padding:0.6rem 1.4rem; border:1px solid rgba(212,175,55,0.6); color:#d4af37; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono, monospace); font-size:12px; letter-spacing:0.08em; text-transform:uppercase; background:rgba(212,175,55,0.08); border-radius:4px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>View on GitHub</span>
+        </a>` : ''}
         <button id="caseDrawerCta" class="btn btn--primary" style="padding:0.6rem 1.4rem;">
           <span>Contact Mohammed</span>
           <span class="btn__stamp">押</span>

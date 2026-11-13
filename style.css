@@ -4203,3 +4203,310 @@ html body .footer {
     display: none !important;
   }
 }
+
+/* ============================================================
+   GAZU-INSPIRED EDITORIAL LUXURY HERO SECTION
+   ============================================================ */
+
+/* Top Announcement Bar */
+.top-announcement-bar {
+  background: #080808;
+  color: #f5f5f0;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(16px, 4vw, 48px);
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(10px, 0.72vw, 11px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  z-index: 105;
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.top-announcement-bar__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.92;
+}
+
+.announcement-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: announcementBlink 1.8s infinite ease-in-out;
+}
+
+@keyframes announcementBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.top-announcement-bar__right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.top-announcement-bar__right a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+
+.top-announcement-bar__right a:hover {
+  opacity: 1;
+}
+
+.bar-sep {
+  opacity: 0.35;
+}
+
+/* Hero Section Stage */
+.hero--gazu {
+  position: relative;
+  min-height: calc(100svh - 36px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: clamp(24px, 4vh, 48px) clamp(24px, 4.5vw, 64px);
+  isolation: isolate;
+  background-color: var(--spring, #f3f3e9);
+}
+
+/* Monumental Background Typography */
+.gazu-hero__bg-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: 100%;
+  max-width: 1600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: clamp(12px, 3vw, 40px);
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.gazu-char {
+  font-family: 'Syne', 'Outfit', 'Kanit', sans-serif;
+  font-weight: 900;
+  font-size: clamp(100px, 19vw, 320px);
+  line-height: 0.82;
+  color: #0c0c0c;
+  letter-spacing: -0.04em;
+  display: inline-block;
+  text-transform: uppercase;
+}
+
+/* Center Model Cutout */
+.gazu-hero__photo-stage {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: clamp(520px, 86svh, 920px);
+  width: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.gazu-hero__photo-wrap {
+  height: 100%;
+  width: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, rgba(0, 0, 0, 0.6) 90%, transparent 100%);
+}
+
+.gazu-hero__photo {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 14px 30px rgba(12, 12, 12, 0.16));
+}
+
+.gazu-hero__floor-shadow {
+  position: absolute;
+  bottom: 1.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(12, 12, 12, 0.28) 0%, rgba(12, 12, 12, 0.08) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Left Manifesto */
+.gazu-hero__left {
+  position: absolute;
+  left: clamp(24px, 4.5vw, 64px);
+  top: clamp(26%, 30svh, 36%);
+  z-index: 3;
+  text-align: left;
+}
+
+.gazu-hero__tagline {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(12px, 1.05vw, 15px);
+  font-weight: 600;
+  line-height: 1.7;
+  letter-spacing: 0.22em;
+  color: #121212;
+  margin: 0 0 14px;
+  text-transform: uppercase;
+}
+
+.gazu-hero__line {
+  width: 48px;
+  height: 1.5px;
+  background: #121212;
+}
+
+.gazu-hero__line--short {
+  width: 38px;
+  margin-top: 10px;
+}
+
+/* Bottom Left Actions */
+.gazu-hero__actions {
+  position: absolute;
+  left: clamp(24px, 4.5vw, 64px);
+  bottom: clamp(24px, 4.5svh, 48px);
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 28px);
+}
+
+.gazu-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #0c0c0c;
+  color: #f5f5f0 !important;
+  padding: 14px 28px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #0c0c0c;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gazu-btn-primary:hover {
+  background: var(--cinnabar, #e33529);
+  border-color: var(--cinnabar, #e33529);
+  color: #fff !important;
+  transform: translateY(-2px);
+}
+
+.gazu-btn-link {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #0c0c0c;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1.5px solid #0c0c0c;
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+
+.gazu-btn-link:hover {
+  color: var(--cinnabar, #e33529);
+  border-bottom-color: var(--cinnabar, #e33529);
+}
+
+.gazu-btn-link:hover .gazu-arrow {
+  transform: translateX(4px);
+}
+
+.gazu-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+/* Bottom Right Meta */
+.gazu-hero__meta {
+  position: absolute;
+  right: clamp(24px, 4.5vw, 64px);
+  bottom: clamp(24px, 4.5svh, 48px);
+  z-index: 3;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #121212;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+
+.meta-year {
+  font-family: var(--font-mono, monospace);
+  font-size: clamp(11px, 0.9vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #121212;
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .top-announcement-bar__left {
+    font-size: 9px;
+  }
+  .top-announcement-bar__right {
+    display: none;
+  }
+  .gazu-char {
+    font-size: clamp(52px, 15vw, 90px);
+  }
+  .gazu-hero__left {
+    top: 14%;
+    left: 20px;
+  }
+  .gazu-hero__actions {
+    left: 20px;
+    bottom: 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .gazu-hero__meta {
+    right: 20px;
+    bottom: 24px;
+    text-align: right;
+  }
+}
